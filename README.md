@@ -4,7 +4,7 @@
 > Founded & Owned by **Rohith Vuppula**  
 > Official Domain: [vitoniya.com](https://vitoniya.com) | Contact: [info@vitoniya.com](mailto:info@vitoniya.com)
 
-Official responsive, high-performance "Launching Soon" landing page for **Vitoniya Global Technologies**.
+Official responsive, high-performance web service for **Vitoniya Global Technologies**, powered by **Python Flask & Gunicorn**.
 
 ---
 
@@ -12,57 +12,79 @@ Official responsive, high-performance "Launching Soon" landing page for **Vitoni
 
 ```
 vitoniya/
-├── index.html        # Semantic HTML5 landing page with SEO & Open Graph meta
-├── styles.css        # Premium dark mode stylesheet & responsive layout
-├── script.js         # Interactive canvas animation, mobile menu, email copy
-├── favicon.svg       # Vector geometric 'V' monogram favicon
-└── README.md         # Deployment & DNS setup guide
+├── app.py                # Flask application & HTTP server routing
+├── requirements.txt      # Python dependencies (Flask, gunicorn)
+├── Procfile              # Render process definition (web: gunicorn app:app)
+├── .gitignore            # Python & system gitignore
+├── README.md             # Complete Render Web Service & DNS guide
+└── public/               # Production frontend assets
+    ├── index.html        # Landing page with SEO, Open Graph & founder attribution
+    ├── styles.css        # Premium dark mode stylesheet & responsive layout
+    ├── script.js         # Interactive canvas animation, mobile menu, email copy
+    └── favicon.svg       # Vector geometric 'V' monogram favicon
 ```
 
 ---
 
-## 🚀 Deployment Guide: Render Static Site
+## 🚀 Deployment Guide: Render Web Service
 
-1. Sign in to [Render](https://render.com).
-2. Click **New +** → **Static Site**.
+Deploying on [Render](https://render.com) as a **Web Service**:
+
+1. Log in to [Render](https://render.com).
+2. Click **New +** → select **Web Service** *(not Static Site)*.
 3. Connect your GitHub repository: `rohith1246/vitoniya`.
-4. Configure the service settings:
+4. Configure the Web Service settings:
    - **Name**: `vitoniya`
+   - **Language / Runtime**: `Python 3`
    - **Branch**: `main`
-   - **Build Command**: *(leave blank)*
-   - **Publish Directory**: `.`
-5. Click **Create Static Site**.
-6. Render will build and deploy your site in seconds at a URL like:
+   - **Region**: Closest to your target audience (e.g. Frankfurt, Singapore, or Oregon)
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app`
+   - **Plan**: Free (or Starter)
+5. *(Optional)* In **Advanced Settings**, set **Health Check Path** to `/health`.
+6. Click **Create Web Service**.
+7. Render will build the environment, install Flask and Gunicorn, and start your web service at:  
    `https://vitoniya.onrender.com`
 
 ---
 
 ## 🌐 Connecting `vitoniya.com` (Hostinger DNS Setup)
 
-### 1. Add Custom Domain in Render
-- In your Render dashboard, navigate to your static site.
-- Go to **Settings** → **Custom Domains**.
-- Add both:
+### 1. Add Custom Domain on Render
+- In your Render Web Service dashboard, go to **Settings** → **Custom Domains**.
+- Add:
   - `vitoniya.com`
   - `www.vitoniya.com`
 - Set `vitoniya.com` as the **Primary Domain** (Render will automatically redirect `www` to root).
+- Render will display the DNS records needed for Hostinger.
 
-### 2. Update DNS Records in Hostinger
-Log in to your Hostinger Control Panel → **Domains** → **vitoniya.com** → **DNS / Nameservers**:
+### 2. Configure Hostinger DNS
+In your **Hostinger Control Panel** → **Domains** → **vitoniya.com** → **DNS / Nameservers**:
 
-| Type | Name / Host | Target / Value | TTL | Purpose |
+| Type | Name / Host | Points to / Value | TTL | Purpose |
 |---|---|---|---|---|
-| **A** | `@` | `216.24.57.1` *(or IP provided by Render)* | 3600 | Points root domain to Render |
-| **CNAME** | `www` | `vitoniya.onrender.com` | 3600 | Points www to Render |
+| **A** | `@` | `216.24.57.1` *(or IP provided by Render)* | 3600 | Directs apex domain to Render Web Service |
+| **CNAME** | `www` | `vitoniya.onrender.com` | 3600 | Directs `www` to Render |
 
 > ⚠️ **CRITICAL: Preserve Email (MX Records)**  
-> **Do NOT touch or delete existing MX, SPF, or DKIM records** in Hostinger.  
-> Your email (`info@vitoniya.com`) routes through Hostinger's mail servers, while your web traffic routes to Render.
+> **Do NOT delete or edit your existing MX, SPF, or DKIM records** in Hostinger.  
+> Your email (`info@vitoniya.com`) routes through Hostinger's mail servers, while website traffic routes to your Render Web Service.
 
 ---
 
-## 🔒 SSL / HTTPS
-Render automatically provisions and renews a free Let's Encrypt SSL certificate as soon as the DNS records propagate (typically 5–30 minutes).
+## 🔒 Automatic SSL / HTTPS
+Render automatically provisions and renews a free Let's Encrypt SSL certificate once DNS records are verified.
+
+---
+
+## 💻 Local Testing
+
+To run the web service locally on your machine:
+```bash
+pip install -r requirements.txt
+python app.py
+```
+Open [http://localhost:5000](http://localhost:5000) in your browser.
 
 ---
 
