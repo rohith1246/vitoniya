@@ -1,18 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <linearGradient id="vGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#0969da"/>
+    <!-- Left Wing Forest Green Gradient -->
+    <linearGradient id="greenWing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A6F56"/>
+      <stop offset="60%" stop-color="#284433"/>
+      <stop offset="100%" stop-color="#192C21"/>
+    </linearGradient>
+    <!-- Right Wing Warm Bronze Gold Gradient -->
+    <linearGradient id="goldWing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AA6A"/>
+      <stop offset="70%" stop-color="#B88B4A"/>
+      <stop offset="100%" stop-color="#936B32"/>
     </linearGradient>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#f8fafc"/>
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FAF8F5"/>
     </linearGradient>
   </defs>
-  <!-- Background rounded rectangle -->
-  <rect width="64" height="64" rx="14" fill="url(#bgGrad)" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- Clean ivory base with refined hairline border -->
+  <rect width="64" height="64" rx="14" fill="url(#bgGrad)" stroke="#E8E4DC" stroke-width="1.5"/>
+
+  <!-- Left Wing (Forest Green Curve) -->
+  <path d="M19 14 C26 14 29 17 31 23 L36 37 C34 44 32 49 28 50 C25 45 22 36 19 28 Z" fill="url(#greenWing)"/>
   
-  <!-- Stylized Geometric V Monogram -->
-  <path d="M16 18 L27 46 L37 46 L48 18 L40.5 18 L32 39.5 L23.5 18 Z" fill="url(#vGrad)"/>
-  <circle cx="32" cy="18" r="2.5" fill="#0969da"/>
+  <!-- Right Wing (Bronze Gold Accent) -->
+  <path d="M45 14 C40 14 36 18 34 23 L37.5 31 L41.5 22 L45 14 Z" fill="url(#goldWing)"/>
 </svg>
