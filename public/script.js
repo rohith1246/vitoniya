@@ -206,4 +206,39 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal();
     }
   });
+
+  // 7. Intro Video Controls
+  const mainIntroVideo = document.getElementById('main-intro-video');
+  const watchIntroBtn = document.getElementById('watch-intro-btn');
+  const muteToggleBtn = document.getElementById('video-mute-toggle');
+
+  if (mainIntroVideo && muteToggleBtn) {
+    const iconOff = muteToggleBtn.querySelector('.icon-sound-off');
+    const iconOn = muteToggleBtn.querySelector('.icon-sound-on');
+    const soundLabel = muteToggleBtn.querySelector('.sound-label');
+
+    muteToggleBtn.addEventListener('click', () => {
+      mainIntroVideo.muted = !mainIntroVideo.muted;
+      if (mainIntroVideo.muted) {
+        if (iconOff) iconOff.style.display = 'block';
+        if (iconOn) iconOn.style.display = 'none';
+        if (soundLabel) soundLabel.textContent = 'Unmute';
+      } else {
+        if (iconOff) iconOff.style.display = 'none';
+        if (iconOn) iconOn.style.display = 'block';
+        if (soundLabel) soundLabel.textContent = 'Mute';
+      }
+    });
+
+    if (watchIntroBtn) {
+      watchIntroBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.getElementById('hero-video-frame');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          mainIntroVideo.play().catch(() => {});
+        }
+      });
+    }
+  }
 });
