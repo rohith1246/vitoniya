@@ -81,24 +81,57 @@
         <a href="#contact" class="btn btn-primary mobile-cta">Start a Project</a>
     </div>
 
+    <!-- FULLSCREEN INTRO VIDEO OVERLAY / INTRO ANIMATION -->
+    <div id="intro-video-overlay" class="intro-video-overlay" aria-label="Intro Brand Animation">
+        <video id="intro-splash-video" class="intro-splash-video" autoplay muted playsinline preload="auto">
+            <source src="intro-video.mp4" type="video/mp4">
+            <source src="intro%20video.mp4" type="video/mp4">
+        </video>
+        <button id="skip-intro-btn" class="skip-intro-btn" type="button" aria-label="Skip Intro">
+            <span>Skip Intro</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+    </div>
+
     <!-- BACKGROUND GRID -->
     <div class="bg-grid"></div>
 
     <main>
         <!-- SECTION 1: HERO -->
         <section id="hero" class="hero section">
-            <!-- Ambient Video Background Layer -->
-            <div class="hero-video-bg-wrap" aria-hidden="true">
-                <video class="hero-video-bg" autoplay loop muted playsinline preload="metadata">
-                    <source src="intro-video.mp4" type="video/mp4">
-                    <source src="intro%20video.mp4" type="video/mp4">
-                </video>
-                <div class="hero-video-overlay"></div>
-            </div>
-
             <div class="container hero-container reveal">
-                <img src="logo.png" alt="Vitoniya Emblem" class="hero-emblem">
-                
+                <!-- Tagline Badge -->
+                <div class="hero-tagline-bar">
+                    <span class="gold-line"></span>
+                    <span class="hero-tagline-text">Intelligent Solutions For A Better Tomorrow</span>
+                    <span class="gold-line"></span>
+                </div>
+
+                <!-- Professional Hero Headline -->
+                <h1 class="hero-title">Architecting The Next Generation Of Intelligent Technology<span class="accent-dot">.</span></h1>
+
+                <!-- Featured Executive Quotation -->
+                <div class="hero-quote-card">
+                    <div class="quote-icon" aria-hidden="true">&ldquo;</div>
+                    <blockquote class="hero-quote-text">
+                        We believe technology should do more than solve problems &mdash; it should create enduring intelligence, elevate human capability, and build a better tomorrow.
+                    </blockquote>
+                    <div class="quote-byline">
+                        <span class="founder-mark">Vitoniya Global Technologies</span>
+                        <span class="byline-separator">&bull;</span>
+                        <span class="byline-founder">Founded &amp; Owned by Rohith Vuppula</span>
+                    </div>
+                </div>
+
+                <!-- Hero Call to Actions -->
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Start a Project</a>
+                    <a href="#services" class="btn btn-secondary">
+                        <span>Explore Solutions</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+
                 <div class="scroll-indicator">
                     <div class="mouse">
                         <div class="wheel"></div>

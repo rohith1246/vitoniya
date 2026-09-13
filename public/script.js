@@ -207,31 +207,61 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 7. Ensure Hero Background Video Autoplay (seamless, natural, zero controls)
-  const heroBgVideo = document.querySelector('.hero-video-bg');
-  if (heroBgVideo) {
-    heroBgVideo.muted = true;
-    heroBgVideo.setAttribute('muted', '');
-    heroBgVideo.setAttribute('playsinline', '');
-    heroBgVideo.setAttribute('autoplay', '');
-    heroBgVideo.setAttribute('loop', '');
-    
-    const playHeroBg = () => {
-      const p = heroBgVideo.play();
-      if (p !== undefined) {
-        p.catch(() => {
-          const wakeVideo = () => {
-            heroBgVideo.play().catch(() => {});
-            window.removeEventListener('scroll', wakeVideo);
-            window.removeEventListener('click', wakeVideo);
-            window.removeEventListener('touchstart', wakeVideo);
-          };
-          window.addEventListener('scroll', wakeVideo, { passive: true });
-          window.addEventListener('click', wakeVideo, { passive: true });
-          window.addEventListener('touchstart', wakeVideo, { passive: true });
-        });
-      }
+  // 7. Fullscreen Intro Animation Video Controller
+  const introOverlay = document.getElementById('intro-video-overlay');
+  const introVideo = document.getElementById('intro-splash-video');
+  const skipIntroBtn = document.getElementById('skip-intro-btn');
+
+  if (introOverlay && introVideo) {
+    let hasDismissed = false;
+
+    const dismissIntro = () => {
+      if (hasDismissed) return;
+      hasDismissed = true;
+      introOverlay.classList.add('fade-out');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        try {
+          introVideo.pause();
+        } catch (e) {}
+      }, 900);
     };
-    playHeroBg();
+
+    // Lock scroll during intro animation
+    document.body.style.overflow = 'hidden';
+
+    // Auto-dismiss when intro animation completes
+    introVideo.addEventListener('ended', dismissIntro);
+
+    // Skip button
+    if (skipIntroBtn) {
+      skipIntroBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissIntro();
+      });
+    }
+
+    // Safety fallback: dismiss after 10.5 seconds if video stalls
+    setTimeout(() => {
+      dismissIntro();
+    }, 10500);
+
+    // Ensure video starts playing immediately
+    introVideo.muted = true;
+    introVideo.setAttribute('muted', '');
+    introVideo.setAttribute('playsinline', '');
+    const playPromise = introVideo.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // If autoplay blocked, dismiss smoothly on first user click or touch
+        const onAnyInput = () => {
+          dismissIntro();
+          window.removeEventListener('click', onAnyInput);
+          window.removeEventListener('touchstart', onAnyInput);
+        };
+        window.addEventListener('click', onAnyInput, { passive: true });
+        window.addEventListener('touchstart', onAnyInput, { passive: true });
+      });
+    }
   }
 });
