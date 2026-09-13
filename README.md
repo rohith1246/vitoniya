@@ -1,7 +1,6 @@
 # VITONIYA
 
-> **Vitoniya Global Technologies** | *Building What's Next.*  
-> Founded & Owned by **Rohith Vuppula**  
+> **Vitoniya Global Technologies** | *Intelligent Solutions For A Better Tomorrow*  
 > Official Domain: [vitoniya.com](https://vitoniya.com) | Contact: [info@vitoniya.com](mailto:info@vitoniya.com)
 
 Official responsive, high-performance web service for **Vitoniya Global Technologies**, powered by **Python Flask & Gunicorn**.
@@ -18,9 +17,9 @@ vitoniya/
 ├── .gitignore            # Python & system gitignore
 ├── README.md             # Complete Render Web Service & DNS guide
 └── public/               # Production frontend assets
-    ├── index.html        # Landing page with SEO, Open Graph & founder attribution
-    ├── styles.css        # Premium dark mode stylesheet & responsive layout
-    ├── script.js         # Interactive canvas animation, mobile menu, email copy
+    ├── index.html        # Landing page with SEO, Open Graph
+    ├── styles.css        # Premium editorial stylesheet & responsive layout
+    ├── script.js         # Interactive scroll animations, mobile menu, email copy
     └── favicon.svg       # Vector geometric 'V' monogram favicon
 ```
 

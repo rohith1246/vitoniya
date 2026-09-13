@@ -1274,12 +1274,6 @@ input:focus, select:focus, textarea:focus {
   margin-bottom: 1rem;
 }
 
-.footer-founder {
-  font-size: 0.85rem;
-  opacity: 0.7;
-  color: var(--color-white);
-}
-
 .footer h4 {
   color: var(--color-white);
   margin-bottom: 1.5rem;
