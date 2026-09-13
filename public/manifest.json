@@ -1,0 +1,16 @@
+{
+  "name": "Vitoniya Global Technologies",
+  "short_name": "VITONIYA",
+  "description": "Intelligent Technology & AI Solutions",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F3",
+  "theme_color": "#0F3D2E",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

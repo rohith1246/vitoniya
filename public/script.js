@@ -1,157 +1,209 @@
-/**
- * Vitoniya Global Technologies - Corporate Web Experience
- * Vanilla JavaScript - Zero dependencies, high performance
- */
-
 document.addEventListener('DOMContentLoaded', () => {
-  initNavigation();
-  initEmailCopy();
-  initModals();
-});
+  // 1. Navigation & Header
+  const header = document.getElementById('header');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('.nav-link');
 
-/* ==========================================================================
-   NAVIGATION & MOBILE DRAWER
-   ========================================================================== */
-function initNavigation() {
-  const header = document.getElementById('site-header');
-  const toggleBtn = document.getElementById('mobile-toggle');
-  const drawer = document.getElementById('mobile-drawer');
-  const mobileLinks = document.querySelectorAll('.mobile-link, .mobile-cta');
-
-  // Sticky header background shift on scroll
-  const handleScroll = () => {
-    if (window.scrollY > 15) {
+  // Sticky header class
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
       header.classList.add('scrolled');
     } else {
       header.classList.remove('scrolled');
     }
-  };
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
+    
+    // Active Nav Highlighting
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      if (scrollY >= (sectionTop - 200)) {
+        current = section.getAttribute('id');
+      }
+    });
 
-  if (!toggleBtn || !drawer) return;
-
-  function setDrawerState(isOpen) {
-    toggleBtn.classList.toggle('is-active', isOpen);
-    toggleBtn.setAttribute('aria-expanded', isOpen);
-    drawer.classList.toggle('open', isOpen);
-    drawer.setAttribute('aria-hidden', !isOpen);
-  }
-
-  toggleBtn.addEventListener('click', () => {
-    const isOpen = drawer.classList.contains('open');
-    setDrawerState(!isOpen);
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href').includes(current)) {
+        link.classList.add('active');
+      }
+    });
   });
 
-  // Close drawer on clicking any link
-  mobileLinks.forEach((link) => {
+  // Mobile drawer toggle
+  function toggleMenu() {
+    mobileMenuBtn.classList.toggle('open');
+    mobileDrawer.classList.toggle('open');
+    document.body.style.overflow = mobileDrawer.classList.contains('open') ? 'hidden' : '';
+  }
+
+  mobileMenuBtn.addEventListener('click', toggleMenu);
+
+  // Close mobile drawer on link click
+  mobileNavLinks.forEach(link => {
     link.addEventListener('click', () => {
-      setDrawerState(false);
+      if (mobileDrawer.classList.contains('open')) {
+        toggleMenu();
+      }
     });
   });
 
-  // Close drawer on Escape key
+  // Close mobile drawer on Escape key
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer.classList.contains('open')) {
-      setDrawerState(false);
-    }
-  });
-}
-
-/* ==========================================================================
-   COPY EMAIL FUNCTIONALITY
-   ========================================================================== */
-function initEmailCopy() {
-  const copyBtn = document.getElementById('btn-copy-email');
-  const toast = document.getElementById('copy-toast');
-  const email = 'info@vitoniya.com';
-
-  if (!copyBtn) return;
-
-  let toastTimer;
-
-  copyBtn.addEventListener('click', async () => {
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(email);
-      } else {
-        // Fallback for non-HTTPS or legacy contexts
-        const tempInput = document.createElement('input');
-        tempInput.value = email;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-      }
-
-      // Show toast
-      if (toast) {
-        clearTimeout(toastTimer);
-        toast.classList.add('show');
-        toastTimer = setTimeout(() => {
-          toast.classList.remove('show');
-        }, 2200);
-      }
-    } catch (err) {
-      console.error('Could not copy email:', err);
-    }
-  });
-}
-
-/* ==========================================================================
-   MODALS (PRIVACY & TERMS)
-   ========================================================================== */
-function initModals() {
-  const openButtons = document.querySelectorAll('[data-modal]');
-  const closeButtons = document.querySelectorAll('.modal-close, .modal-close-btn');
-  const modalBackdrops = document.querySelectorAll('.modal-backdrop');
-
-  openButtons.forEach((button) => {
-    button.addEventListener('click', (e) => {
-      e.preventDefault();
-      const modalId = button.getAttribute('data-modal');
-      const targetModal = document.getElementById(modalId);
-      if (targetModal) {
-        openModal(targetModal);
-      }
-    });
-  });
-
-  closeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const parentModal = button.closest('.modal-backdrop');
-      if (parentModal) {
-        closeModal(parentModal);
-      }
-    });
-  });
-
-  modalBackdrops.forEach((backdrop) => {
-    backdrop.addEventListener('click', (e) => {
-      if (e.target === backdrop) {
-        closeModal(backdrop);
-      }
-    });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const openModalEl = document.querySelector('.modal-backdrop.is-open');
-      if (openModalEl) {
-        closeModal(openModalEl);
-      }
+    if (e.key === 'Escape' && mobileDrawer.classList.contains('open')) {
+      toggleMenu();
     }
   });
 
-  function openModal(modalEl) {
-    modalEl.classList.add('is-open');
-    modalEl.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
+  // 2. Scroll Reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+  } else {
+    // Fallback for older browsers
+    revealElements.forEach(el => el.classList.add('visible'));
   }
 
-  function closeModal(modalEl) {
-    modalEl.classList.remove('is-open');
-    modalEl.setAttribute('aria-hidden', 'true');
+  // 4. Email Copy
+  const copyBtn = document.getElementById('copy-email');
+  const toast = document.getElementById('toast');
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('info@vitoniya.com').then(() => {
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    });
+  }
+
+  // 5. Contact Form
+  const contactForm = document.getElementById('contact-form');
+  const formSuccess = document.getElementById('form-success');
+  const formError = document.getElementById('form-error');
+  const submitBtn = document.getElementById('submit-btn');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Basic validation
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (!name || !email || !message) {
+        return; // HTML5 required attribute should catch this, but just in case
+      }
+      
+      if (!emailRegex.test(email)) {
+        return;
+      }
+      
+      // Setup payload
+      const formData = new FormData(contactForm);
+      const payload = Object.fromEntries(formData.entries());
+      
+      // Loading state
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      formSuccess.hidden = true;
+      formError.hidden = true;
+      
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        if (response.ok) {
+          formSuccess.hidden = false;
+          contactForm.reset();
+        } else {
+          formError.hidden = false;
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        formError.hidden = false;
+      } finally {
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  // 6. Modals
+  const modalTriggers = document.querySelectorAll('[data-modal]');
+  const modals = document.querySelectorAll('.modal');
+  const modalCloseBtns = document.querySelectorAll('.modal-close');
+
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeModal() {
+    modals.forEach(modal => {
+      modal.classList.remove('open');
+    });
     document.body.style.overflow = '';
   }
-}
+
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modalId = trigger.getAttribute('data-modal');
+      openModal(modalId);
+    });
+  });
+
+  modalCloseBtns.forEach(btn => {
+    btn.addEventListener('click', closeModal);
+  });
+
+  // Close modal on click outside
+  modals.forEach(modal => {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  });
+  
+  // Close modal on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+});

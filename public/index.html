@@ -1,444 +1,632 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vitoniya Global Technologies | Building What's Next</title>
-  <meta name="description" content="Vitoniya Global Technologies builds modern software, scalable cloud architectures, enterprise platforms, and digital automation technologies. Intelligent solutions for a better tomorrow.">
-  <meta name="author" content="Vitoniya Global Technologies">
-  <meta name="keywords" content="Vitoniya, Vitoniya Global Technologies, enterprise software, cloud systems, digital platforms, automation, Rohith Vuppula">
-  <meta name="robots" content="index, follow">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITONIYA | Intelligent Technology & AI Solutions</title>
+    <meta name="description" content="Vitoniya Global Technologies — Building intelligent digital solutions. Software development, AI-powered systems, automation, and digital platforms.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="styles.css">
+    
+    <meta property="og:title" content="VITONIYA | Intelligent Technology & AI Solutions">
+    <meta property="og:description" content="Vitoniya Global Technologies — Building intelligent digital solutions. Software development, AI-powered systems, automation, and digital platforms.">
+    <meta property="og:image" content="https://vitoniya.com/logo.png">
+    <meta property="og:url" content="https://vitoniya.com/">
+    <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Open Graph / Facebook / LinkedIn -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vitoniya.com/">
-  <meta property="og:title" content="Vitoniya Global Technologies | Building What's Next">
-  <meta property="og:description" content="Vitoniya Global Technologies builds modern software, scalable cloud architectures, enterprise platforms, and digital automation technologies. Intelligent solutions for a better tomorrow.">
-  <meta property="og:image" content="https://vitoniya.com/logo.png">
-
-  <!-- Twitter Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="vitoniya.com">
-  <meta property="twitter:url" content="https://vitoniya.com/">
-  <meta name="twitter:title" content="Vitoniya Global Technologies | Building What's Next">
-  <meta name="twitter:description" content="Vitoniya Global Technologies builds modern software, scalable cloud architectures, enterprise platforms, and digital automation technologies.">
-  <meta name="twitter:image" content="https://vitoniya.com/logo.png">
-
-  <!-- Favicon: Official Forest Green V Emblem -->
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="apple-touch-icon" href="logo.png">
-
-  <!-- Typography: MONTSERRAT (Official Primary Font) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Vitoniya Global Technologies",
+      "url": "https://vitoniya.com",
+      "email": "info@vitoniya.com",
+      "founder": {
+        "@type": "Person",
+        "name": "Rohith Vuppula"
+      }
+    }
+    </script>
 </head>
 <body>
-
-  <!-- Subtle Architectural Grid Background -->
-  <div class="background-grid" aria-hidden="true"></div>
-
-  <!-- NAVIGATION -->
-  <header class="site-header" id="site-header">
-    <div class="header-container">
-      <a href="#hero" class="brand-logo" aria-label="Vitoniya Homepage">
-        <img src="logo.png" alt="Vitoniya Logo" class="header-logo-img">
-        <div class="brand-text-block">
-          <span class="brand-name">VITONIYA</span>
-          <span class="brand-tagline-micro">Intelligent Solutions</span>
+    <!-- HEADER & NAVIGATION -->
+    <header id="header" class="header">
+        <div class="container header-container">
+            <a href="#" class="logo-link">
+                <img src="logo.png" alt="Vitoniya Logo" class="logo-img">
+                <div class="logo-text">
+                    <span class="brand-name">VITONIYA</span>
+                    <span class="brand-tagline">Intelligent Solutions</span>
+                </div>
+            </a>
+            
+            <nav class="desktop-nav">
+                <ul class="nav-list">
+                    <li><a href="#hero" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#services" class="nav-link">Solutions</a></li>
+                    <li><a href="#products" class="nav-link">Products</a></li>
+                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <a href="#contact" class="btn btn-primary header-cta">Start a Project</a>
+            
+            <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-      </a>
+    </header>
 
-      <!-- Desktop Navigation -->
-      <nav class="desktop-nav" aria-label="Main Navigation">
-        <ul class="nav-links">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#what-we-build" class="nav-link">What We Build</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+    <!-- MOBILE DRAWER -->
+    <div id="mobile-drawer" class="mobile-drawer">
+        <ul class="mobile-nav-list">
+            <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+            <li><a href="#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#services" class="mobile-nav-link">Solutions</a></li>
+            <li><a href="#products" class="mobile-nav-link">Products</a></li>
+            <li><a href="#portfolio" class="mobile-nav-link">Portfolio</a></li>
+            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
         </ul>
-        <a href="#contact" class="btn btn-nav">Get in Touch</a>
-      </nav>
-
-      <!-- Mobile Hamburger Button -->
-      <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-drawer">
-        <span class="hamburger-bar"></span>
-        <span class="hamburger-bar"></span>
-        <span class="hamburger-bar"></span>
-      </button>
+        <a href="#contact" class="btn btn-primary mobile-cta">Start a Project</a>
     </div>
 
-    <!-- Mobile Slide Drawer -->
-    <div class="mobile-drawer" id="mobile-drawer" aria-hidden="true">
-      <nav class="mobile-nav" aria-label="Mobile Navigation">
-        <ul class="mobile-links">
-          <li><a href="#about" class="mobile-link">About</a></li>
-          <li><a href="#what-we-build" class="mobile-link">What We Build</a></li>
-          <li><a href="#launching" class="mobile-link">Launch Status</a></li>
-          <li><a href="#contact" class="mobile-link">Contact</a></li>
-        </ul>
-        <div class="mobile-cta-wrap">
-          <a href="#contact" class="btn btn-primary btn-block mobile-cta">Get in Touch</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+    <!-- BACKGROUND GRID -->
+    <div class="bg-grid"></div>
 
-  <main id="main-content">
-    <!-- SECTION 1: HERO -->
-    <section class="hero-section" id="hero">
-      <div class="container hero-container">
-        
-        <!-- Official Logo Emblem in Hero -->
-        <div class="hero-brand-mark animate-fade-in">
-          <img src="logo.png" alt="Vitoniya Emblem" class="hero-logo-img">
-        </div>
-
-        <!-- Status Badge -->
-        <div class="badge-wrapper animate-fade-in">
-          <div class="status-badge">
-            <span class="status-dot"></span>
-            <span class="status-text">COMING SOON</span>
-          </div>
-        </div>
-
-        <!-- Official Tagline Bar from Brand Guide -->
-        <div class="official-tagline-bar animate-fade-in">
-          <span class="tagline-rule" aria-hidden="true"></span>
-          <span class="tagline-text">Intelligent Solutions For A Better Tomorrow</span>
-          <span class="tagline-rule" aria-hidden="true"></span>
-        </div>
-
-        <!-- Hero Headline & Subheadline -->
-        <h1 class="hero-title animate-fade-in-up">
-          Building What’s Next<span class="accent-dot">.</span>
-        </h1>
-
-        <p class="hero-subheadline animate-fade-in-up-delay-1">
-          Vitoniya Global Technologies is building modern software, scalable cloud architectures, and digital products for the future.
-        </p>
-
-        <!-- Founder Ownership Attribution -->
-        <div class="founder-badge animate-fade-in-up-delay-2">
-          <span class="founder-badge-line" aria-hidden="true"></span>
-          <span class="founder-badge-text">Founded &amp; Owned by Rohith Vuppula</span>
-          <span class="founder-badge-line" aria-hidden="true"></span>
-        </div>
-
-        <!-- Hero Actions -->
-        <div class="hero-actions animate-fade-in-up-delay-3">
-          <a href="#contact" class="btn btn-primary">Contact Us</a>
-          <a href="#what-we-build" class="btn btn-secondary">
-            <span>Explore Vitoniya</span>
-            <svg class="icon-arrow" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M4.167 10h11.666M10.833 5l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Scroll Indicator Hint -->
-        <div class="scroll-hint" aria-hidden="true">
-          <span class="scroll-mouse">
-            <span class="scroll-wheel"></span>
-          </span>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION 2: BRAND STATEMENT -->
-    <section class="brand-statement-section" id="statement">
-      <div class="container statement-container">
-        <div class="statement-label">Trust &bull; Growth &bull; Stability</div>
-        <blockquote class="statement-quote">
-          “We believe technology should do more than solve problems. It should create new possibilities.”
-        </blockquote>
-      </div>
-    </section>
-
-    <!-- SECTION 3: WHAT WE BUILD -->
-    <section class="what-we-build-section" id="what-we-build">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-badge">Core Capabilities</span>
-          <h2 class="section-title">What We Build</h2>
-          <p class="section-subtitle">
-            Engineering robust foundations for high-performance software, cloud infrastructure, and operational scale.
-          </p>
-        </div>
-
-        <div class="cards-grid">
-          <!-- Card 1: Enterprise Software -->
-          <div class="feature-card">
-            <div class="card-icon-box">
-              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-                <line x1="12" y1="17" x2="12" y2="21" />
-                <path d="m8 9 2 2-2 2M13 13h3" />
-              </svg>
+    <main>
+        <!-- SECTION 1: HERO -->
+        <section id="hero" class="hero section">
+            <div class="container hero-container reveal">
+                <img src="logo.png" alt="Vitoniya Emblem" class="hero-emblem">
+                
+                <div class="hero-tagline-bar">
+                    <span class="gold-line"></span>
+                    <span class="hero-tagline-text">Intelligent Solutions For A Better Tomorrow</span>
+                    <span class="gold-line"></span>
+                </div>
+                
+                <h1 class="hero-title">Building Intelligent Digital Solutions<span class="accent-dot">.</span></h1>
+                
+                <p class="hero-subtitle">We design and build software, AI-powered systems, automation platforms, and digital products that drive real business value.</p>
+                
+                <div class="founder-attribution">
+                    <span class="gold-line-small"></span>
+                    <span class="attribution-text">Founded & Owned by Rohith Vuppula</span>
+                    <span class="gold-line-small"></span>
+                </div>
+                
+                <div class="hero-actions">
+                    <a href="#contact" class="btn btn-primary">Start a Project</a>
+                    <a href="#services" class="btn btn-secondary">
+                        Explore Solutions
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                </div>
+                
+                <div class="scroll-indicator">
+                    <div class="mouse">
+                        <div class="wheel"></div>
+                    </div>
+                </div>
             </div>
-            <h3 class="card-title">Enterprise Software</h3>
-            <p class="card-description">
-              Scalable web applications, mission-critical SaaS platforms, robust APIs, and enterprise systems.
-            </p>
-          </div>
+        </section>
 
-          <!-- Card 2: Cloud & Distributed Systems -->
-          <div class="feature-card">
-            <div class="card-icon-box">
-              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-              </svg>
+        <!-- SECTION 2: INTRODUCTION -->
+        <section id="introduction" class="introduction section">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Our Approach</span>
+                    <h2>From Problem to Product</h2>
+                </div>
+                
+                <div class="process-progression">
+                    <div class="progression-step">
+                        <div class="step-num">1</div>
+                        <h4 class="step-title">Problem</h4>
+                        <p class="step-desc">Understand the challenge</p>
+                    </div>
+                    <div class="progression-connector"></div>
+                    <div class="progression-step">
+                        <div class="step-num">2</div>
+                        <h4 class="step-title">Strategy</h4>
+                        <p class="step-desc">Plan the right approach</p>
+                    </div>
+                    <div class="progression-connector"></div>
+                    <div class="progression-step">
+                        <div class="step-num">3</div>
+                        <h4 class="step-title">Engineering</h4>
+                        <p class="step-desc">Build with precision</p>
+                    </div>
+                    <div class="progression-connector"></div>
+                    <div class="progression-step">
+                        <div class="step-num">4</div>
+                        <h4 class="step-title">Deployment</h4>
+                        <p class="step-desc">Launch with confidence</p>
+                    </div>
+                    <div class="progression-connector"></div>
+                    <div class="progression-step">
+                        <div class="step-num">5</div>
+                        <h4 class="step-title">Growth</h4>
+                        <p class="step-desc">Scale and improve</p>
+                    </div>
+                </div>
             </div>
-            <h3 class="card-title">Cloud &amp; Distributed Systems</h3>
-            <p class="card-description">
-              High-concurrency backend services, fault-tolerant architectures, and secure cloud infrastructure.
-            </p>
-          </div>
+        </section>
 
-          <!-- Card 3: Digital Platforms -->
-          <div class="feature-card">
-            <div class="card-icon-box">
-              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <polygon points="12 2 2 7 12 12 22 7 12 2" />
-                <polyline points="2 17 12 22 22 17" />
-                <polyline points="2 12 12 17 22 12" />
-              </svg>
+        <!-- SECTION 3: WHAT WE DO -->
+        <section id="services" class="services section bg-alt">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Core Capabilities</span>
+                    <h2>What We Do</h2>
+                    <p class="section-subtitle">Comprehensive technology services designed for modern businesses.</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card reveal">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line><polyline points="16 10 18 10 18 10"></polyline><polyline points="6 10 8 10 8 10"></polyline></svg>
+                        </div>
+                        <h3>Software Development</h3>
+                        <p>Custom web applications, SaaS platforms, APIs, and enterprise software engineered for scale.</p>
+                    </div>
+                    
+                    <div class="service-card reveal" style="transition-delay: 100ms">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                        </div>
+                        <h3>AI & Intelligent Systems</h3>
+                        <p>AI-powered applications, intelligent automation, machine learning models, and data-driven solutions.</p>
+                    </div>
+                    
+                    <div class="service-card reveal" style="transition-delay: 200ms">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                        </div>
+                        <h3>Automation & Workflows</h3>
+                        <p>Intelligent workflow systems that eliminate repetitive tasks and streamline operations.</p>
+                    </div>
+                    
+                    <div class="service-card reveal" style="transition-delay: 300ms">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        </div>
+                        <h3>Digital Platforms</h3>
+                        <p>Modern digital experiences, web platforms, and tools designed for businesses and users.</p>
+                    </div>
+                    
+                    <div class="service-card reveal" style="transition-delay: 400ms">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                        </div>
+                        <h3>Technology Products</h3>
+                        <p>Own-brand technology products built to solve real-world problems.</p>
+                    </div>
+                </div>
             </div>
-            <h3 class="card-title">Digital Platforms</h3>
-            <p class="card-description">
-              Modern digital experiences designed for enterprises, teams, and international users.
-            </p>
-          </div>
+        </section>
 
-          <!-- Card 4: Workflow Automation -->
-          <div class="feature-card">
-            <div class="card-icon-box">
-              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="3" />
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-              </svg>
+        <!-- SECTION 4: SOLUTIONS -->
+        <section id="solutions" class="solutions section">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Solutions</span>
+                    <h2>Intelligent Solutions</h2>
+                    <p class="section-subtitle">Targeted technology solutions across key business areas.</p>
+                </div>
+                
+                <div class="solutions-grid">
+                    <div class="solution-card">
+                        <h4 class="solution-title"><span class="solution-icon">✦</span> AI Solutions</h4>
+                        <p class="solution-desc">Smart systems powered by artificial intelligence and machine learning.</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 class="solution-title"><span class="solution-icon">✦</span> Business Software</h4>
+                        <p class="solution-desc">Custom enterprise applications and management platforms.</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 class="solution-title"><span class="solution-icon">✦</span> Automation Systems</h4>
+                        <p class="solution-desc">End-to-end workflow automation for operational efficiency.</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 class="solution-title"><span class="solution-icon">✦</span> Web Platforms</h4>
+                        <p class="solution-desc">Scalable web applications and digital platforms.</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 class="solution-title"><span class="solution-icon">✦</span> Data & APIs</h4>
+                        <p class="solution-desc">Data pipelines, REST APIs, and integration services.</p>
+                    </div>
+                    <div class="solution-card">
+                        <h4 class="solution-title"><span class="solution-icon">✦</span> Digital Products</h4>
+                        <p class="solution-desc">Consumer and business products built for the modern web.</p>
+                    </div>
+                </div>
             </div>
-            <h3 class="card-title">Workflow Automation</h3>
-            <p class="card-description">
-              Intelligent digital workflows that eliminate repetitive bottlenecks and streamline operations.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- SECTION 4: ABOUT VITONIYA -->
-    <section class="about-section" id="about">
-      <div class="container about-container">
-        <div class="about-card">
-          <span class="about-tag">About Vitoniya</span>
-          <h2 class="about-title">Independent Engineering. Global Vision.</h2>
-          <p class="about-lead">
-            Vitoniya Global Technologies is an independent technology company founded and owned by Rohith Vuppula, focused on building intelligent software, AI-powered solutions, automation systems, and digital products.
-          </p>
-          <div class="about-specs">
-            <div class="spec-item">
-              <div class="spec-num">01</div>
-              <div class="spec-content">
-                <h4>Systematic Architecture</h4>
-                <p>Engineered for high resilience, security, and sustained scalability from line one.</p>
-              </div>
+        <!-- SECTION 5: HOW WE WORK -->
+        <section id="process" class="process section bg-alt">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Process</span>
+                    <h2>How We Work</h2>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="timeline-circle">1</div>
+                        <h4 class="timeline-title">Understand</h4>
+                        <p class="timeline-desc">Discovery, research, and requirements gathering</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-circle">2</div>
+                        <h4 class="timeline-title">Design</h4>
+                        <p class="timeline-desc">Architecture, wireframes, and technical planning</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-circle">3</div>
+                        <h4 class="timeline-title">Build</h4>
+                        <p class="timeline-desc">Agile development with continuous integration</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-circle">4</div>
+                        <h4 class="timeline-title">Deploy</h4>
+                        <p class="timeline-desc">Testing, launch, and production deployment</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="timeline-circle">5</div>
+                        <h4 class="timeline-title">Improve</h4>
+                        <p class="timeline-desc">Monitoring, feedback, and iterative optimization</p>
+                    </div>
+                </div>
             </div>
-            <div class="spec-item">
-              <div class="spec-num">02</div>
-              <div class="spec-content">
-                <h4>Engineering Rigor</h4>
-                <p>Applying modern software design patterns and distributed system best practices.</p>
-              </div>
-            </div>
-            <div class="spec-item">
-              <div class="spec-num">03</div>
-              <div class="spec-content">
-                <h4>Product Precision</h4>
-                <p>Designing interfaces and tools that combine technical capability with refined simplicity.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
-    <!-- SECTION 5: LAUNCHING SOON -->
-    <section class="launching-section" id="launching">
-      <div class="container">
-        <div class="launch-card">
-          <div class="launch-badge">
-            <span class="launch-indicator"></span>
-            Launching Soon
-          </div>
-          <h2 class="launch-heading">Something New Is Coming.</h2>
-          <p class="launch-text">
-            Vitoniya is preparing its first generation of technology products and solutions.
-          </p>
-
-          <!-- Transparent Roadmap Phases -->
-          <div class="launch-roadmap">
-            <div class="roadmap-stage active">
-              <div class="stage-marker">
-                <svg viewBox="0 0 16 16" fill="currentColor" class="stage-check"><path d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"/></svg>
-              </div>
-              <div class="stage-info">
-                <span class="stage-label">Phase 01</span>
-                <span class="stage-title">Architecture &amp; Core Systems</span>
-              </div>
+        <!-- SECTION 6: PRODUCTS -->
+        <section id="products" class="products section">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Our Products</span>
+                    <h2>Technology Products</h2>
+                    <p class="section-subtitle">Products we're building to solve real problems.</p>
+                </div>
+                
+                <div class="products-grid">
+                    <div class="product-card reveal">
+                        <div class="product-header">
+                            <h3 class="product-title">Vitoniya Platform</h3>
+                            <span class="status-badge status-dev">In Development</span>
+                        </div>
+                        <p class="product-desc">An integrated digital platform for intelligent business operations and workflow management.</p>
+                    </div>
+                    
+                    <div class="product-card reveal" style="transition-delay: 100ms">
+                        <div class="product-header">
+                            <h3 class="product-title">Vitoniya AI Suite</h3>
+                            <span class="status-badge status-concept">Concept</span>
+                        </div>
+                        <p class="product-desc">A suite of AI-powered tools for data analysis, content generation, and intelligent automation.</p>
+                    </div>
+                    
+                    <div class="product-card reveal" style="transition-delay: 200ms">
+                        <div class="product-header">
+                            <h3 class="product-title">Vitoniya Cloud Tools</h3>
+                            <span class="status-badge status-concept">Concept</span>
+                        </div>
+                        <p class="product-desc">Cloud-native developer tools and APIs for modern application development.</p>
+                    </div>
+                </div>
             </div>
-            <div class="roadmap-connector active"></div>
-            <div class="roadmap-stage in-progress">
-              <div class="stage-marker">
-                <span class="stage-pulse"></span>
-              </div>
-              <div class="stage-info">
-                <span class="stage-label">Phase 02</span>
-                <span class="stage-title">Product Engineering &amp; Integration</span>
-              </div>
+        </section>
+
+        <!-- SECTION 7: PORTFOLIO -->
+        <section id="portfolio" class="portfolio section bg-alt">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Portfolio</span>
+                    <h2>Selected Work</h2>
+                    <p class="section-subtitle">Projects and solutions we've delivered.</p>
+                </div>
+                
+                <div class="portfolio-grid">
+                    <div class="portfolio-card reveal">
+                        <span class="portfolio-category">Web Platform</span>
+                        <h3 class="portfolio-title">Enterprise Management System</h3>
+                        <p class="portfolio-desc">Full-stack business management platform with real-time analytics and reporting.</p>
+                    </div>
+                    
+                    <div class="portfolio-card reveal" style="transition-delay: 100ms">
+                        <span class="portfolio-category">Automation</span>
+                        <h3 class="portfolio-title">Workflow Automation Engine</h3>
+                        <p class="portfolio-desc">Intelligent process automation system reducing manual operations by design.</p>
+                    </div>
+                    
+                    <div class="portfolio-card reveal" style="transition-delay: 200ms">
+                        <span class="portfolio-category">AI Solution</span>
+                        <h3 class="portfolio-title">Data Intelligence Platform</h3>
+                        <p class="portfolio-desc">AI-powered data analysis and insights platform for strategic decision-making.</p>
+                    </div>
+                </div>
             </div>
-            <div class="roadmap-connector"></div>
-            <div class="roadmap-stage upcoming">
-              <div class="stage-marker"></div>
-              <div class="stage-info">
-                <span class="stage-label">Phase 03</span>
-                <span class="stage-title">Public Rollout</span>
-              </div>
+        </section>
+
+        <!-- SECTION 8: TECHNOLOGY STACK -->
+        <section id="tech-stack" class="tech-stack section">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Technology</span>
+                    <h2>Our Technology Stack</h2>
+                </div>
+                
+                <div class="tech-pills">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Flask</span>
+                    <span class="tech-pill">FastAPI</span>
+                    <span class="tech-pill">PostgreSQL</span>
+                    <span class="tech-pill">JavaScript</span>
+                    <span class="tech-pill">HTML5</span>
+                    <span class="tech-pill">CSS3</span>
+                    <span class="tech-pill">REST APIs</span>
+                    <span class="tech-pill">AI / LLMs</span>
+                    <span class="tech-pill">Git</span>
+                    <span class="tech-pill">Docker</span>
+                    <span class="tech-pill">Cloud</span>
+                    <span class="tech-pill">React</span>
+                    <span class="tech-pill">Node.js</span>
+                    <span class="tech-pill">TensorFlow</span>
+                </div>
             </div>
-          </div>
+        </section>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 6: CONTACT -->
-    <section class="contact-section" id="contact">
-      <div class="container contact-container">
-        <div class="contact-card">
-          <span class="section-badge">Get in Touch</span>
-          <h2 class="contact-heading">Let’s Build the Future.</h2>
-          <p class="contact-subtext">
-            For partnerships, technology solutions, collaborations, or business enquiries, reach out to us.
-          </p>
-
-          <div class="contact-action-box">
-            <div class="email-display-wrapper">
-              <span class="email-label">Official Correspondence</span>
-              <div class="email-address-row">
-                <a href="mailto:info@vitoniya.com" class="email-link">info@vitoniya.com</a>
-                <button type="button" class="btn-copy" id="btn-copy-email" aria-label="Copy email address to clipboard">
-                  <svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  <span class="copy-label">Copy</span>
-                </button>
-              </div>
+        <!-- SECTION 9: ABOUT -->
+        <section id="about" class="about section bg-alt">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">About Vitoniya</span>
+                    <h2>Independent Engineering. Global Vision.</h2>
+                </div>
+                
+                <p class="about-lead">Vitoniya Global Technologies is an independent technology company founded and owned by Rohith Vuppula, focused on building intelligent software, AI-powered solutions, automation systems, and digital products.</p>
+                
+                <div class="about-pillars">
+                    <div class="pillar">
+                        <div class="pillar-num">01</div>
+                        <h4 class="pillar-title">Systematic Architecture</h4>
+                        <p class="pillar-desc">Engineered for high resilience, security, and sustained scalability from line one.</p>
+                    </div>
+                    
+                    <div class="pillar">
+                        <div class="pillar-num">02</div>
+                        <h4 class="pillar-title">Engineering Rigor</h4>
+                        <p class="pillar-desc">Applying modern software design patterns and distributed system best practices.</p>
+                    </div>
+                    
+                    <div class="pillar">
+                        <div class="pillar-num">03</div>
+                        <h4 class="pillar-title">Product Precision</h4>
+                        <p class="pillar-desc">Designing interfaces and tools that combine technical capability with refined simplicity.</p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="contact-btn-row">
-              <a href="mailto:info@vitoniya.com" class="btn btn-primary btn-contact-email">
-                <svg class="email-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                <span>Email Vitoniya</span>
-              </a>
+        <!-- SECTION 10: GLOBAL VISION -->
+        <section id="vision" class="vision section">
+            <div class="container reveal">
+                <div class="vision-content">
+                    <div class="globe-visual"></div>
+                    <h2>Thinking Global. Building for the Future.</h2>
+                    <p>Vitoniya is building technology with a global perspective — designing solutions that are scalable, accessible, and ready for international markets.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 11: CTA -->
+        <section id="cta" class="cta section">
+            <div class="container reveal text-center">
+                <h2>Have an idea worth building?</h2>
+                <p>Let's turn your concept into a working product.</p>
+                <a href="#contact" class="btn btn-cta">Start a Project</a>
+            </div>
+        </section>
+
+        <!-- SECTION 12: CONTACT FORM -->
+        <section id="contact" class="contact section bg-alt">
+            <div class="container reveal">
+                <div class="section-header">
+                    <span class="badge">Get in Touch</span>
+                    <h2>Start a Conversation</h2>
+                    <p class="section-subtitle">Tell us about your project and we'll get back to you within 24 hours.</p>
+                </div>
+                
+                <div class="contact-grid">
+                    <div class="contact-form-wrapper">
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="project-type">Project Type</label>
+                                <select id="project-type" name="project_type">
+                                    <option value="">Select project type</option>
+                                    <option value="Software Development">Software Development</option>
+                                    <option value="AI Solution">AI Solution</option>
+                                    <option value="Automation">Automation</option>
+                                    <option value="Digital Platform">Digital Platform</option>
+                                    <option value="Technology Consulting">Technology Consulting</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="budget">Budget Range</label>
+                                <select id="budget" name="budget">
+                                    <option value="">Select budget range</option>
+                                    <option value="Under $5,000">Under $5,000</option>
+                                    <option value="$5,000 - $15,000">$5,000 - $15,000</option>
+                                    <option value="$15,000 - $50,000">$15,000 - $50,000</option>
+                                    <option value="$50,000+">$50,000+</option>
+                                    <option value="Not sure yet">Not sure yet</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group full-width">
+                                <label for="message">Message <span class="required">*</span></label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" id="submit-btn" class="btn btn-primary full-width">Send Message</button>
+                            
+                            <div id="form-success" class="form-message success" hidden>
+                                Thank you! Your message has been sent. We'll get back to you soon.
+                            </div>
+                            
+                            <div id="form-error" class="form-message error" hidden>
+                                Something went wrong. Please try again or email us directly.
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="info-item">
+                            <h4>Email</h4>
+                            <div class="email-wrapper">
+                                <a href="mailto:info@vitoniya.com">info@vitoniya.com</a>
+                                <button id="copy-email" class="copy-btn" aria-label="Copy email">
+                                    <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Location</h4>
+                            <p>Global (Remote-first)</p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h4>Response time</h4>
+                            <p>Within 24 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-grid">
+                <div class="footer-col brand-col">
+                    <div class="footer-logo">
+                        <img src="logo.png" alt="Vitoniya Logo">
+                        <span class="brand-name">VITONIYA</span>
+                    </div>
+                    <p class="company-name">Vitoniya Global Technologies</p>
+                    <p class="footer-tagline">Intelligent Solutions For A Better Tomorrow</p>
+                    <p class="footer-founder">Founded & Owned by Rohith Vuppula</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Solutions</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Solutions</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">AI Solutions</a></li>
+                        <li><a href="#services">Business Software</a></li>
+                        <li><a href="#services">Automation</a></li>
+                        <li><a href="#services">Web Platforms</a></li>
+                        <li><a href="#services">Data & APIs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Legal & Connect</h4>
+                    <ul class="footer-links">
+                        <li><button class="text-btn" data-modal="privacy-modal">Privacy Policy</button></li>
+                        <li><button class="text-btn" data-modal="terms-modal">Terms of Service</button></li>
+                        <li><a href="mailto:info@vitoniya.com">info@vitoniya.com</a></li>
+                    </ul>
+                    <div class="social-icons">
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="#" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                    </div>
+                </div>
             </div>
             
-            <div id="copy-toast" class="copy-toast" role="status" aria-live="polite">
-              Email copied to clipboard
+            <div class="footer-bottom">
+                <p>&copy; 2026 Vitoniya Global Technologies. All rights reserved. | <a href="https://vitoniya.com">vitoniya.com</a></p>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
-  </main>
+    </footer>
 
-  <!-- SECTION 7: FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-top">
-        <div class="footer-brand-info">
-          <div class="footer-logo">
-            <img src="logo.png" alt="Vitoniya Logo" class="footer-logo-img">
-            <span class="footer-brand-name">VITONIYA</span>
-          </div>
-          <p class="footer-full-name">Vitoniya Global Technologies</p>
-          <p class="footer-tagline">“Intelligent Solutions For A Better Tomorrow”</p>
-          <p class="footer-founder">Founded &amp; Owned by Rohith Vuppula</p>
+    <!-- MODALS -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2>Privacy Policy</h2>
+            <div class="modal-body">
+                <p><strong>Vitoniya Global Technologies</strong> is committed to respecting your privacy.</p>
+                <p>This website serves as an informational platform. We do not use persistent tracking cookies, sell user profiles, or collect unauthorized personal data.</p>
+                <p>When you submit the contact form or email us directly at <code>info@vitoniya.com</code>, any information you provide is used solely to respond to your inquiry and discuss potential collaboration.</p>
+                <p>For inquiries regarding our data handling or corporate privacy guidelines, please reach out directly to <a href="mailto:info@vitoniya.com">info@vitoniya.com</a>.</p>
+            </div>
         </div>
-
-        <div class="footer-nav-col">
-          <h4 class="footer-col-title">Navigation</h4>
-          <ul class="footer-links">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#what-we-build">What We Build</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-nav-col">
-          <h4 class="footer-col-title">Legal &amp; Connect</h4>
-          <ul class="footer-links">
-            <li><button type="button" class="legal-link-btn" data-modal="privacy-modal">Privacy</button></li>
-            <li><button type="button" class="legal-link-btn" data-modal="terms-modal">Terms</button></li>
-            <li><a href="mailto:info@vitoniya.com">info@vitoniya.com</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <p class="copyright-text">
-          &copy; 2026 Vitoniya Global Technologies. All rights reserved.
-        </p>
-        <p class="footer-domain-tag">vitoniya.com</p>
-      </div>
     </div>
-  </footer>
 
-  <!-- PRIVACY MODAL -->
-  <div class="modal-backdrop" id="privacy-modal" aria-hidden="true" role="dialog" aria-labelledby="privacy-title">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 id="privacy-title">Privacy Policy</h3>
-        <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Vitoniya Global Technologies</strong> is committed to respecting your privacy.</p>
-        <p>This launching soon website serves as an informational platform. We do not use persistent tracking cookies, sell user profiles, or collect unauthorized personal data.</p>
-        <p>When you contact us directly via email (<code>info@vitoniya.com</code>), any information you provide is used solely to respond to your inquiry and discuss potential collaboration.</p>
-        <p>For inquiries regarding our data handling or corporate privacy guidelines, please reach out directly to <a href="mailto:info@vitoniya.com">info@vitoniya.com</a>.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close-btn">Close</button>
-      </div>
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close modal">&times;</button>
+            <h2>Terms of Service</h2>
+            <div class="modal-body">
+                <p><strong>Vitoniya Global Technologies</strong></p>
+                <p>All content, design elements, monograms, brand markings, and code on this site are the intellectual property of Vitoniya Global Technologies and its owner, Rohith Vuppula, protected by applicable copyright and trademark laws.</p>
+                <p>Information presented on this website is for corporate overview and communication. Unauthorized reproduction, modification, or scraping without prior written consent is strictly prohibited.</p>
+                <p>For business agreements, partnership contracts, or terms questions, contact <a href="mailto:info@vitoniya.com">info@vitoniya.com</a>.</p>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <!-- TERMS MODAL -->
-  <div class="modal-backdrop" id="terms-modal" aria-hidden="true" role="dialog" aria-labelledby="terms-title">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 id="terms-title">Terms of Service</h3>
-        <button type="button" class="modal-close" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Vitoniya Global Technologies</strong></p>
-        <p>All content, design elements, monograms, brand markings, and code on this site are the intellectual property of Vitoniya Global Technologies and its owner, Rohith Vuppula, protected by applicable copyright and trademark laws.</p>
-        <p>Information presented on this website is for corporate overview and launch communication. Unauthorized reproduction, modification, or scraping without prior written consent is strictly prohibited.</p>
-        <p>For business agreements, partnership contracts, or terms questions, contact <a href="mailto:info@vitoniya.com">info@vitoniya.com</a>.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary modal-close-btn">Close</button>
-      </div>
-    </div>
-  </div>
+    <!-- TOAST -->
+    <div id="toast" class="toast">Email copied to clipboard</div>
 
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
