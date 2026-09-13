@@ -207,32 +207,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 7. Ensure Video Autoplay (seamless, natural, zero controls)
-  const mainIntroVideo = document.getElementById('main-intro-video');
-  if (mainIntroVideo) {
-    mainIntroVideo.muted = true;
-    mainIntroVideo.setAttribute('muted', '');
-    mainIntroVideo.setAttribute('playsinline', '');
-    mainIntroVideo.setAttribute('autoplay', '');
-    mainIntroVideo.setAttribute('loop', '');
+  // 7. Ensure Hero Background Video Autoplay (seamless, natural, zero controls)
+  const heroBgVideo = document.querySelector('.hero-video-bg');
+  if (heroBgVideo) {
+    heroBgVideo.muted = true;
+    heroBgVideo.setAttribute('muted', '');
+    heroBgVideo.setAttribute('playsinline', '');
+    heroBgVideo.setAttribute('autoplay', '');
+    heroBgVideo.setAttribute('loop', '');
     
-    const tryAutoplay = () => {
-      const playPromise = mainIntroVideo.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // In case of browser strict autoplay policy, play on initial scroll or interaction
-          const onFirstInteraction = () => {
-            mainIntroVideo.play().catch(() => {});
-            window.removeEventListener('scroll', onFirstInteraction);
-            window.removeEventListener('click', onFirstInteraction);
-            window.removeEventListener('touchstart', onFirstInteraction);
+    const playHeroBg = () => {
+      const p = heroBgVideo.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          const wakeVideo = () => {
+            heroBgVideo.play().catch(() => {});
+            window.removeEventListener('scroll', wakeVideo);
+            window.removeEventListener('click', wakeVideo);
+            window.removeEventListener('touchstart', wakeVideo);
           };
-          window.addEventListener('scroll', onFirstInteraction, { passive: true });
-          window.addEventListener('click', onFirstInteraction, { passive: true });
-          window.addEventListener('touchstart', onFirstInteraction, { passive: true });
+          window.addEventListener('scroll', wakeVideo, { passive: true });
+          window.addEventListener('click', wakeVideo, { passive: true });
+          window.addEventListener('touchstart', wakeVideo, { passive: true });
         });
       }
     };
-    tryAutoplay();
+    playHeroBg();
   }
 });
