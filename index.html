@@ -104,144 +104,136 @@
     <div class="bg-grid"></div>
 
     <main>
-        <!-- SECTION 1: HERO (MNC 3D Digital Core & Kinetic Typography) -->
-        <section id="hero" class="hero-mnc">
-            <!-- 3D Interactive WebGL/Three.js Canvas Background / Stage -->
-            <div class="hero-3d-stage" id="hero-3d-stage" aria-hidden="true">
-                <canvas id="hero-3d-canvas" class="hero-3d-canvas"></canvas>
-            </div>
-
-            <div class="container hero-mnc-container">
-                <!-- MNC Executive Telemetry Topline -->
-                <div class="mnc-topline reveal">
-                    <div class="mnc-status-beacon">
-                        <span class="pulse-beacon-dot"></span>
-                        <span class="pulse-beacon-text">PRODUCTION SYSTEM ACTIVE // MULTI-REGION CORE</span>
-                    </div>
-                    <div class="mnc-topline-tags">
-                        <span class="topline-tag">VITONIYA GLOBAL TECHNOLOGIES</span>
-                        <span class="topline-divider" aria-hidden="true">&bull;</span>
-                        <span class="topline-tag">INTELLIGENT SOLUTIONS FOR A BETTER TOMORROW</span>
-                    </div>
+        <!-- SECTION 1: HERO (Enterprise Technology & Digital Solutions) -->
+        <section id="hero" class="hero-pro">
+            <div class="container hero-pro-container">
+                <!-- Top Brand Strip -->
+                <div class="hero-pro-eyebrow reveal">
+                    <span class="eyebrow-pill">ENTERPRISE TECHNOLOGY</span>
+                    <span class="eyebrow-sep" aria-hidden="true">&bull;</span>
+                    <span class="eyebrow-tagline">Intelligent Solutions For A Better Tomorrow</span>
                 </div>
 
-                <!-- MNC Split Layout: Kinetic Typography & 3D Interactive Console -->
-                <div class="mnc-hero-grid">
-                    <!-- Left: Kinetic Typography & Executive Mission -->
-                    <div class="mnc-hero-content reveal">
-                        <!-- Kinetic Animated Headline -->
-                        <h1 class="mnc-title">
-                            <span class="title-lead">Building Next-Gen</span>
-                            <span class="kinetic-rotator-container">
-                                <span id="kinetic-rotator" class="kinetic-rotator" aria-live="polite">Intelligent Digital Solutions.</span>
-                                <span class="kinetic-cursor" aria-hidden="true"></span>
-                            </span>
+                <div class="hero-pro-grid">
+                    <!-- Left: Clear, Authoritative Editorial Proposition -->
+                    <div class="hero-pro-left reveal">
+                        <h1 class="hero-pro-title">
+                            Building Intelligent<br>
+                            Digital Solutions<span class="hero-pro-dot">.</span>
                         </h1>
 
-                        <!-- Executive Mission Thesis -->
-                        <p class="mnc-abstract">
-                            We architect mission-critical software, custom artificial intelligence systems, enterprise automation platforms, and digital products engineered for high-availability corporate scale.
+                        <p class="hero-pro-lead">
+                            Vitoniya Global Technologies designs and engineers mission-critical software, custom artificial intelligence systems, workflow automation platforms, and scalable digital products for modern enterprises.
                         </p>
 
-                        <!-- Enterprise Capability Tags -->
-                        <div class="mnc-capability-tags">
-                            <span class="mnc-cap-pill"><span class="pill-dot">✦</span> Enterprise AI &amp; ML</span>
-                            <span class="mnc-cap-pill"><span class="pill-dot">✦</span> Distributed Cloud SaaS</span>
-                            <span class="mnc-cap-pill"><span class="pill-dot">✦</span> Autonomous Workflows</span>
-                            <span class="mnc-cap-pill"><span class="pill-dot">✦</span> Scalable API Infrastructure</span>
+                        <div class="hero-pro-actions">
+                            <a href="#contact" class="btn btn-primary hero-btn">
+                                <span>Start a Project</span>
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2.2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a href="#services" class="btn btn-secondary hero-btn">
+                                <span>Explore Solutions</span>
+                            </a>
                         </div>
 
-                        <!-- MNC Action Center -->
-                        <div class="mnc-actions">
-                            <a href="#contact" class="btn-mnc-primary">
-                                <span>Initiate Enterprise Project</span>
-                                <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2.2" fill="none"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                            </a>
-                            <a href="#services" class="btn-mnc-secondary">
-                                <span>Explore Solutions Matrix</span>
-                            </a>
+                        <div class="hero-pro-trust">
+                            <span class="trust-tag">Enterprise Software</span>
+                            <span class="trust-dot">&bull;</span>
+                            <span class="trust-tag">Applied AI</span>
+                            <span class="trust-dot">&bull;</span>
+                            <span class="trust-tag">Automation</span>
+                            <span class="trust-dot">&bull;</span>
+                            <span class="trust-tag">Cloud Platforms</span>
                         </div>
                     </div>
 
-                    <!-- Right: Interactive 3D Holographic Telemetry Card -->
-                    <div class="mnc-3d-console reveal" aria-hidden="true">
-                        <div class="console-glass-card" id="console-card">
-                            <div class="console-header">
-                                <div class="console-lights">
-                                    <span class="light red"></span>
-                                    <span class="light yellow"></span>
-                                    <span class="light green"></span>
+                    <!-- Right: Professional Architecture Matrix Card -->
+                    <div class="hero-pro-right reveal">
+                        <div class="pro-system-card">
+                            <div class="system-card-header">
+                                <div>
+                                    <span class="card-meta-label">ENGINEERING PLATFORM</span>
+                                    <h3 class="card-meta-title">Enterprise System Architecture</h3>
                                 </div>
-                                <span class="console-spec">TOPOLOGY // 3D NEURAL CORE</span>
-                                <span class="console-fps" id="console-fps">60 FPS</span>
+                                <div class="card-status-badge">
+                                    <span class="status-indicator-dot"></span>
+                                    <span>OPERATIONAL</span>
+                                </div>
                             </div>
-                            
-                            <div class="console-visual-window">
-                                <div class="console-crosshair ch-tl"></div>
-                                <div class="console-crosshair ch-tr"></div>
-                                <div class="console-crosshair ch-bl"></div>
-                                <div class="console-crosshair ch-br"></div>
-                                
-                                <div class="console-telemetry-hud">
-                                    <div class="hud-item">
-                                        <span class="hud-label">COORDINATES</span>
-                                        <span class="hud-val" id="hud-coords">17.3850&deg; N, 78.4867&deg; E</span>
+
+                            <div class="system-card-modules">
+                                <div class="system-card-row">
+                                    <div class="row-text">
+                                        <span class="row-category">01 / SOFTWARE ARCHITECTURE</span>
+                                        <h4 class="row-heading">Custom Cloud &amp; Distributed Platforms</h4>
+                                        <p class="row-desc">High-throughput microservices, scalable REST &amp; GraphQL APIs, robust backends.</p>
                                     </div>
-                                    <div class="hud-item">
-                                        <span class="hud-label">GEOMETRY</span>
-                                        <span class="hud-val">1,480 VERTICES</span>
+                                    <div class="row-stat">
+                                        <span class="stat-number">99.99%</span>
+                                        <span class="stat-caption">TARGET SLA</span>
                                     </div>
-                                    <div class="hud-item">
-                                        <span class="hud-label">INTERACTION</span>
-                                        <span class="hud-val accent">CLICK &amp; DRAG TO ORBIT</span>
+                                </div>
+
+                                <div class="system-card-row">
+                                    <div class="row-text">
+                                        <span class="row-category">02 / APPLIED INTELLIGENCE</span>
+                                        <h4 class="row-heading">Machine Learning &amp; AI Systems</h4>
+                                        <p class="row-desc">Domain-specific models, predictive analytics pipelines, and neural workflows.</p>
+                                    </div>
+                                    <div class="row-stat">
+                                        <span class="stat-number">End-to-End</span>
+                                        <span class="stat-caption">INTELLIGENCE</span>
+                                    </div>
+                                </div>
+
+                                <div class="system-card-row">
+                                    <div class="row-text">
+                                        <span class="row-category">03 / WORKFLOW AUTOMATION</span>
+                                        <h4 class="row-heading">Operational Process Engines</h4>
+                                        <p class="row-desc">Autonomous workflow automation eliminating manual friction across business silos.</p>
+                                    </div>
+                                    <div class="row-stat">
+                                        <span class="stat-number">Zero-Friction</span>
+                                        <span class="stat-caption">ORCHESTRATION</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="console-footer">
-                                <span class="console-foot-tag">REAL-TIME PARAMETRIC VISUALIZATION</span>
-                                <span class="console-foot-brand">VITONIYA GLOBAL</span>
+                            <div class="system-card-footer">
+                                <div class="footer-spec">
+                                    <span class="spec-label">SECURITY</span>
+                                    <span class="spec-val">Zero-Trust Cryptographic Isolation</span>
+                                </div>
+                                <div class="footer-spec">
+                                    <span class="spec-label">RUNTIME</span>
+                                    <span class="spec-val">Distributed Cloud Infrastructure</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- MNC Telemetry Metrics Strip (Base of Hero) -->
-                <div class="mnc-metrics-strip reveal">
-                    <div class="mnc-metric-card">
-                        <div class="metric-head">
-                            <span class="metric-val">99.99<span class="val-sup">%</span></span>
-                            <span class="metric-badge">TARGET</span>
-                        </div>
-                        <span class="metric-title">Availability Architecture</span>
-                        <p class="metric-sub">Distributed fault tolerance with zero single points of failure.</p>
+                <!-- 4 Capabilities Pillars at Base -->
+                <div class="hero-pro-pillars reveal">
+                    <div class="pillar-box">
+                        <span class="pillar-idx">01</span>
+                        <h4 class="pillar-title">Custom Software</h4>
+                        <p class="pillar-desc">Custom web applications, SaaS platforms, APIs, and enterprise software.</p>
                     </div>
-
-                    <div class="mnc-metric-card">
-                        <div class="metric-head">
-                            <span class="metric-val">Zero<span class="val-sup">-Trust</span></span>
-                            <span class="metric-badge">SECURITY</span>
-                        </div>
-                        <span class="metric-title">Enterprise Isolation</span>
-                        <p class="metric-sub">Strict encryption, tenant boundary segregation, and audits.</p>
+                    <div class="pillar-box">
+                        <span class="pillar-idx">02</span>
+                        <h4 class="pillar-title">AI &amp; Intelligence</h4>
+                        <p class="pillar-desc">AI-powered applications, machine learning models, and intelligent workflows.</p>
                     </div>
-
-                    <div class="mnc-metric-card">
-                        <div class="metric-head">
-                            <span class="metric-val">Full<span class="val-sup">-Cycle</span></span>
-                            <span class="metric-badge">DELIVERY</span>
-                        </div>
-                        <span class="metric-title">Concept to Deployment</span>
-                        <p class="metric-sub">System architecture, ML modeling, and continuous production scaling.</p>
+                    <div class="pillar-box">
+                        <span class="pillar-idx">03</span>
+                        <h4 class="pillar-title">Automation</h4>
+                        <p class="pillar-desc">Intelligent workflow systems eliminating repetitive operational friction.</p>
                     </div>
-
-                    <div class="mnc-metric-card">
-                        <div class="metric-head">
-                            <span class="metric-val">Distributed<span class="val-sup">+</span></span>
-                            <span class="metric-badge">RUNTIME</span>
-                        </div>
-                        <span class="metric-title">Global Cloud Matrix</span>
-                        <p class="metric-sub">Multi-cloud deployment ready for worldwide low-latency demand.</p>
+                    <div class="pillar-box">
+                        <span class="pillar-idx">04</span>
+                        <h4 class="pillar-title">Digital Products</h4>
+                        <p class="pillar-desc">Scalable, user-centered digital platforms built from concept to launch.</p>
                     </div>
                 </div>
             </div>
@@ -751,8 +743,6 @@
     <!-- TOAST -->
     <div id="toast" class="toast">Email copied to clipboard</div>
 
-    <!-- Three.js 3D Engine -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

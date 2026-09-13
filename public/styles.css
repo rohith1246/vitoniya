@@ -413,450 +413,334 @@ p {
 }
 
 /* ══════════════════════════════════════════════════════
-   HERO SECTION — MNC 3D Digital Core & Kinetic Typography
+   HERO SECTION — Professional Enterprise Technology Core
 ══════════════════════════════════════════════════════ */
-.hero-mnc {
+.hero-pro {
   position: relative;
-  min-height: 100vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   padding-top: 130px;
   padding-bottom: 70px;
-  background: radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.95) 0%, #FAF8F3 65%, #F4F0E8 100%);
+  background-color: var(--color-cream);
+  background-image: 
+    radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.95) 0%, transparent 60%),
+    linear-gradient(to right, rgba(15, 61, 46, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 61, 46, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 50px 50px, 50px 50px;
   overflow: hidden;
-  border-bottom: 1px solid rgba(15, 61, 46, 0.1);
+  border-bottom: 1px solid rgba(15, 61, 46, 0.08);
 }
 
-/* 3D Interactive WebGL/Three.js Canvas Background / Stage */
-.hero-3d-stage {
-  position: absolute;
-  right: -5%;
-  top: 0;
-  width: 65%;
-  height: 100%;
-  pointer-events: auto;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.hero-3d-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-@media (max-width: 960px) {
-  .hero-3d-stage {
-    width: 100%;
-    right: 0;
-    opacity: 0.28;
-    pointer-events: none;
-  }
-}
-
-.hero-mnc-container {
+.hero-pro-container {
   position: relative;
   z-index: 2;
   width: 100%;
 }
 
-/* MNC Executive Telemetry Topline */
-.mnc-topline {
+/* Top Brand Strip */
+.hero-pro-eyebrow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding-bottom: 1.25rem;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid rgba(15, 61, 46, 0.12);
-}
-
-.mnc-status-beacon {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.pulse-beacon-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #10B981;
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  animation: beacon-pulse 2s infinite cubic-bezier(0.45, 0, 0.55, 1);
-}
-
-@keyframes beacon-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
-}
-
-.pulse-beacon-text {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--color-forest);
-  text-transform: uppercase;
-}
-
-.mnc-topline-tags {
-  display: inline-flex;
-  align-items: center;
   gap: 0.75rem;
+  margin-bottom: 2.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(15, 61, 46, 0.1);
 }
 
-.topline-tag {
+.eyebrow-pill {
+  display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--color-gray-600);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-forest);
+  background: rgba(15, 61, 46, 0.06);
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid rgba(15, 61, 46, 0.12);
   text-transform: uppercase;
 }
 
-.topline-divider {
+.eyebrow-sep {
   color: var(--color-gold);
-  font-size: 0.8rem;
-  opacity: 0.7;
+  font-size: 0.75rem;
 }
 
-/* MNC Split Layout */
-.mnc-hero-grid {
+.eyebrow-tagline {
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gray-600);
+  letter-spacing: 0.02em;
+}
+
+/* Hero Grid */
+.hero-pro-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
+  gap: 3.5rem;
   align-items: center;
   margin-bottom: 4rem;
 }
 
 @media (min-width: 960px) {
-  .mnc-hero-grid {
-    grid-template-columns: 1.2fr 0.8fr;
+  .hero-pro-grid {
+    grid-template-columns: 1.15fr 0.85fr;
     gap: 3.5rem;
   }
 }
 
-/* Kinetic Animated Headline */
-.mnc-title {
-  font-size: clamp(2.6rem, 5.2vw, 4.4rem);
-  font-weight: 800;
-  line-height: 1.12;
-  color: var(--color-forest);
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
-}
-
-.title-lead {
-  display: block;
-  font-family: var(--font-main);
-  font-weight: 700;
-  color: var(--color-forest);
-}
-
-.kinetic-rotator-container {
-  display: inline-flex;
-  align-items: baseline;
-  position: relative;
-  min-height: 1.25em;
-  vertical-align: bottom;
-}
-
-.kinetic-rotator {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 600;
-  color: var(--color-gold);
-  background: linear-gradient(135deg, #B8945A 0%, #8C6A30 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-
-.kinetic-rotator.slide-out {
-  opacity: 0;
-  transform: translateY(-16px);
-}
-
-.kinetic-rotator.slide-in {
-  opacity: 0;
-  transform: translateY(16px);
-}
-
-.kinetic-cursor {
-  display: inline-block;
-  width: 3px;
-  height: 0.85em;
-  background-color: var(--color-gold);
-  margin-left: 6px;
-  animation: cursor-blink 1s infinite;
-  vertical-align: baseline;
-}
-
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-/* MNC Executive Abstract */
-.mnc-abstract {
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-  line-height: 1.75;
-  color: #2D3A34;
-  font-weight: 400;
-  max-width: 580px;
-  margin-bottom: 2rem;
-}
-
-/* Capability Tags */
-.mnc-capability-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 2.5rem;
-}
-
-.mnc-cap-pill {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 0.4rem 0.85rem;
-  border-radius: 50px;
-  background: rgba(15, 61, 46, 0.05);
-  border: 1px solid rgba(15, 61, 46, 0.12);
-  color: var(--color-forest);
-  transition: all 0.2s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-}
-
-.mnc-cap-pill:hover {
-  border-color: var(--color-gold);
-  background: rgba(184, 148, 90, 0.1);
-  transform: translateY(-1px);
-}
-
-.pill-dot {
-  color: var(--color-gold);
-  font-size: 0.7rem;
-}
-
-/* MNC Action Center */
-.mnc-actions {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-}
-
-.btn-mnc-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background-color: var(--color-forest);
-  color: #FFFFFF;
-  font-family: var(--font-main);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 1rem 2rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-forest);
-  box-shadow: 0 4px 14px rgba(15, 61, 46, 0.25);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-mnc-primary:hover {
-  background-color: var(--color-forest-dark);
-  color: #FFFFFF;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(15, 61, 46, 0.3);
-  border-color: var(--color-gold);
-}
-
-.btn-mnc-secondary {
-  display: inline-flex;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  color: var(--color-forest);
-  font-family: var(--font-main);
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 1rem 1.85rem;
-  border-radius: var(--radius-sm);
-  border: 1.5px solid rgba(15, 61, 46, 0.25);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: all 0.25s ease;
-}
-
-.btn-mnc-secondary:hover {
-  border-color: var(--color-forest);
-  background-color: rgba(15, 61, 46, 0.06);
-  transform: translateY(-2px);
-}
-
-/* ── Interactive 3D Holographic Telemetry Card ── */
-.mnc-3d-console {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.console-glass-card {
-  position: relative;
-  width: 100%;
-  max-width: 440px;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(15, 61, 46, 0.15);
-  border-radius: 12px;
-  padding: 1.5rem;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 24px 48px -12px rgba(15, 61, 46, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-  cursor: grab;
-}
-
-.console-glass-card:active {
-  cursor: grabbing;
-}
-
-.console-glass-card:hover {
-  border-color: var(--color-gold);
-  transform: translateY(-3px);
-}
-
-.console-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 0.9rem;
-  border-bottom: 1px solid rgba(15, 61, 46, 0.08);
-  margin-bottom: 1.25rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--color-forest);
-}
-
-.console-lights {
-  display: flex;
-  gap: 5px;
-}
-
-.console-lights span {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.console-lights .light.red { background-color: #EF4444; }
-.console-lights .light.yellow { background-color: #F59E0B; }
-.console-lights .light.green { background-color: #10B981; }
-
-.console-fps {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: #10B981;
-  font-weight: 700;
-  background: rgba(16, 185, 129, 0.12);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.console-visual-window {
-  position: relative;
-  height: 250px;
-  display: flex;
-  align-items: flex-end;
-  padding: 1rem;
-  border-radius: 8px;
-  background: radial-gradient(circle at 50% 50%, rgba(15, 61, 46, 0.03) 0%, rgba(184, 148, 90, 0.02) 100%);
-  border: 1px dashed rgba(15, 61, 46, 0.16);
-  overflow: hidden;
-}
-
-/* Precision MNC HUD Crosshairs */
-.console-crosshair {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  pointer-events: none;
-}
-.console-crosshair.ch-tl { top: 6px; left: 6px; border-top: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); }
-.console-crosshair.ch-tr { top: 6px; right: 6px; border-top: 2px solid var(--color-gold); border-right: 2px solid var(--color-gold); }
-.console-crosshair.ch-bl { bottom: 6px; left: 6px; border-bottom: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); }
-.console-crosshair.ch-br { bottom: 6px; right: 6px; border-bottom: 2px solid var(--color-gold); border-right: 2px solid var(--color-gold); }
-
-.console-telemetry-hud {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 0.6rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid rgba(15, 61, 46, 0.08);
-}
-
-.hud-item {
+/* Left Proposition */
+.hero-pro-left {
   display: flex;
   flex-direction: column;
 }
 
-.hud-label {
-  font-size: 0.58rem;
-  color: var(--color-gray-600);
-  letter-spacing: 0.06em;
-}
-
-.hud-val {
-  font-weight: 700;
+.hero-pro-title {
+  font-family: var(--font-main);
+  font-size: clamp(2.7rem, 5.2vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.1;
   color: var(--color-forest);
-  margin-top: 1px;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
 }
 
-.hud-val.accent {
+.hero-pro-dot {
   color: var(--color-gold);
 }
 
-.console-footer {
+.hero-pro-lead {
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  line-height: 1.75;
+  color: #374151;
+  font-weight: 400;
+  max-width: 540px;
+  margin-bottom: 2.25rem;
+}
+
+.hero-pro-actions {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(15, 61, 46, 0.08);
-  margin-top: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero-btn {
+  padding: 0.95rem 1.85rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-pro-trust {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.trust-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(15, 61, 46, 0.7);
+  text-transform: uppercase;
+}
+
+.trust-dot {
+  color: var(--color-gold);
+  font-size: 0.7rem;
+}
+
+/* Right System Card */
+.hero-pro-right {
+  display: flex;
+  justify-content: center;
+}
+
+.pro-system-card {
+  width: 100%;
+  max-width: 480px;
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 61, 46, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: 0 20px 40px -15px rgba(15, 61, 46, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.pro-system-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-gold);
+  box-shadow: 0 24px 48px -12px rgba(15, 61, 46, 0.12);
+}
+
+.system-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(15, 61, 46, 0.08);
+  margin-bottom: 1.25rem;
+}
+
+.card-meta-label {
+  display: block;
   font-family: var(--font-mono);
   font-size: 0.68rem;
-  color: var(--color-gray-600);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
-.console-foot-brand {
+.card-meta-title {
+  font-family: var(--font-main);
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-forest);
-  letter-spacing: 0.08em;
+  margin: 0;
 }
 
-/* ── MNC Telemetry Metrics Strip (Base of Hero) ── */
-.mnc-metrics-strip {
+.card-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #059669;
+  background: rgba(5, 150, 105, 0.1);
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #059669;
+}
+
+.system-card-modules {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+}
+
+.system-card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--color-cream);
+  border: 1px solid rgba(15, 61, 46, 0.08);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.system-card-row:hover {
+  background: #FFFFFF;
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(3px);
+}
+
+.row-text {
+  flex: 1;
+}
+
+.row-category {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-gold);
+  margin-bottom: 3px;
+}
+
+.row-heading {
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-forest);
+  margin-bottom: 4px;
+}
+
+.row-desc {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+.row-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.stat-number {
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--color-forest);
+}
+
+.stat-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--color-gray-600);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+.system-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(15, 61, 46, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.footer-spec {
+  display: flex;
+  flex-direction: column;
+}
+
+.spec-label {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-gray-600);
+  margin-bottom: 2px;
+}
+
+.spec-val {
+  font-weight: 600;
+  color: var(--color-forest);
+}
+
+/* 4 Foundation Pillars */
+.hero-pro-pillars {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
@@ -864,81 +748,54 @@ p {
 }
 
 @media (min-width: 640px) {
-  .mnc-metrics-strip {
+  .hero-pro-pillars {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .mnc-metrics-strip {
+  .hero-pro-pillars {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.mnc-metric-card {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(15, 61, 46, 0.1);
-  border-left: 3.5px solid var(--color-gold);
-  border-radius: var(--radius-md);
-  padding: 1.5rem 1.4rem;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.3s ease;
-}
-
-.mnc-metric-card:hover {
-  transform: translateY(-4px);
+.pillar-box {
   background: #FFFFFF;
-  border-color: var(--color-gold);
-  box-shadow: 0 16px 32px rgba(15, 61, 46, 0.08);
+  border: 1px solid rgba(15, 61, 46, 0.1);
+  border-top: 3px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 1.6rem 1.4rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
-.metric-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.pillar-box:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-gold);
+  box-shadow: 0 14px 28px rgba(15, 61, 46, 0.08);
+}
+
+.pillar-idx {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: 0.75rem;
+}
+
+.pillar-title {
+  font-family: var(--font-main);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-forest);
   margin-bottom: 0.5rem;
 }
 
-.metric-val {
-  font-family: var(--font-main);
-  font-size: 1.65rem;
-  font-weight: 800;
-  color: var(--color-forest);
-  letter-spacing: -0.02em;
-}
-
-.val-sup {
-  color: var(--color-gold);
-  font-size: 1.05rem;
-}
-
-.metric-badge {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--color-gold);
-  background: rgba(184, 148, 90, 0.12);
-  padding: 0.2rem 0.55rem;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-}
-
-.metric-title {
-  font-family: var(--font-main);
-  font-size: 0.98rem;
-  font-weight: 700;
-  color: var(--color-forest);
-  display: block;
-}
-
-.metric-sub {
-  font-size: 0.825rem;
-  line-height: 1.5;
+.pillar-desc {
+  font-size: 0.85rem;
+  line-height: 1.55;
   color: var(--color-gray-600);
-  margin: 0.35rem 0 0;
+  margin: 0;
 }
 
 /* ══════════════════════════════
