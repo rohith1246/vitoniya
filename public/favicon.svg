@@ -1,29 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <!-- Left Wing Forest Green Gradient -->
-    <linearGradient id="greenWing" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#4A6F56"/>
-      <stop offset="60%" stop-color="#284433"/>
-      <stop offset="100%" stop-color="#192C21"/>
+    <!-- Left Wing Gradient: Forest Green Silk -->
+    <linearGradient id="leftWing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A755E"/>
+      <stop offset="50%" stop-color="#1E4F3D"/>
+      <stop offset="100%" stop-color="#0F3D2E"/>
     </linearGradient>
-    <!-- Right Wing Warm Bronze Gold Gradient -->
-    <linearGradient id="goldWing" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#D4AA6A"/>
-      <stop offset="70%" stop-color="#B88B4A"/>
-      <stop offset="100%" stop-color="#936B32"/>
-    </linearGradient>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#FAF8F5"/>
+    <!-- Right Wing Gradient: Earth Gold Metallic -->
+    <linearGradient id="rightWing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AE72"/>
+      <stop offset="60%" stop-color="#B8945A"/>
+      <stop offset="100%" stop-color="#8F6C34"/>
     </linearGradient>
   </defs>
 
-  <!-- Clean ivory base with refined hairline border -->
-  <rect width="64" height="64" rx="14" fill="url(#bgGrad)" stroke="#E8E4DC" stroke-width="1.5"/>
+  <!-- Forest Green Rounded Base (#0F3D2E) as specified in the Brand Guide Favicon -->
+  <rect width="64" height="64" rx="15" fill="#0F3D2E"/>
 
-  <!-- Left Wing (Forest Green Curve) -->
-  <path d="M19 14 C26 14 29 17 31 23 L36 37 C34 44 32 49 28 50 C25 45 22 36 19 28 Z" fill="url(#greenWing)"/>
+  <!-- Left Wing (Green Silk Curve) -->
+  <path d="M19 15 C26 15 29 18 31 24 L36 38 C34 45 32 49 28 50 C25 45 22 36 19 28 Z" fill="url(#leftWing)"/>
   
-  <!-- Right Wing (Bronze Gold Accent) -->
-  <path d="M45 14 C40 14 36 18 34 23 L37.5 31 L41.5 22 L45 14 Z" fill="url(#goldWing)"/>
+  <!-- Right Wing (Earth Gold) -->
+  <path d="M45 15 C40 15 36 19 34 24 L37.5 32 L41.5 23 L45 15 Z" fill="url(#rightWing)"/>
 </svg>
