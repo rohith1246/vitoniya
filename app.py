@@ -16,14 +16,22 @@ app = Flask(__name__, static_folder=STATIC_DIR, static_url_path='')
 DATABASE_URL = os.environ.get('DATABASE_URL')
 db_pool = None
 
+def get_db_pool():
+    global db_pool
+    if db_pool is None and DATABASE_URL:
+        try:
+            db_pool = psycopg2.pool.SimpleConnectionPool(1, 10, DATABASE_URL)
+            logger.info("Database connection pool initialized successfully")
+        except Exception as e:
+            logger.error(f"Error creating connection pool: {e}")
+            db_pool = None
+    return db_pool
+
 if DATABASE_URL:
     try:
-        db_pool = psycopg2.pool.SimpleConnectionPool(1, 10, DATABASE_URL)
-        if db_pool:
-            logger.info("Database connection pool created successfully")
-            
-            # Auto-create table
-            conn = db_pool.getconn()
+        pool_inst = get_db_pool()
+        if pool_inst:
+            conn = pool_inst.getconn()
             try:
                 with conn.cursor() as cur:
                     cur.execute("""
@@ -39,13 +47,14 @@ if DATABASE_URL:
                     );
                     """)
                 conn.commit()
+                logger.info("contact_submissions table verified/created successfully.")
             except Exception as e:
                 logger.error(f"Error creating table: {e}")
                 conn.rollback()
             finally:
-                db_pool.putconn(conn)
+                pool_inst.putconn(conn)
     except Exception as e:
-        logger.error(f"Error connecting to database: {e}")
+        logger.error(f"Error connecting to database on startup: {e}")
 else:
     logger.warning("DATABASE_URL environment variable is not set. Database features will be unavailable.")
 
@@ -75,7 +84,8 @@ def manifest():
 
 @app.route('/api/contact', methods=['POST'])
 def contact():
-    if not db_pool:
+    pool_inst = get_db_pool()
+    if not pool_inst:
         return jsonify({"success": False, "message": "Service unavailable (database not configured)"}), 503
 
     data = request.get_json()
@@ -97,7 +107,7 @@ def contact():
 
     conn = None
     try:
-        conn = db_pool.getconn()
+        conn = pool_inst.getconn()
         with conn.cursor() as cur:
             cur.execute(
                 """
@@ -115,7 +125,7 @@ def contact():
         return jsonify({"success": False, "message": "An error occurred while saving your message"}), 500
     finally:
         if conn:
-            db_pool.putconn(conn)
+            pool_inst.putconn(conn)
 
 @app.errorhandler(404)
 def not_found(e):
