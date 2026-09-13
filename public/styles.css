@@ -382,8 +382,8 @@ p {
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  opacity: 0.28;
-  filter: saturate(1.15) contrast(1.05);
+  opacity: 0.78;
+  filter: saturate(1.1) contrast(1.08);
 }
 
 .hero-video-overlay {
@@ -392,7 +392,7 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at 50% 45%, rgba(250, 248, 243, 0.72) 0%, rgba(250, 248, 243, 0.88) 60%, var(--color-cream) 100%);
+  background: radial-gradient(circle at 50% 45%, rgba(250, 248, 243, 0.35) 0%, rgba(250, 248, 243, 0.62) 65%, rgba(250, 248, 243, 0.88) 100%);
 }
 
 .hero .hero-container {
@@ -403,6 +403,7 @@ p {
 .hero-emblem {
   width: 120px;
   margin: 0 auto 2rem;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.12));
 }
 
 .hero-tagline-bar {
@@ -414,7 +415,7 @@ p {
 }
 
 .gold-line {
-  height: 1px;
+  height: 1.5px;
   width: 40px;
   background-color: var(--color-gold);
 }
@@ -427,15 +428,17 @@ p {
 
 .hero-tagline-text {
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--color-forest);
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
 }
 
 .hero-title {
   max-width: 900px;
   margin: 0 auto 1.5rem;
+  text-shadow: 0 2px 8px rgba(255, 255, 255, 0.75);
 }
 
 .accent-dot {
@@ -443,10 +446,12 @@ p {
 }
 
 .hero-subtitle {
-  font-size: 1.125rem;
-  max-width: 700px;
+  font-size: 1.15rem;
+  font-weight: 500;
+  max-width: 720px;
   margin: 0 auto 2rem;
-  color: var(--color-gray-600);
+  color: var(--color-forest);
+  text-shadow: 0 1px 4px rgba(255, 255, 255, 0.85);
 }
 
 .founder-attribution {
