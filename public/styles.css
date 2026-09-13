@@ -413,224 +413,450 @@ p {
 }
 
 /* ══════════════════════════════════════════════════════
-   HERO SECTION — Architectural Editorial & Studio Grid
+   HERO SECTION — MNC 3D Digital Core & Kinetic Typography
 ══════════════════════════════════════════════════════ */
-.hero-arch {
+.hero-mnc {
   position: relative;
-  min-height: 92vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   padding-top: 130px;
   padding-bottom: 70px;
-  background: var(--color-cream);
+  background: radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.95) 0%, #FAF8F3 65%, #F4F0E8 100%);
   overflow: hidden;
-  border-bottom: 1px solid rgba(15, 61, 46, 0.08);
+  border-bottom: 1px solid rgba(15, 61, 46, 0.1);
 }
 
-/* Subtle architectural paper texture */
-.hero-arch::before {
-  content: '';
+/* 3D Interactive WebGL/Three.js Canvas Background / Stage */
+.hero-3d-stage {
   position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(15, 61, 46, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 61, 46, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
+  right: -5%;
+  top: 0;
+  width: 65%;
+  height: 100%;
+  pointer-events: auto;
+  z-index: 1;
+  overflow: hidden;
 }
 
-.hero-arch-container {
+.hero-3d-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 960px) {
+  .hero-3d-stage {
+    width: 100%;
+    right: 0;
+    opacity: 0.28;
+    pointer-events: none;
+  }
+}
+
+.hero-mnc-container {
   position: relative;
   z-index: 2;
   width: 100%;
 }
 
-/* Top Executive Meta Strip */
-.hero-meta-strip {
+/* MNC Executive Telemetry Topline */
+.mnc-topline {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 0.85rem;
+  gap: 1rem;
   padding-bottom: 1.25rem;
   margin-bottom: 3rem;
   border-bottom: 1px solid rgba(15, 61, 46, 0.12);
 }
 
-.meta-item {
+.mnc-status-beacon {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
-.meta-dot {
-  width: 7px;
-  height: 7px;
+.pulse-beacon-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background-color: var(--color-forest);
-  box-shadow: 0 0 0 3px rgba(15, 61, 46, 0.15);
+  background-color: #10B981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: beacon-pulse 2s infinite cubic-bezier(0.45, 0, 0.55, 1);
 }
 
-.meta-label {
+@keyframes beacon-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.pulse-beacon-text {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   color: var(--color-forest);
   text-transform: uppercase;
 }
 
-.meta-divider {
-  color: var(--color-gold);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  opacity: 0.6;
+.mnc-topline-tags {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.meta-tag {
+.topline-tag {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: var(--color-gray-600);
   text-transform: uppercase;
 }
 
-/* Grand Editorial Typography Core */
-.hero-editorial-core {
+.topline-divider {
+  color: var(--color-gold);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* MNC Split Layout */
+.mnc-hero-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
-  margin-bottom: 4.5rem;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 4rem;
 }
 
 @media (min-width: 960px) {
-  .hero-editorial-core {
-    grid-template-columns: 1.15fr 0.85fr;
-    align-items: end;
-    gap: 4rem;
+  .mnc-hero-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3.5rem;
   }
 }
 
-.hero-arch-title {
+/* Kinetic Animated Headline */
+.mnc-title {
+  font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  color: var(--color-forest);
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.title-lead {
+  display: block;
+  font-family: var(--font-main);
+  font-weight: 700;
+  color: var(--color-forest);
+}
+
+.kinetic-rotator-container {
+  display: inline-flex;
+  align-items: baseline;
+  position: relative;
+  min-height: 1.25em;
+  vertical-align: bottom;
+}
+
+.kinetic-rotator {
   font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 6.2vw, 5.2rem);
-  font-weight: 600;
-  line-height: 1.05;
-  color: var(--color-forest);
-  letter-spacing: -0.025em;
-  margin: 0;
-}
-
-.hero-arch-title .serif-accent {
   font-style: italic;
-  font-weight: 400;
-  color: var(--color-forest);
-  text-decoration: underline;
-  text-decoration-color: var(--color-gold);
-  text-underline-offset: 6px;
-  text-decoration-thickness: 2px;
-}
-
-.arch-dot {
+  font-weight: 600;
   color: var(--color-gold);
+  background: linear-gradient(135deg, #B8945A 0%, #8C6A30 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
 }
 
-.hero-narrative-block {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+.kinetic-rotator.slide-out {
+  opacity: 0;
+  transform: translateY(-16px);
 }
 
-.hero-lead-thesis {
-  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
+.kinetic-rotator.slide-in {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.kinetic-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  background-color: var(--color-gold);
+  margin-left: 6px;
+  animation: cursor-blink 1s infinite;
+  vertical-align: baseline;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* MNC Executive Abstract */
+.mnc-abstract {
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
   line-height: 1.75;
   color: #2D3A34;
   font-weight: 400;
+  max-width: 580px;
   margin-bottom: 2rem;
 }
 
-.hero-action-cluster {
+/* Capability Tags */
+.mnc-capability-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+}
+
+.mnc-cap-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.4rem 0.85rem;
+  border-radius: 50px;
+  background: rgba(15, 61, 46, 0.05);
+  border: 1px solid rgba(15, 61, 46, 0.12);
+  color: var(--color-forest);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mnc-cap-pill:hover {
+  border-color: var(--color-gold);
+  background: rgba(184, 148, 90, 0.1);
+  transform: translateY(-1px);
+}
+
+.pill-dot {
+  color: var(--color-gold);
+  font-size: 0.7rem;
+}
+
+/* MNC Action Center */
+.mnc-actions {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 1.25rem;
 }
 
-.btn-arch-primary {
+.btn-mnc-primary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   background-color: var(--color-forest);
   color: #FFFFFF;
   font-family: var(--font-main);
   font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.9rem 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 1rem 2rem;
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-forest);
+  box-shadow: 0 4px 14px rgba(15, 61, 46, 0.25);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.btn-arch-primary:hover {
+.btn-mnc-primary:hover {
   background-color: var(--color-forest-dark);
   color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(15, 61, 46, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(15, 61, 46, 0.3);
+  border-color: var(--color-gold);
 }
 
-.btn-arch-secondary {
+.btn-mnc-secondary {
   display: inline-flex;
   align-items: center;
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.7);
   color: var(--color-forest);
   font-family: var(--font-main);
   font-size: 0.95rem;
   font-weight: 600;
-  padding: 0.9rem 1.75rem;
+  padding: 1rem 1.85rem;
   border-radius: var(--radius-sm);
   border: 1.5px solid rgba(15, 61, 46, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: all 0.25s ease;
 }
 
-.btn-arch-secondary:hover {
+.btn-mnc-secondary:hover {
   border-color: var(--color-forest);
-  background-color: rgba(15, 61, 46, 0.05);
+  background-color: rgba(15, 61, 46, 0.06);
   transform: translateY(-2px);
 }
 
-.hero-direct-contact {
+/* ── Interactive 3D Holographic Telemetry Card ── */
+.mnc-3d-console {
   display: flex;
-  flex-direction: column;
-  padding-left: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
-.direct-label {
+.console-glass-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 61, 46, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 48px -12px rgba(15, 61, 46, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  cursor: grab;
+}
+
+.console-glass-card:active {
+  cursor: grabbing;
+}
+
+.console-glass-card:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-3px);
+}
+
+.console-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(15, 61, 46, 0.08);
+  margin-bottom: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-forest);
+}
+
+.console-lights {
+  display: flex;
+  gap: 5px;
+}
+
+.console-lights span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.console-lights .light.red { background-color: #EF4444; }
+.console-lights .light.yellow { background-color: #F59E0B; }
+.console-lights .light.green { background-color: #10B981; }
+
+.console-fps {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: #10B981;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.console-visual-window {
+  position: relative;
+  height: 250px;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  border-radius: 8px;
+  background: radial-gradient(circle at 50% 50%, rgba(15, 61, 46, 0.03) 0%, rgba(184, 148, 90, 0.02) 100%);
+  border: 1px dashed rgba(15, 61, 46, 0.16);
+  overflow: hidden;
+}
+
+/* Precision MNC HUD Crosshairs */
+.console-crosshair {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+}
+.console-crosshair.ch-tl { top: 6px; left: 6px; border-top: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); }
+.console-crosshair.ch-tr { top: 6px; right: 6px; border-top: 2px solid var(--color-gold); border-right: 2px solid var(--color-gold); }
+.console-crosshair.ch-bl { bottom: 6px; left: 6px; border-bottom: 2px solid var(--color-gold); border-left: 2px solid var(--color-gold); }
+.console-crosshair.ch-br { bottom: 6px; right: 6px; border-bottom: 2px solid var(--color-gold); border-right: 2px solid var(--color-gold); }
+
+.console-telemetry-hud {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(15, 61, 46, 0.08);
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hud-label {
+  font-size: 0.58rem;
   color: var(--color-gray-600);
-  margin-bottom: 2px;
+  letter-spacing: 0.06em;
 }
 
-.direct-link {
-  font-family: var(--font-main);
-  font-size: 0.9rem;
-  font-weight: 600;
+.hud-val {
+  font-weight: 700;
   color: var(--color-forest);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color 0.2s ease;
+  margin-top: 1px;
 }
 
-.direct-link:hover {
+.hud-val.accent {
   color: var(--color-gold);
 }
 
-/* ── Architectural Capabilities Grid (4 Foundation Pillars) ── */
-.hero-pillars-grid {
+.console-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(15, 61, 46, 0.08);
+  margin-top: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-gray-600);
+}
+
+.console-foot-brand {
+  font-weight: 700;
+  color: var(--color-forest);
+  letter-spacing: 0.08em;
+}
+
+/* ── MNC Telemetry Metrics Strip (Base of Hero) ── */
+.mnc-metrics-strip {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
@@ -638,92 +864,81 @@ p {
 }
 
 @media (min-width: 640px) {
-  .hero-pillars-grid {
+  .mnc-metrics-strip {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (min-width: 1024px) {
-  .hero-pillars-grid {
+  .mnc-metrics-strip {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-.pillar-card {
-  background: rgba(255, 255, 255, 0.9);
+.mnc-metric-card {
+  background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(15, 61, 46, 0.1);
-  border-top: 3px solid var(--color-gold);
+  border-left: 3.5px solid var(--color-gold);
   border-radius: var(--radius-md);
-  padding: 1.75rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 1.5rem 1.4rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
               box-shadow 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
               border-color 0.3s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
-.pillar-card:hover {
-  transform: translateY(-5px);
+.mnc-metric-card:hover {
+  transform: translateY(-4px);
   background: #FFFFFF;
   border-color: var(--color-gold);
-  box-shadow: 0 16px 36px rgba(15, 61, 46, 0.08);
+  box-shadow: 0 16px 32px rgba(15, 61, 46, 0.08);
 }
 
-.pillar-header {
+.metric-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.pillar-index {
+.metric-val {
+  font-family: var(--font-main);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--color-forest);
+  letter-spacing: -0.02em;
+}
+
+.val-sup {
+  color: var(--color-gold);
+  font-size: 1.05rem;
+}
+
+.metric-badge {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: var(--color-gold);
+  background: rgba(184, 148, 90, 0.12);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
 }
 
-.pillar-badge {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: rgba(15, 61, 46, 0.6);
-  text-transform: uppercase;
-}
-
-.pillar-heading {
+.metric-title {
   font-family: var(--font-main);
-  font-size: 1.15rem;
+  font-size: 0.98rem;
   font-weight: 700;
   color: var(--color-forest);
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.01em;
+  display: block;
 }
 
-.pillar-summary {
-  font-size: 0.875rem;
-  line-height: 1.6;
+.metric-sub {
+  font-size: 0.825rem;
+  line-height: 1.5;
   color: var(--color-gray-600);
-  margin-bottom: 1.5rem;
-  flex-grow: 1;
-}
-
-.pillar-footer {
-  padding-top: 0.9rem;
-  border-top: 1px solid rgba(15, 61, 46, 0.08);
-}
-
-.pillar-spec {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--color-forest);
-  opacity: 0.8;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  margin: 0.35rem 0 0;
 }
 
 /* ══════════════════════════════
