@@ -395,78 +395,24 @@ p {
   z-index: 1;
 }
 
-/* Showcase Intro Video Player Card */
+/* Showcase Intro Video Frame (Natural, cinematic autoplay) */
 .hero-video-showcase {
-  max-width: 860px;
+  max-width: 920px;
   width: 100%;
-  margin: 1rem auto 3.5rem;
+  margin: 1.5rem auto 3.5rem;
   background: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  box-shadow: 0 16px 40px -8px rgba(15, 61, 46, 0.12), 0 4px 16px -2px rgba(184, 148, 90, 0.1);
+  box-shadow: 0 20px 48px -12px rgba(15, 61, 46, 0.16), 0 8px 24px -4px rgba(184, 148, 90, 0.12);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }
 
 .hero-video-showcase:hover {
   border-color: var(--color-gold);
-  transform: translateY(-3px);
-  box-shadow: 0 24px 50px -10px rgba(15, 61, 46, 0.18), 0 8px 24px -3px rgba(184, 148, 90, 0.15);
-}
-
-.video-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.85rem 1.25rem;
-  background: var(--color-cream-card, #ffffff);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.video-dots {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.video-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.dot-red { background-color: #ff5f56; }
-.dot-yellow { background-color: #ffbd2e; }
-.dot-green { background-color: #27c93f; }
-
-.video-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--color-forest);
-}
-
-.video-action-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: var(--color-cream);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full, 9999px);
-  padding: 0.3rem 0.75rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-forest);
-  cursor: pointer;
-  transition: all var(--transition-fast, 0.2s ease);
-}
-
-.video-action-btn:hover {
-  background: var(--color-gold);
-  color: #ffffff;
-  border-color: var(--color-gold);
+  transform: translateY(-4px);
+  box-shadow: 0 28px 60px -12px rgba(15, 61, 46, 0.22), 0 12px 30px -4px rgba(184, 148, 90, 0.18);
 }
 
 .video-wrapper {

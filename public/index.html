@@ -117,34 +117,18 @@
                 
                 <div class="hero-actions">
                     <a href="#contact" class="btn btn-primary">Start a Project</a>
-                    <a href="#hero-video-frame" class="btn btn-secondary" id="watch-intro-btn">
-                        <span>Watch Intro Film</span>
-                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <a href="#services" class="btn btn-secondary">
+                        Explore Solutions
+                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </a>
                 </div>
 
-                <!-- Showcase Intro Video Player Card -->
+                <!-- Showcase Intro Video (Autoplay, natural, seamless) -->
                 <div class="hero-video-showcase reveal" id="hero-video-frame">
-                    <div class="video-card-header">
-                        <div class="video-dots">
-                            <span class="video-dot dot-red"></span>
-                            <span class="video-dot dot-yellow"></span>
-                            <span class="video-dot dot-green"></span>
-                        </div>
-                        <span class="video-badge">VITONIYA &bull; Brand Film</span>
-                        <div class="video-controls-quick">
-                            <button type="button" id="video-mute-toggle" class="video-action-btn" aria-label="Toggle Sound">
-                                <svg class="icon-sound-off" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
-                                <svg class="icon-sound-on" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                                <span class="sound-label">Unmute</span>
-                            </button>
-                        </div>
-                    </div>
                     <div class="video-wrapper">
-                        <video id="main-intro-video" controls playsinline preload="auto" poster="logo.png">
+                        <video id="main-intro-video" autoplay loop muted playsinline preload="auto">
                             <source src="intro-video.mp4" type="video/mp4">
                             <source src="intro%20video.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
                         </video>
                     </div>
                 </div>
