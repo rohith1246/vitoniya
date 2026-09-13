@@ -19,7 +19,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="logo.png">
@@ -108,112 +108,102 @@
     <div class="bg-grid"></div>
 
     <main>
-        <!-- SECTION 1: HERO -->
-        <section id="hero" class="hero">
-            <!-- Sidebar editorial label -->
-            <div class="hero-sidebar-label" aria-hidden="true">
-                <span>01 &mdash; INTELLIGENT TECHNOLOGY</span>
-            </div>
-
-            <div class="hero-inner container">
-                <!-- LEFT PANEL: Editorial Text -->
-                <div class="hero-left reveal">
-                    <!-- Eyebrow -->
-                    <div class="hero-eyebrow">
-                        <span class="hero-eyebrow-line"></span>
-                        <span class="hero-eyebrow-text">VITONIYA GLOBAL TECHNOLOGIES</span>
+        <!-- SECTION 1: HERO (Architectural Editorial & Multi-Disciplinary Practice) -->
+        <section id="hero" class="hero-arch">
+            <div class="container hero-arch-container">
+                <!-- Top Executive Meta Strip -->
+                <div class="hero-meta-strip reveal">
+                    <div class="meta-item">
+                        <span class="meta-dot"></span>
+                        <span class="meta-label">VITONIYA GLOBAL TECHNOLOGIES</span>
                     </div>
-
-                    <!-- H1 Headline -->
-                    <h1 class="hero-headline">Building Intelligent<br>Digital Solutions<span class="hero-accent-dot">.</span></h1>
-
-                    <!-- Supporting copy -->
-                    <p class="hero-copy">We design and build software, AI&#8209;powered systems, automation platforms, and digital products that drive real business value.</p>
-
-                    <!-- CTAs -->
-                    <div class="hero-ctas">
-                        <a href="#contact" class="hero-btn-primary">Start a Project &rarr;</a>
-                        <a href="#services" class="hero-btn-secondary">Explore Solutions</a>
+                    <div class="meta-divider" aria-hidden="true">/</div>
+                    <div class="meta-item">
+                        <span class="meta-tag">FOUNDED &amp; OWNED BY ROHITH VUPPULA</span>
                     </div>
-
-                    <!-- Trust line -->
-                    <div class="hero-trust-line">
-                        <span>Software</span>
-                        <span class="hero-trust-dot" aria-hidden="true">&bull;</span>
-                        <span>AI</span>
-                        <span class="hero-trust-dot" aria-hidden="true">&bull;</span>
-                        <span>Automation</span>
-                        <span class="hero-trust-dot" aria-hidden="true">&bull;</span>
-                        <span>Digital Products</span>
+                    <div class="meta-divider" aria-hidden="true">/</div>
+                    <div class="meta-item">
+                        <span class="meta-tag">INDEPENDENT ENGINEERING &amp; PRODUCT STUDIO</span>
                     </div>
                 </div>
 
-                <!-- RIGHT PANEL: Animated Visual -->
-                <div class="hero-right" aria-hidden="true">
-                    <div class="hero-visual" id="hero-visual">
-                        <!-- SVG: Globe / orbital geometry -->
-                        <svg class="hero-orbital-svg" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                            <!-- Faint world grid background sphere -->
-                            <ellipse class="orbital-globe-base" cx="240" cy="240" rx="192" ry="192"/>
-                            <!-- Latitude curves -->
-                            <ellipse class="orbital-lat" cx="240" cy="240" rx="192" ry="54"/>
-                            <ellipse class="orbital-lat" cx="240" cy="200" rx="155" ry="30"/>
-                            <ellipse class="orbital-lat" cx="240" cy="280" rx="155" ry="30"/>
-                            <!-- Longitude curves -->
-                            <ellipse class="orbital-lng" cx="240" cy="240" rx="55" ry="192"/>
-                            <ellipse class="orbital-lng" cx="240" cy="240" rx="55" ry="192" transform="rotate(40 240 240)"/>
-                            <ellipse class="orbital-lng" cx="240" cy="240" rx="55" ry="192" transform="rotate(-40 240 240)"/>
-                            <!-- Primary orbit ring (animated) -->
-                            <ellipse class="orbital-ring-primary" cx="240" cy="240" rx="210" ry="60" transform="rotate(-20 240 240)"/>
-                            <!-- Secondary orbit ring -->
-                            <ellipse class="orbital-ring-secondary" cx="240" cy="240" rx="170" ry="48" transform="rotate(25 240 240)"/>
-                            <!-- Tertiary thin ring -->
-                            <circle class="orbital-ring-tertiary" cx="240" cy="240" r="228"/>
-                            <!-- Data points -->
-                            <circle class="data-pt dp1" cx="96" cy="210" r="3"/>
-                            <circle class="data-pt dp2" cx="384" cy="268" r="3"/>
-                            <circle class="data-pt dp3" cx="240" cy="52" r="2.5"/>
-                            <circle class="data-pt dp4" cx="60" cy="290" r="2"/>
-                            <circle class="data-pt dp5" cx="420" cy="185" r="2"/>
-                            <circle class="data-pt dp6" cx="310" cy="428" r="2.5"/>
-                            <circle class="data-pt dp7" cx="155" cy="415" r="2"/>
-                            <!-- Flowing data lines -->
-                            <line class="data-line dl1" x1="96" y1="210" x2="240" y2="240"/>
-                            <line class="data-line dl2" x1="384" y1="268" x2="240" y2="240"/>
-                            <line class="data-line dl3" x1="240" y1="52" x2="240" y2="240"/>
-                            <!-- Geometric micro-structures -->
-                            <polygon class="geo-struct gs1" points="96,210 108,196 120,210 108,224"/>
-                            <polygon class="geo-struct gs2" points="384,268 396,256 408,268 396,280"/>
-                            <polygon class="geo-struct gs3" points="240,52 252,40 264,52 252,64"/>
-                            <!-- Orbiting travel dot -->
-                            <circle class="orbit-traveller" r="5">
-                                <animateMotion dur="12s" repeatCount="indefinite" rotate="auto">
-                                    <mpath href="#orbit-path-1"/>
-                                </animateMotion>
-                            </circle>
-                            <defs>
-                                <path id="orbit-path-1" d="M 30,240 A 210,60 0 0 1 450,240 A 210,60 0 0 1 30,240" transform="rotate(-20 240 240)"/>
-                            </defs>
-                            <!-- Gold light sweep arc -->
-                            <path class="gold-sweep" d="M 120,150 Q 240,80 360,150" stroke-linecap="round"/>
-                        </svg>
-
-                        <!-- Logo emblem (centerpiece) -->
-                        <div class="hero-logo-wrap" id="hero-logo-wrap">
-                            <img src="logo.png" alt="Vitoniya Global Technologies emblem" class="hero-logo-emblem">
-                            <div class="hero-logo-glow"></div>
+                <!-- Grand Editorial Typography Core -->
+                <div class="hero-editorial-core reveal">
+                    <h1 class="hero-arch-title">
+                        Building <span class="serif-accent">Intelligent</span><br>
+                        Digital Solutions<span class="arch-dot">.</span>
+                    </h1>
+                    
+                    <div class="hero-narrative-block">
+                        <p class="hero-lead-thesis">
+                            We design and engineer mission-critical software, custom AI systems, autonomous automation platforms, and digital products built to create enduring enterprise value.
+                        </p>
+                        
+                        <div class="hero-action-cluster">
+                            <a href="#contact" class="btn-arch-primary">
+                                <span>Start a Project</span>
+                                <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                            <a href="#services" class="btn-arch-secondary">
+                                <span>Explore Solutions</span>
+                            </a>
+                            <div class="hero-direct-contact">
+                                <span class="direct-label">Direct Communication</span>
+                                <a href="mailto:info@vitoniya.com" class="direct-link">info@vitoniya.com</a>
+                            </div>
                         </div>
-
-                        <!-- Particle canvas -->
-                        <canvas class="hero-particles" id="hero-particles" aria-hidden="true"></canvas>
                     </div>
                 </div>
-            </div>
 
-            <!-- Scroll indicator -->
-            <div class="hero-scroll-hint" aria-label="Scroll down">
-                <div class="scroll-mouse">
-                    <div class="scroll-wheel"></div>
+                <!-- Architectural Capabilities Grid (4 Foundation Pillars) -->
+                <div class="hero-pillars-grid reveal">
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-index">01</span>
+                            <span class="pillar-badge">CORE DISCIPLINE</span>
+                        </div>
+                        <h3 class="pillar-heading">Software Development</h3>
+                        <p class="pillar-summary">High-performance custom web applications, distributed cloud backends, enterprise SaaS, and resilient APIs engineered from ground zero.</p>
+                        <div class="pillar-footer">
+                            <span class="pillar-spec">System Architecture &bull; Full-Stack &bull; APIs</span>
+                        </div>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-index">02</span>
+                            <span class="pillar-badge">INTELLIGENCE</span>
+                        </div>
+                        <h3 class="pillar-heading">AI &amp; Intelligent Systems</h3>
+                        <p class="pillar-summary">Applied machine learning models, autonomous task pipelines, and intelligent decision systems designed around real business logic.</p>
+                        <div class="pillar-footer">
+                            <span class="pillar-spec">Applied ML &bull; Domain Models &bull; LLM Workflows</span>
+                        </div>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-index">03</span>
+                            <span class="pillar-badge">SCALE</span>
+                        </div>
+                        <h3 class="pillar-heading">Automation &amp; Workflows</h3>
+                        <p class="pillar-summary">End-to-end operational automation engines that remove manual friction, eliminate data silos, and scale operations smoothly.</p>
+                        <div class="pillar-footer">
+                            <span class="pillar-spec">Orchestration &bull; Data Pipelines &bull; Integration</span>
+                        </div>
+                    </div>
+
+                    <div class="pillar-card">
+                        <div class="pillar-header">
+                            <span class="pillar-index">04</span>
+                            <span class="pillar-badge">INNOVATION</span>
+                        </div>
+                        <h3 class="pillar-heading">Digital Products</h3>
+                        <p class="pillar-summary">End-to-end proprietary technology products and consumer tools built with aesthetic discipline and uncompromising software quality.</p>
+                        <div class="pillar-footer">
+                            <span class="pillar-spec">Product Engineering &bull; Modern UI &bull; Cloud SaaS</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

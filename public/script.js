@@ -265,25 +265,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 8. Premium Hero Interactive System (Particles, Parallax & Entrance)
-  const heroSection = document.getElementById('hero');
-  const heroLeft = document.querySelector('.hero-left');
-  const heroVisual = document.getElementById('hero-visual');
-  const heroLogoWrap = document.getElementById('hero-logo-wrap');
-  const particleCanvas = document.getElementById('hero-particles');
-
-  // Trigger entrance when hero is visible
+  // 8. Architectural Hero Reveal System
+  const heroRevealElements = document.querySelectorAll('.hero-arch .reveal');
   const triggerHeroEntrance = () => {
-    if (heroLeft) {
-      heroLeft.classList.add('visible');
-    }
+    heroRevealElements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add('visible');
+      }, index * 120);
+    });
   };
 
-  // If intro overlay exists, wait for fade-out or trigger after 1.5s
+  // If intro overlay exists, wait for fade-out or trigger after 1.2s
   if (introOverlay) {
     const observer = new MutationObserver(() => {
       if (introOverlay.classList.contains('fade-out')) {
-        setTimeout(triggerHeroEntrance, 200);
+        setTimeout(triggerHeroEntrance, 150);
       }
     });
     observer.observe(introOverlay, { attributes: true, attributeFilter: ['class'] });
@@ -291,109 +287,6 @@ document.addEventListener('DOMContentLoaded', () => {
     triggerHeroEntrance();
   }
   // Fallback entrance trigger
-  setTimeout(triggerHeroEntrance, 2500);
-
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Parallax on mouse move
-  if (heroSection && heroVisual && heroLogoWrap && !prefersReducedMotion) {
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
-    let isHovering = false;
-
-    heroSection.addEventListener('mousemove', (e) => {
-      const rect = heroSection.getBoundingClientRect();
-      const relX = (e.clientX - rect.left) / rect.width - 0.5;
-      const relY = (e.clientY - rect.top) / rect.height - 0.5;
-      mouseX = relX * 22;
-      mouseY = relY * 22;
-      isHovering = true;
-    });
-
-    heroSection.addEventListener('mouseleave', () => {
-      mouseX = 0;
-      mouseY = 0;
-      isHovering = false;
-    });
-
-    const animateParallax = () => {
-      currentX += (mouseX - currentX) * 0.06;
-      currentY += (mouseY - currentY) * 0.06;
-
-      heroVisual.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
-      heroLogoWrap.style.transform = `translate(-50%, -50%) translate3d(${(-currentX * 0.6).toFixed(2)}px, ${(-currentY * 0.6).toFixed(2)}px, 0)`;
-
-      requestAnimationFrame(animateParallax);
-    };
-
-    requestAnimationFrame(animateParallax);
-  }
-
-  // Particle Canvas Animation
-  if (particleCanvas && !prefersReducedMotion) {
-    const ctx = particleCanvas.getContext('2d');
-    let width = (particleCanvas.width = particleCanvas.offsetWidth || 420);
-    let height = (particleCanvas.height = particleCanvas.offsetHeight || 420);
-
-    const resizeCanvas = () => {
-      if (!particleCanvas.offsetWidth) return;
-      width = particleCanvas.width = particleCanvas.offsetWidth;
-      height = particleCanvas.height = particleCanvas.offsetHeight;
-    };
-
-    window.addEventListener('resize', resizeCanvas);
-
-    // Create subtle particles
-    const particleCount = 28;
-    const particles = [];
-    const colors = [
-      'rgba(184, 148, 90, 0.45)', // Earth gold
-      'rgba(184, 148, 90, 0.25)',
-      'rgba(15, 61, 46, 0.35)',   // Forest green
-      'rgba(15, 61, 46, 0.2)'
-    ];
-
-    for (let i = 0; i < particleCount; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const radius = 40 + Math.random() * (width * 0.42);
-      particles.push({
-        x: width / 2 + Math.cos(angle) * radius,
-        y: height / 2 + Math.sin(angle) * radius,
-        baseRadius: radius,
-        angle: angle,
-        speed: (0.0015 + Math.random() * 0.0025) * (Math.random() > 0.5 ? 1 : -1),
-        size: 1 + Math.random() * 2,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        driftY: (Math.random() - 0.5) * 0.2
-      });
-    }
-
-    const renderParticles = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      const centerX = width / 2;
-      const centerY = height / 2;
-
-      particles.forEach((p) => {
-        p.angle += p.speed;
-        p.y += p.driftY;
-
-        // Recalculate orbital drift
-        p.x = centerX + Math.cos(p.angle) * p.baseRadius;
-        p.y = centerY + Math.sin(p.angle) * (p.baseRadius * 0.75);
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-      });
-
-      requestAnimationFrame(renderParticles);
-    };
-
-    renderParticles();
-  }
+  setTimeout(triggerHeroEntrance, 2000);
 });
 
