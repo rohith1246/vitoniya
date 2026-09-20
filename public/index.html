@@ -19,7 +19,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="logo.png">
@@ -47,7 +47,7 @@
     <header id="header" class="header">
         <div class="container header-container">
             <a href="#" class="logo-link">
-                <img src="logo.png" alt="Vitoniya Logo" class="logo-img">
+                <img src="vitoniya-emblem-hd.png" alt="Vitoniya Logo" class="logo-img">
                 <div class="logo-text">
                     <span class="brand-name">VITONIYA</span>
                     <span class="brand-tagline">GLOBAL TECHNOLOGIES</span>
@@ -130,68 +130,14 @@
                         </div>
                     </div>
 
-                    <!-- Right Centerpiece: 3D Beveled Golden V Emblem in Globe Center -->
+                    <!-- Right Centerpiece: 3D Rotating World Map with Animated Lights & Official Vitoniya Logo -->
                     <div class="hero-globe-portal reveal" aria-hidden="true">
+                        <!-- 3D Rotating Interactive World Map Canvas -->
+                        <canvas id="hero-globe-canvas" class="hero-globe-canvas"></canvas>
+
+                        <!-- Official Vitoniya Brand Logo Floating at Center of World -->
                         <div class="hero-v-emblem-wrap">
-                            <!-- 3D Precision-Beveled Metallic Gold V Monogram -->
-                            <svg class="gold-v-3d-svg" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <linearGradient id="vFacetLeftOuter" x1="45" y1="45" x2="160" y2="265" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0%" stop-color="#FCEBB5"/>
-                                        <stop offset="30%" stop-color="#E5B869"/>
-                                        <stop offset="70%" stop-color="#A67623"/>
-                                        <stop offset="100%" stop-color="#5E3E0B"/>
-                                    </linearGradient>
-                                    <linearGradient id="vFacetLeftInner" x1="96" y1="45" x2="160" y2="220" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0%" stop-color="#FFFFFF"/>
-                                        <stop offset="15%" stop-color="#FFF8E0"/>
-                                        <stop offset="45%" stop-color="#FCD373"/>
-                                        <stop offset="80%" stop-color="#D49A32"/>
-                                        <stop offset="100%" stop-color="#8C5C10"/>
-                                    </linearGradient>
-                                    <linearGradient id="vFacetRightOuter" x1="275" y1="45" x2="160" y2="265" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0%" stop-color="#FFF0BE"/>
-                                        <stop offset="25%" stop-color="#EEBD61"/>
-                                        <stop offset="65%" stop-color="#B27F26"/>
-                                        <stop offset="100%" stop-color="#613F09"/>
-                                    </linearGradient>
-                                    <linearGradient id="vFacetRightInner" x1="224" y1="45" x2="160" y2="220" gradientUnits="userSpaceOnUse">
-                                        <stop offset="0%" stop-color="#DF9F3D"/>
-                                        <stop offset="35%" stop-color="#A16E20"/>
-                                        <stop offset="75%" stop-color="#5E3B09"/>
-                                        <stop offset="100%" stop-color="#341E03"/>
-                                    </linearGradient>
-                                    <radialGradient id="vAmbientGlow" cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stop-color="rgba(247, 208, 120, 0.48)"/>
-                                        <stop offset="45%" stop-color="rgba(214, 160, 64, 0.18)"/>
-                                        <stop offset="100%" stop-color="rgba(0, 0, 0, 0)"/>
-                                    </radialGradient>
-                                </defs>
-
-                                <!-- Core Ambient Glow -->
-                                <circle cx="160" cy="160" r="145" fill="url(#vAmbientGlow)" />
-
-                                <!-- Left Arm: Outer Bevel Facet -->
-                                <path d="M 45 45 L 96 45 L 160 265 L 45 45 Z" fill="url(#vFacetLeftOuter)"/>
-
-                                <!-- Left Arm: Inner Bevel Facet (Peak Brilliant Highlight) -->
-                                <path d="M 96 45 L 140 45 L 160 168 L 160 265 Z" fill="url(#vFacetLeftInner)"/>
-
-                                <!-- Right Arm: Inner Bevel Facet (Deep Metallic Shadow) -->
-                                <path d="M 224 45 L 180 45 L 160 168 L 160 265 Z" fill="url(#vFacetRightInner)"/>
-
-                                <!-- Right Arm: Outer Bevel Facet (Warm Ambient Rim) -->
-                                <path d="M 275 45 L 224 45 L 160 265 L 275 45 Z" fill="url(#vFacetRightOuter)"/>
-
-                                <!-- Top Chamfer Caps -->
-                                <path d="M 45 45 L 96 45 L 140 45 L 138 49 L 96 50 L 47 49 Z" fill="#FFFBE8"/>
-                                <path d="M 180 45 L 224 45 L 275 45 L 273 49 L 224 50 L 182 49 Z" fill="#FFE8A3"/>
-
-                                <!-- Ridge Specular Crease Lines -->
-                                <line x1="96" y1="45" x2="160" y2="265" stroke="rgba(255, 255, 255, 0.85)" stroke-width="1.8" stroke-linecap="round"/>
-                                <line x1="224" y1="45" x2="160" y2="265" stroke="rgba(255, 235, 175, 0.5)" stroke-width="1.2" stroke-linecap="round"/>
-                                <line x1="160" y1="168" x2="160" y2="265" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"/>
-                            </svg>
+                            <img src="vitoniya-emblem-hd.png" alt="Vitoniya Official Logo" class="vitoniya-emblem-img">
                         </div>
                     </div>
                 </div>
@@ -776,6 +722,7 @@
     <!-- TOAST -->
     <div id="toast" class="toast">Email copied to clipboard</div>
 
+    <script src="globe.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@
   --color-gray-300: #D1D5DB;
   --color-gray-600: #4B5563;
   
-  --font-main: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-main: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
   
@@ -241,16 +241,16 @@ p {
 }
 
 .brand-name {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
+  font-family: var(--font-main);
+  font-weight: 700;
   font-size: 1.25rem;
   color: #FFFFFF;
   line-height: 1;
-  letter-spacing: 2px;
+  letter-spacing: 2.2px;
 }
 
 .brand-tagline {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-main);
   font-size: 0.62rem;
   color: #E5B869;
   font-weight: 600;
@@ -269,7 +269,7 @@ p {
 }
 
 .nav-link {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-main);
   font-weight: 500;
   font-size: 0.92rem;
   color: rgba(255, 255, 255, 0.82);
@@ -478,45 +478,47 @@ p {
   align-items: center;
   gap: 0.65rem;
   margin-bottom: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   color: #E5B869;
   text-transform: uppercase;
 }
 
 .eyebrow-slash {
   color: #E5B869;
-  opacity: 0.6;
+  opacity: 0.55;
   font-weight: 400;
 }
 
 .hero-cinematic-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
-  font-weight: 800;
-  line-height: 1.12;
+  font-family: var(--font-main);
+  font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.15;
   color: #FFFFFF;
-  letter-spacing: -0.025em;
-  margin-bottom: 1.4rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 1.35rem;
 }
 
 .text-gold-gradient {
-  background: linear-gradient(90deg, #FDE89C 0%, #F5C26B 35%, #DDA03B 75%, #C28220 100%);
+  background: linear-gradient(135deg, #FFF0C2 0%, #F5C26B 38%, #DDA03B 75%, #B87A18 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
+  font-weight: 700;
 }
 
 .hero-cinematic-desc {
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(1rem, 1.25vw, 1.12rem);
-  line-height: 1.72;
-  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-main);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.76);
   font-weight: 400;
-  max-width: 530px;
+  max-width: 520px;
   margin-bottom: 2.2rem;
+  letter-spacing: 0.005em;
 }
 
 .hero-cinematic-ctas {
@@ -533,10 +535,11 @@ p {
   gap: 0.65rem;
   background: #E5B869;
   color: #071911;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  font-family: var(--font-main);
+  font-weight: 600;
   font-size: 0.95rem;
-  padding: 0.9rem 2.1rem;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 2rem;
   border-radius: 9999px;
   text-decoration: none;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -566,12 +569,13 @@ p {
   justify-content: center;
   background: rgba(4, 19, 14, 0.45);
   color: #FFFFFF;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
+  font-family: var(--font-main);
+  font-weight: 500;
   font-size: 0.95rem;
-  padding: 0.9rem 2.1rem;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 2rem;
   border-radius: 9999px;
-  border: 1.5px solid rgba(229, 184, 105, 0.55);
+  border: 1.5px solid rgba(229, 184, 105, 0.5);
   text-decoration: none;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -585,22 +589,33 @@ p {
   transform: translateY(-2px);
 }
 
-/* Right Globe Centerpiece (3D Golden V Emblem) */
+/* Right Globe Centerpiece (3D Rotating World Map & Official Logo) */
 .hero-globe-portal {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   width: 100%;
-  min-height: 380px;
+  min-height: 480px;
+}
+
+.hero-globe-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .hero-v-emblem-wrap {
   position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: vFloating 6s ease-in-out infinite alternate;
+  animation: vFloating 5s ease-in-out infinite alternate;
+  pointer-events: auto;
 }
 
 @keyframes vFloating {
@@ -612,17 +627,19 @@ p {
   }
 }
 
-.gold-v-3d-svg {
-  width: clamp(210px, 24vw, 320px);
-  height: clamp(210px, 24vw, 320px);
-  filter: drop-shadow(0 0 45px rgba(245, 194, 107, 0.55)) drop-shadow(0 15px 35px rgba(0, 0, 0, 0.85));
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, filter;
+.vitoniya-emblem-img {
+  width: clamp(140px, 16vw, 210px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 35px rgba(229, 184, 105, 0.45)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.85));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  user-select: none;
+  cursor: pointer;
 }
 
-.hero-v-emblem-wrap:hover .gold-v-3d-svg {
-  transform: scale(1.04);
-  filter: drop-shadow(0 0 65px rgba(247, 208, 120, 0.75)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
+.hero-v-emblem-wrap:hover .vitoniya-emblem-img {
+  transform: scale(1.06);
+  filter: drop-shadow(0 0 55px rgba(247, 208, 120, 0.75)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
 }
 
 /* Bottom 5-Pillar Capability Bar */
