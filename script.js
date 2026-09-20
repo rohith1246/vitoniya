@@ -266,12 +266,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 8. Hero Reveal System
-  const heroRevealElements = document.querySelectorAll('.hero-pro .reveal');
+  const heroRevealElements = document.querySelectorAll('.hero-cinematic .reveal, .hero-pro .reveal');
   const triggerHeroEntrance = () => {
     heroRevealElements.forEach((el, index) => {
       setTimeout(() => {
         el.classList.add('visible');
-      }, index * 100);
+      }, index * 80);
     });
   };
 
