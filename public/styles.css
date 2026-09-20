@@ -419,7 +419,7 @@ p {
   padding-top: 110px;
   padding-bottom: 35px;
   background-color: #020C08;
-  background-image: url('herobgdesktop.png');
+  background-image: url('herobg-clean.png');
   background-repeat: no-repeat;
   background-position: right 45%;
   background-size: cover;
@@ -589,7 +589,7 @@ p {
   transform: translateY(-2px);
 }
 
-/* Right Globe Centerpiece (3D Rotating World Map & Official Logo) */
+/* Right Globe Centerpiece (The User's Real World Map Rotating & Animated Lights) */
 .hero-globe-portal {
   display: flex;
   align-items: center;
@@ -599,15 +599,85 @@ p {
   min-height: 480px;
 }
 
-.hero-globe-canvas {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 2;
+.hero-world-globe-wrap {
+  position: relative;
+  width: clamp(320px, 42vw, 560px);
+  height: clamp(320px, 42vw, 560px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* The User's Exact Photorealistic World Map Rotating */
+.my-world-map-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: worldMapPlanetaryRotation 60s linear infinite;
+  transform-origin: center center;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 0 50px rgba(229, 184, 105, 0.45)) drop-shadow(0 15px 40px rgba(0, 0, 0, 0.9));
+}
+
+@keyframes worldMapPlanetaryRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animated Glowing Lights Overlay */
+.world-lights-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  animation: worldMapPlanetaryRotation 60s linear infinite;
+  transform-origin: center center;
+}
+
+.world-light-node {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #FFF2C6;
+  box-shadow: 0 0 10px #F5C26B, 0 0 20px rgba(245, 194, 107, 0.8);
+  animation: lightBeaconPulse 2.8s ease-in-out infinite;
+}
+
+/* Positions matching bright nodes on the orbital rings and continents */
+.node-1 { top: 22%; left: 68%; animation-delay: 0.0s; }
+.node-2 { top: 38%; left: 88%; animation-delay: 0.4s; }
+.node-3 { top: 60%; left: 78%; animation-delay: 0.8s; }
+.node-4 { top: 72%; left: 45%; animation-delay: 1.2s; }
+.node-5 { top: 62%; left: 22%; animation-delay: 1.6s; }
+.node-6 { top: 35%; left: 18%; animation-delay: 2.0s; }
+.node-7 { top: 32%; left: 42%; animation-delay: 0.6s; }
+.node-8 { top: 46%; left: 62%; animation-delay: 1.4s; }
+
+@keyframes lightBeaconPulse {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.85;
+    box-shadow: 0 0 8px #F5C26B, 0 0 15px rgba(245, 194, 107, 0.6);
+  }
+  50% {
+    transform: scale(1.65);
+    opacity: 1;
+    box-shadow: 0 0 16px #FFF0BE, 0 0 32px rgba(245, 194, 107, 0.95), 0 0 45px rgba(78, 226, 168, 0.45);
+  }
+}
+
+/* Centerpiece Official Vitoniya Logo (Stays Upright & Floats) */
 .hero-v-emblem-wrap {
   position: relative;
   z-index: 10;
@@ -628,10 +698,10 @@ p {
 }
 
 .vitoniya-emblem-img {
-  width: clamp(140px, 16vw, 210px);
+  width: clamp(135px, 15vw, 200px);
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 35px rgba(229, 184, 105, 0.45)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.85));
+  filter: drop-shadow(0 0 35px rgba(229, 184, 105, 0.5)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.9));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
   user-select: none;
   cursor: pointer;
@@ -639,7 +709,7 @@ p {
 
 .hero-v-emblem-wrap:hover .vitoniya-emblem-img {
   transform: scale(1.06);
-  filter: drop-shadow(0 0 55px rgba(247, 208, 120, 0.75)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 0 55px rgba(247, 208, 120, 0.8)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
 }
 
 /* Bottom 5-Pillar Capability Bar */
