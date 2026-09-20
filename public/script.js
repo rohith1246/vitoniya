@@ -207,66 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 7. Fullscreen Intro Animation Video Controller
-  const introOverlay = document.getElementById('intro-video-overlay');
-  const introVideo = document.getElementById('intro-splash-video');
-  const skipIntroBtn = document.getElementById('skip-intro-btn');
-
-  if (introOverlay && introVideo) {
-    let hasDismissed = false;
-
-    const dismissIntro = () => {
-      if (hasDismissed) return;
-      hasDismissed = true;
-      introOverlay.classList.add('fade-out');
-      document.body.style.overflow = '';
-      setTimeout(() => {
-        try {
-          introVideo.pause();
-        } catch (e) {}
-      }, 900);
-    };
-
-    // Lock scroll during intro animation
-    document.body.style.overflow = 'hidden';
-
-    // Auto-dismiss when intro animation completes
-    introVideo.addEventListener('ended', dismissIntro);
-
-    // Skip button
-    if (skipIntroBtn) {
-      skipIntroBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        dismissIntro();
-      });
-    }
-
-    // Safety fallback: dismiss after 10.5 seconds if video stalls
-    setTimeout(() => {
-      dismissIntro();
-    }, 10500);
-
-    // Ensure video starts playing immediately
-    introVideo.muted = true;
-    introVideo.setAttribute('muted', '');
-    introVideo.setAttribute('playsinline', '');
-    const playPromise = introVideo.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // If autoplay blocked, dismiss smoothly on first user click or touch
-        const onAnyInput = () => {
-          dismissIntro();
-          window.removeEventListener('click', onAnyInput);
-          window.removeEventListener('touchstart', onAnyInput);
-        };
-        window.addEventListener('click', onAnyInput, { passive: true });
-        window.addEventListener('touchstart', onAnyInput, { passive: true });
-      });
-    }
-  }
-
-  // 8. Hero Reveal System
-  const heroRevealElements = document.querySelectorAll('.hero-cinematic .reveal, .hero-pro .reveal');
+  // 7. Hero Reveal System
+  const heroRevealElements = document.querySelectorAll('.hero-cinematic .reveal');
   const triggerHeroEntrance = () => {
     heroRevealElements.forEach((el, index) => {
       setTimeout(() => {
@@ -275,16 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  if (introOverlay) {
-    const observer = new MutationObserver(() => {
-      if (introOverlay.classList.contains('fade-out')) {
-        setTimeout(triggerHeroEntrance, 150);
-      }
-    });
-    observer.observe(introOverlay, { attributes: true, attributeFilter: ['class'] });
-  } else {
-    triggerHeroEntrance();
-  }
-  setTimeout(triggerHeroEntrance, 2000);
+  // Immediate entrance
+  triggerHeroEntrance();
 });
 
