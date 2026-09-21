@@ -444,16 +444,16 @@ p:last-child {
 }
 
 /* ══════════════════════════════════════════════════════
-   1. HERO SECTION — Matches Mockup
+   1. HERO SECTION — Matches Mockup (Separated Desktop & Mobile)
 ══════════════════════════════════════════════════════ */
 .hero-cinematic {
   position: relative;
-  min-height: 92vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding-top: 105px;
-  padding-bottom: 50px;
+  justify-content: space-between;
+  padding-top: 95px;
+  padding-bottom: 25px;
   background-color: #020C08;
   background-image: url('herobgdesktop.png');
   background-repeat: no-repeat;
@@ -479,45 +479,64 @@ p:last-child {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
 }
 
 .hero-cinematic-main {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1.5rem;
+  padding-top: 1rem;
 }
 
 @media (min-width: 992px) {
   .hero-cinematic-main {
     grid-template-columns: 1.15fr 0.85fr;
     gap: 3.5rem;
+    padding-top: 2rem;
   }
 }
 
 .hero-cinematic-content {
   max-width: 620px;
   z-index: 3;
+  text-align: left;
 }
 
-.hero-eyebrow-label {
-  display: inline-block;
-  font-size: 0.78rem;
+.hero-eyebrow-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: var(--font-main);
+  font-size: 0.76rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   color: var(--color-gold-bright);
   text-transform: uppercase;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.eyebrow-slash {
+  color: var(--color-gold-bright);
+  opacity: 0.65;
+  font-weight: 400;
 }
 
 .hero-cinematic-title {
-  font-size: clamp(2.3rem, 4.2vw, 3.8rem);
+  font-family: var(--font-main);
+  font-size: clamp(2.35rem, 5.5vw, 4rem);
   font-weight: 800;
   line-height: 1.15;
   color: #FFFFFF;
   letter-spacing: -0.02em;
   margin-bottom: 1.25rem;
+  text-align: left;
 }
 
 .text-gold-gradient {
@@ -528,20 +547,32 @@ p:last-child {
 }
 
 .hero-cinematic-desc {
-  font-size: clamp(0.98rem, 1.2vw, 1.1rem);
-  line-height: 1.7;
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  line-height: 1.65;
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
-  max-width: 520px;
-  margin-bottom: 2rem;
+  max-width: 540px;
+  margin-bottom: 1.75rem;
+  text-align: left;
 }
 
 .hero-cinematic-ctas {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2.25rem;
+  flex-wrap: nowrap;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+  justify-content: flex-start;
+}
+
+@media (max-width: 420px) {
+  .hero-cinematic-ctas {
+    gap: 0.5rem;
+  }
+  .btn-gold-pill, .btn-outline-pill {
+    padding: 0.7rem 1.15rem;
+    font-size: 0.82rem;
+  }
 }
 
 .hero-supporting-line {
@@ -549,16 +580,19 @@ p:last-child {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.65rem;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: var(--color-gold-bright);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+  justify-content: flex-start;
 }
 
-.dot-sep {
+.pipe-sep {
   color: var(--color-gold-bright);
-  opacity: 0.7;
+  opacity: 0.6;
+  font-weight: 400;
+  margin: 0 0.15rem;
 }
 
 /* Centerpiece Official Vitoniya Logo Centered on Globe */
@@ -580,41 +614,153 @@ p:last-child {
 }
 
 .vitoniya-emblem-img {
-  width: clamp(150px, 16vw, 220px);
+  width: clamp(140px, 16vw, 210px);
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 40px rgba(229, 184, 105, 0.45)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.85));
+  filter: drop-shadow(0 0 40px rgba(229, 184, 105, 0.5)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.85));
   transition: transform 0.3s ease, filter 0.3s ease;
   user-select: none;
 }
 
 .hero-v-emblem-wrap:hover .vitoniya-emblem-img {
   transform: scale(1.05);
-  filter: drop-shadow(0 0 55px rgba(247, 208, 120, 0.75)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 0 55px rgba(247, 208, 120, 0.8)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
 }
 
+/* Mouse Scroll Indicator */
+.hero-scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.mouse-icon {
+  width: 20px;
+  height: 32px;
+  border: 1.8px solid rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}
+
+.mouse-wheel {
+  width: 3px;
+  height: 6px;
+  background-color: var(--color-gold-bright);
+  border-radius: 2px;
+  animation: mouseWheelScroll 1.6s ease-in-out infinite;
+}
+
+@keyframes mouseWheelScroll {
+  0% { transform: translateY(0); opacity: 1; }
+  60% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.scroll-chevron {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  animation: chevronBounce 1.6s ease-in-out infinite;
+}
+
+@keyframes chevronBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(3px); opacity: 1; }
+}
+
+/* ══════════════════════════════════════════════════════
+   MOBILE VIEW (max-width: 768px) — Uses herobgmobile.png
+   Matches media_1789999133182.png
+══════════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .hero-cinematic {
-    padding-top: 95px;
-    background-position: center 30%;
+    background-image: url('herobgmobile.png');
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    padding-top: 90px;
+    padding-bottom: 20px;
   }
+
+  .hero-bg-scrim {
+    background: linear-gradient(180deg, rgba(2, 12, 8, 0.85) 0%, rgba(2, 12, 8, 0.35) 45%, transparent 70%);
+  }
+
   .hero-cinematic-main {
     grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
+    gap: 1.25rem;
+    text-align: left;
   }
+
   .hero-cinematic-content {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
   }
+
+  .hero-eyebrow-line {
+    justify-content: flex-start;
+  }
+
+  .hero-cinematic-title {
+    font-size: clamp(2.15rem, 8.5vw, 2.9rem);
+    text-align: left;
+    line-height: 1.15;
+  }
+
+  .hero-cinematic-desc {
+    text-align: left;
+    font-size: 0.94rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
   .hero-cinematic-ctas {
-    justify-content: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
   }
+
+  .btn-gold-pill, .btn-outline-pill {
+    padding: 0.72rem 1.15rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
   .hero-supporting-line {
+    justify-content: flex-start;
+    gap: 0.55rem;
+    font-size: 0.78rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Globe Portal on Mobile: Centers the V emblem right on the mobile globe */
+  .hero-globe-portal {
+    min-height: 290px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    margin-top: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .vitoniya-emblem-img {
+    width: clamp(95px, 24vw, 130px);
+    filter: drop-shadow(0 0 35px rgba(229, 184, 105, 0.8)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.95));
+  }
+
+  .hero-scroll-indicator {
+    margin-top: 0.5rem;
   }
 }
 
