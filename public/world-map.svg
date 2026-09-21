@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="100%" height="100%" fill="none">
+  <!-- Simplified elegant world map continents in soft muted tones -->
+  <g fill="#D1DDD5" opacity="0.85">
+    <!-- North America -->
+    <path d="M160,80 Q210,70 260,95 Q290,120 280,160 Q260,180 230,195 Q210,230 180,220 Q150,190 140,150 Q130,110 160,80 Z" />
+    <path d="M220,200 Q240,240 260,260 Q240,270 230,250 Z" />
+    <!-- Greenland -->
+    <path d="M330,40 Q380,35 390,65 Q370,95 330,80 Z" />
+    <!-- South America -->
+    <path d="M280,270 Q340,280 360,330 Q340,410 300,450 Q280,410 270,350 Q260,300 280,270 Z" />
+    <!-- Europe -->
+    <path d="M470,80 Q530,75 560,110 Q540,150 490,150 Q460,130 470,80 Z" />
+    <path d="M480,150 Q520,160 510,190 Q480,190 480,150 Z" />
+    <!-- Africa -->
+    <path d="M460,200 Q540,190 570,250 Q580,320 540,380 Q500,410 490,360 Q460,300 450,250 Q440,220 460,200 Z" />
+    <path d="M590,320 Q610,330 600,360 Q580,360 590,320 Z" />
+    <!-- Asia -->
+    <path d="M560,70 Q690,60 820,100 Q860,160 820,220 Q760,260 700,240 Q680,200 640,190 Q620,160 560,150 Z" />
+    <!-- India Highlight with subtle gold accent -->
+    <path d="M640,190 Q670,200 680,250 Q660,280 640,250 Q630,220 640,190 Z" fill="#B8945A" opacity="0.95" />
+    <!-- Southeast Asia & Japan -->
+    <path d="M740,240 Q780,250 770,290 Q740,280 740,240 Z" />
+    <path d="M830,140 Q850,150 840,180 Q820,170 830,140 Z" />
+    <!-- Australia -->
+    <path d="M760,330 Q840,320 860,370 Q840,430 780,420 Q740,390 760,330 Z" />
+  </g>
+  <!-- Connection Arc from India to World -->
+  <path d="M655,230 Q740,150 820,160" stroke="#B8945A" stroke-width="1.8" stroke-dasharray="4 4" fill="none" opacity="0.7" />
+  <path d="M655,230 Q550,140 490,140" stroke="#B8945A" stroke-width="1.8" stroke-dasharray="4 4" fill="none" opacity="0.7" />
+  <path d="M655,230 Q450,200 320,330" stroke="#B8945A" stroke-width="1.8" stroke-dasharray="4 4" fill="none" opacity="0.7" />
+  <!-- Pulse node over India -->
+  <circle cx="655" cy="230" r="5" fill="#E5B869" />
+  <circle cx="655" cy="230" r="10" stroke="#E5B869" stroke-width="1.2" opacity="0.5" />
+</svg>
