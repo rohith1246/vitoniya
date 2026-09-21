@@ -444,20 +444,21 @@ p:last-child {
 }
 
 /* ══════════════════════════════════════════════════════
-   1. HERO SECTION — Matches media_1789999133182.png
+   1. HERO SECTION — Matches Mockup
 ══════════════════════════════════════════════════════ */
 .hero-cinematic {
   position: relative;
-  min-height: 100vh;
+  min-height: 92vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 90px;
-  padding-bottom: 25px;
+  justify-content: center;
+  padding-top: 105px;
+  padding-bottom: 50px;
   background-color: #020C08;
-  background-image: 
-    radial-gradient(circle at 50% 85%, rgba(15, 61, 46, 0.45) 0%, transparent 60%),
-    radial-gradient(circle at 80% 20%, rgba(229, 184, 105, 0.08) 0%, transparent 50%);
+  background-image: url('herobgdesktop.png');
+  background-repeat: no-repeat;
+  background-position: right 45%;
+  background-size: cover;
   overflow: hidden;
   color: #FFFFFF;
 }
@@ -468,7 +469,8 @@ p:last-child {
   pointer-events: none;
   z-index: 1;
   background: 
-    linear-gradient(180deg, rgba(2, 12, 8, 0.7) 0%, transparent 20%, transparent 75%, rgba(2, 12, 8, 0.95) 100%);
+    linear-gradient(90deg, rgba(2, 12, 8, 0.94) 0%, rgba(2, 12, 8, 0.82) 42%, rgba(2, 12, 8, 0.3) 68%, rgba(2, 12, 8, 0.05) 100%),
+    linear-gradient(180deg, rgba(2, 12, 8, 0.65) 0%, transparent 18%, transparent 75%, rgba(2, 12, 8, 0.95) 100%);
 }
 
 .hero-cinematic-container {
@@ -477,64 +479,45 @@ p:last-child {
   width: 100%;
   max-width: 1240px;
   margin: 0 auto;
-  padding: 0 1.25rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
+  padding: 0 1.5rem;
 }
 
 .hero-cinematic-main {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-  gap: 1.5rem;
-  padding-top: 1rem;
+  gap: 2.5rem;
 }
 
 @media (min-width: 992px) {
   .hero-cinematic-main {
     grid-template-columns: 1.15fr 0.85fr;
     gap: 3.5rem;
-    padding-top: 2rem;
   }
 }
 
 .hero-cinematic-content {
   max-width: 620px;
   z-index: 3;
-  text-align: left;
 }
 
-.hero-eyebrow-line {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  font-family: var(--font-main);
-  font-size: 0.76rem;
+.hero-eyebrow-label {
+  display: inline-block;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   color: var(--color-gold-bright);
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
-}
-
-.eyebrow-slash {
-  color: var(--color-gold-bright);
-  opacity: 0.65;
-  font-weight: 400;
+  margin-bottom: 1.1rem;
 }
 
 .hero-cinematic-title {
-  font-family: var(--font-main);
-  font-size: clamp(2.35rem, 5.5vw, 4rem);
+  font-size: clamp(2.3rem, 4.2vw, 3.8rem);
   font-weight: 800;
   line-height: 1.15;
   color: #FFFFFF;
   letter-spacing: -0.02em;
   margin-bottom: 1.25rem;
-  text-align: left;
 }
 
 .text-gold-gradient {
@@ -545,32 +528,20 @@ p:last-child {
 }
 
 .hero-cinematic-desc {
-  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
-  line-height: 1.65;
+  font-size: clamp(0.98rem, 1.2vw, 1.1rem);
+  line-height: 1.7;
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
-  max-width: 540px;
-  margin-bottom: 1.75rem;
-  text-align: left;
+  max-width: 520px;
+  margin-bottom: 2rem;
 }
 
 .hero-cinematic-ctas {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
-  gap: 0.85rem;
-  margin-bottom: 1.5rem;
-  justify-content: flex-start;
-}
-
-@media (max-width: 420px) {
-  .hero-cinematic-ctas {
-    gap: 0.5rem;
-  }
-  .btn-gold-pill, .btn-outline-pill {
-    padding: 0.7rem 1.15rem;
-    font-size: 0.82rem;
-  }
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
 }
 
 .hero-supporting-line {
@@ -578,125 +549,73 @@ p:last-child {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.65rem;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--color-gold-bright);
-  letter-spacing: 0.04em;
-  margin-bottom: 0.5rem;
-  justify-content: flex-start;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.pipe-sep {
+.dot-sep {
   color: var(--color-gold-bright);
-  opacity: 0.6;
-  font-weight: 400;
-  margin: 0 0.15rem;
+  opacity: 0.7;
 }
 
-/* Centerpiece: The Photorealistic Globe with Golden V Emblem */
+/* Centerpiece Official Vitoniya Logo Centered on Globe */
 .hero-globe-portal {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   width: 100%;
-}
-
-.hero-globe-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@media (max-width: 768px) {
-  .hero-globe-wrapper {
-    max-width: 380px;
-  }
-}
-
-.hero-globe-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  filter: drop-shadow(0 0 45px rgba(229, 184, 105, 0.35));
-  user-select: none;
-  pointer-events: none;
+  min-height: 420px;
 }
 
 .hero-v-emblem-wrap {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
+  position: relative;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .vitoniya-emblem-img {
-  width: clamp(95px, 24vw, 150px);
+  width: clamp(150px, 16vw, 220px);
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 35px rgba(229, 184, 105, 0.75)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 0 40px rgba(229, 184, 105, 0.45)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.85));
   transition: transform 0.3s ease, filter 0.3s ease;
   user-select: none;
 }
 
 .hero-v-emblem-wrap:hover .vitoniya-emblem-img {
-  transform: scale(1.06);
-  filter: drop-shadow(0 0 55px rgba(247, 208, 120, 0.9)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 55px rgba(247, 208, 120, 0.75)) drop-shadow(0 20px 45px rgba(0, 0, 0, 0.95));
 }
 
-/* Mouse Scroll Indicator */
-.hero-scroll-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin-top: 1rem;
-  padding-bottom: 0.5rem;
-}
-
-.mouse-icon {
-  width: 20px;
-  height: 32px;
-  border: 1.8px solid rgba(255, 255, 255, 0.75);
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  padding-top: 5px;
-}
-
-.mouse-wheel {
-  width: 3px;
-  height: 6px;
-  background-color: var(--color-gold-bright);
-  border-radius: 2px;
-  animation: mouseWheelScroll 1.6s ease-in-out infinite;
-}
-
-@keyframes mouseWheelScroll {
-  0% { transform: translateY(0); opacity: 1; }
-  60% { transform: translateY(8px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 0; }
-}
-
-.scroll-chevron {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
-  animation: chevronBounce 1.6s ease-in-out infinite;
-}
-
-@keyframes chevronBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(3px); opacity: 1; }
+@media (max-width: 768px) {
+  .hero-cinematic {
+    padding-top: 95px;
+    background-position: center 30%;
+  }
+  .hero-cinematic-main {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  .hero-cinematic-content {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-cinematic-ctas {
+    justify-content: center;
+  }
+  .hero-supporting-line {
+    justify-content: center;
+  }
 }
 
 /* ══════════════════════════════════════════════════════
