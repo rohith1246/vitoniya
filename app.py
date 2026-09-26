@@ -62,6 +62,18 @@ else:
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
+@app.route('/demos/clinic')
+@app.route('/demos/clinic/')
+def demo_clinic():
+    clinic_dir = os.path.join(app.static_folder, 'demos', 'clinic')
+    return send_from_directory(clinic_dir, 'index.html')
+
+@app.route('/demos/realty')
+@app.route('/demos/realty/')
+def demo_realty():
+    realty_dir = os.path.join(app.static_folder, 'demos', 'realty')
+    return send_from_directory(realty_dir, 'index.html')
+
 @app.route('/health')
 def health():
     return jsonify({"status": "ok"})

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedOS — Clinic & Hospital Management Suite | Vitoniya Demo</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --med-primary: #0A2540;
+            --med-accent: #00A3C4;
+            --med-accent-light: #E0F7FA;
+            --med-green: #0E8A54;
+            --med-green-light: #E8F7F0;
+            --med-gold: #D4AF37;
+            --med-bg: #F4F7F9;
+            --med-card: #FFFFFF;
+            --med-text: #1E293B;
+            --med-muted: #64748B;
+            --med-border: #E2E8F0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--med-bg);
+            color: var(--med-text);
+            line-height: 1.5;
+        }
+
+        /* Top Vitoniya Demo Banner */
+        .demo-bar {
+            background: #083D2E;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #D4AF37;
+        }
+
+        .demo-pill {
+            background: rgba(212, 175, 55, 0.2);
+            color: #FCD34D;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+        }
+
+        .btn-back-vitoniya {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .btn-back-vitoniya:hover {
+            color: #FCD34D;
+        }
+
+        /* Clinic Navbar */
+        .clinic-header {
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--med-border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .clinic-header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .clinic-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .clinic-icon-cross {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--med-accent);
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.4rem;
+        }
+
+        .clinic-name-group h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--med-primary);
+            line-height: 1.2;
+        }
+
+        .clinic-name-group p {
+            font-size: 0.75rem;
+            color: var(--med-muted);
+        }
+
+        /* View Toggle (Patient vs Receptionist/Doctor) */
+        .view-switcher-box {
+            display: flex;
+            background: #EDF2F7;
+            padding: 4px;
+            border-radius: 8px;
+            gap: 4px;
+        }
+
+        .switch-btn {
+            border: none;
+            background: transparent;
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--med-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .switch-btn.active {
+            background: #FFFFFF;
+            color: var(--med-primary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        /* Container */
+        .app-container {
+            max-width: 1200px;
+            margin: 30px auto 60px;
+            padding: 0 20px;
+        }
+
+        /* Patient Booking Screen */
+        .booking-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 28px;
+        }
+
+        .card {
+            background: var(--med-card);
+            border: 1px solid var(--med-border);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--med-border);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--med-accent);
+            color: #FFFFFF;
+            font-weight: 800;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-header h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--med-primary);
+        }
+
+        /* Doctors Grid */
+        .doctors-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .doctor-option {
+            border: 2px solid var(--med-border);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .doctor-option:hover {
+            border-color: var(--med-accent);
+            background: #F8FDFF;
+        }
+
+        .doctor-option.selected {
+            border-color: var(--med-accent);
+            background: var(--med-accent-light);
+        }
+
+        .doc-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .doc-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #CBD5E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #334155;
+            font-size: 1.1rem;
+        }
+
+        .doc-name {
+            font-weight: 700;
+            font-size: 0.98rem;
+            color: var(--med-primary);
+        }
+
+        .doc-spec {
+            font-size: 0.82rem;
+            color: var(--med-muted);
+        }
+
+        .doc-exp {
+            font-size: 0.72rem;
+            color: var(--med-green);
+            font-weight: 600;
+        }
+
+        .doc-fee {
+            text-align: right;
+            font-weight: 800;
+            color: var(--med-primary);
+            font-size: 1.05rem;
+        }
+
+        .doc-fee span {
+            display: block;
+            font-size: 0.68rem;
+            color: var(--med-muted);
+            font-weight: 500;
+        }
+
+        /* Slot Selector */
+        .dates-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .date-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--med-border);
+            border-radius: 8px;
+            background: #FFFFFF;
+            cursor: pointer;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .date-btn.active {
+            background: var(--med-primary);
+            color: #FFFFFF;
+            border-color: var(--med-primary);
+        }
+
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .slot-btn {
+            border: 1px solid var(--med-border);
+            background: #FFFFFF;
+            padding: 10px 6px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--med-text);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .slot-btn:hover {
+            border-color: var(--med-accent);
+            color: var(--med-accent);
+        }
+
+        .slot-btn.selected {
+            background: var(--med-accent);
+            color: #FFFFFF;
+            border-color: var(--med-accent);
+        }
+
+        /* Patient Form */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-label {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--med-text);
+        }
+
+        .form-input {
+            padding: 10px 12px;
+            border: 1px solid var(--med-border);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--med-accent);
+        }
+
+        .btn-confirm-appointment {
+            width: 100%;
+            background: var(--med-green);
+            color: #FFFFFF;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .btn-confirm-appointment:hover {
+            background: #0B7346;
+        }
+
+        /* Right Summary & Pass Display */
+        .token-pass-card {
+            background: linear-gradient(135deg, #0A2540, #14385C);
+            color: #FFFFFF;
+            border-radius: 16px;
+            padding: 28px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(10, 37, 64, 0.25);
+        }
+
+        .token-pass-card::after {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background: rgba(0, 163, 196, 0.2);
+            border-radius: 50%;
+        }
+
+        .pass-badge {
+            display: inline-block;
+            background: rgba(0, 163, 196, 0.25);
+            color: #38BDF8;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .token-large {
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+        }
+
+        .token-large span {
+            color: #38BDF8;
+        }
+
+        .pass-meta-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 16px 0;
+            border-top: 1px dashed rgba(255,255,255,0.2);
+            border-bottom: 1px dashed rgba(255,255,255,0.2);
+            font-size: 0.85rem;
+        }
+
+        .pass-meta-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pass-meta-item span:first-child {
+            color: #94A3B8;
+        }
+
+        .pass-meta-item span:last-child {
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+        .qr-placeholder {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.06);
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .qr-icon {
+            width: 44px;
+            height: 44px;
+            background: #FFFFFF;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0A2540;
+            font-size: 1.5rem;
+            font-weight: 900;
+        }
+
+        .qr-text {
+            font-size: 0.72rem;
+            color: #CBD5E1;
+            line-height: 1.3;
+        }
+
+        /* WhatsApp Simulation Toast */
+        .toast-wa {
+            display: none;
+            background: #25D366;
+            color: #FFFFFF;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Doctor OPD Desk View */
+        .opd-desk-view {
+            display: none;
+        }
+
+        .stats-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-box {
+            background: #FFFFFF;
+            border: 1px solid var(--med-border);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .kpi-lbl {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--med-muted);
+            margin-bottom: 4px;
+        }
+
+        .kpi-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--med-primary);
+        }
+
+        .patients-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.88rem;
+        }
+
+        .patients-table th {
+            text-align: left;
+            padding: 12px 14px;
+            background: #F8FAFC;
+            color: var(--med-muted);
+            font-weight: 600;
+            font-size: 0.75rem;
+            border-bottom: 1px solid var(--med-border);
+        }
+
+        .patients-table td {
+            padding: 14px;
+            border-bottom: 1px solid var(--med-border);
+        }
+
+        .badge-status-in {
+            background: #FEF3C7;
+            color: #B45309;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+        }
+
+        .badge-status-done {
+            background: #DCFCE7;
+            color: #15803D;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+        }
+
+        .btn-action-sm {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--med-border);
+            background: #FFFFFF;
+        }
+
+        .btn-action-sm.green {
+            background: var(--med-green-light);
+            color: var(--med-green);
+            border-color: var(--med-green);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            .booking-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Vitoniya Live Demo Banner -->
+    <div class="demo-bar">
+        <div>
+            <span class="demo-pill">Client Demo</span>
+            <strong>MedOS Healthcare Suite</strong> &mdash; Production prototype designed for private clinics & hospitals in Andhra Pradesh & Telangana.
+        </div>
+        <div>
+            <a href="../../#interactive-demos" class="btn-back-vitoniya">&larr; Back to Vitoniya Showcase</a>
+        </div>
+    </div>
+
+    <!-- Clinic Header -->
+    <header class="clinic-header">
+        <div class="clinic-header-container">
+            <div class="clinic-brand">
+                <div class="clinic-icon-cross">+</div>
+                <div class="clinic-name-group">
+                    <h2>Apex Care Speciality Clinic</h2>
+                    <p>Old Club Road, Kothapet, Guntur &bull; Ph: +91 863 223 4567</p>
+                </div>
+            </div>
+
+            <!-- View Switcher -->
+            <div class="view-switcher-box">
+                <button class="switch-btn active" id="btnPatientView" onclick="switchDesk('patient')">
+                    Patient Booking View
+                </button>
+                <button class="switch-btn" id="btnOpdView" onclick="switchDesk('opd')">
+                    Doctor / OPD Desk 🔒
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- 1. PATIENT BOOKING VIEW -->
+        <div id="patientBookingView">
+            <div class="booking-grid">
+                <!-- Left: Interactive Form -->
+                <div>
+                    <!-- Step 1: Doctor -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="step-num">1</span>
+                            <h3>Select Doctor & Speciality</h3>
+                        </div>
+
+                        <div class="doctors-list">
+                            <div class="doctor-option selected" onclick="selectDoctor(this, 'Dr. K. Radhika, MBBS, MD', 'General Medicine & Diabetology', '₹500')">
+                                <div class="doc-left">
+                                    <div class="doc-avatar" style="background:#E0F2FE; color:#0369A1;">KR</div>
+                                    <div>
+                                        <div class="doc-name">Dr. K. Radhika, MBBS, MD</div>
+                                        <div class="doc-spec">General Medicine & Diabetology</div>
+                                        <div class="doc-exp">14+ Years Exp &bull; Available Today</div>
+                                    </div>
+                                </div>
+                                <div class="doc-fee">₹500 <span>Consultation</span></div>
+                            </div>
+
+                            <div class="doctor-option" onclick="selectDoctor(this, 'Dr. V. Srinivas, MDS', 'Chief Dental Surgeon & Implantologist', '₹400')">
+                                <div class="doc-left">
+                                    <div class="doc-avatar" style="background:#FEF3C7; color:#B45309;">VS</div>
+                                    <div>
+                                        <div class="doc-name">Dr. V. Srinivas, MDS</div>
+                                        <div class="doc-spec">Chief Dental Surgeon & Implantologist</div>
+                                        <div class="doc-exp">11+ Years Exp &bull; Available Today</div>
+                                    </div>
+                                </div>
+                                <div class="doc-fee">₹400 <span>Consultation</span></div>
+                            </div>
+
+                            <div class="doctor-option" onclick="selectDoctor(this, 'Dr. A. Pradeep, MBBS, MS', 'Orthopaedics & Joint Replacement', '₹600')">
+                                <div class="doc-left">
+                                    <div class="doc-avatar" style="background:#DCFCE7; color:#15803D;">AP</div>
+                                    <div>
+                                        <div class="doc-name">Dr. A. Pradeep, MBBS, MS</div>
+                                        <div class="doc-spec">Orthopaedics & Joint Specialist</div>
+                                        <div class="doc-exp">16+ Years Exp &bull; Evening Slots</div>
+                                    </div>
+                                </div>
+                                <div class="doc-fee">₹600 <span>Consultation</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Date & Slot -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="step-num">2</span>
+                            <h3>Select Consultation Slot</h3>
+                        </div>
+
+                        <div class="dates-row">
+                            <button class="date-btn active" onclick="selectDate(this, 'Today, 26 Sep')">Today (26 Sep)</button>
+                            <button class="date-btn" onclick="selectDate(this, 'Tomorrow, 27 Sep')">Tomorrow (27 Sep)</button>
+                            <button class="date-btn" onclick="selectDate(this, 'Monday, 29 Sep')">Monday (29 Sep)</button>
+                        </div>
+
+                        <p style="font-size:0.78rem; font-weight:700; color:var(--med-muted); margin-bottom:10px; text-transform:uppercase;">Evening OPD Hours</p>
+                        <div class="slots-grid">
+                            <button class="slot-btn selected" onclick="selectSlot(this, '05:30 PM')">05:30 PM</button>
+                            <button class="slot-btn" onclick="selectSlot(this, '06:00 PM')">06:00 PM</button>
+                            <button class="slot-btn" onclick="selectSlot(this, '06:30 PM')">06:30 PM</button>
+                            <button class="slot-btn" onclick="selectSlot(this, '07:15 PM')">07:15 PM</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Patient Info -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="step-num">3</span>
+                            <h3>Patient Details</h3>
+                        </div>
+
+                        <form onsubmit="confirmAppointment(event)">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Patient Full Name</label>
+                                    <input type="text" class="form-input" id="patientName" placeholder="e.g. Ramesh Varma" value="K. V. Subba Rao" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">WhatsApp Mobile Number</label>
+                                    <input type="tel" class="form-input" id="patientPhone" placeholder="10-digit number" value="98490 12345" required>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Age & Gender</label>
+                                    <input type="text" class="form-input" id="patientAge" placeholder="e.g. 48 / Male" value="52 / Male" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Primary Symptom / Reason</label>
+                                    <input type="text" class="form-input" id="patientSymptom" placeholder="e.g. Fever / Follow-up" value="Routine Sugar & BP Checkup">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-confirm-appointment">
+                                Confirm Direct Booking & Generate Token &rarr;
+                            </button>
+                        </form>
+
+                        <div class="toast-wa" id="waNotification">
+                            <strong>📲 Automated WhatsApp Confirmation Sent!</strong><br>
+                            Patient received confirmed token pass + Google Maps clinic directions directly on WhatsApp.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Live Token Pass & Queue Status -->
+                <div>
+                    <div class="token-pass-card" id="tokenCard">
+                        <span class="pass-badge">CONFIRMED OPD APPOINTMENT PASS</span>
+                        <div class="token-large">
+                            TOKEN <span id="displayToken">#18</span>
+                        </div>
+                        <p style="font-size:0.85rem; color:#E2E8F0;">Please show this pass at the reception counter.</p>
+
+                        <div class="pass-meta-row">
+                            <div class="pass-meta-item">
+                                <span>Doctor</span>
+                                <span id="displayDoctor">Dr. K. Radhika, MBBS, MD</span>
+                            </div>
+                            <div class="pass-meta-item">
+                                <span>Patient</span>
+                                <span id="displayPatient">K. V. Subba Rao (52/M)</span>
+                            </div>
+                            <div class="pass-meta-item">
+                                <span>Date & Time</span>
+                                <span id="displayTime">Today, 26 Sep &bull; 05:30 PM</span>
+                            </div>
+                            <div class="pass-meta-item">
+                                <span>Consultation Fee</span>
+                                <span id="displayFee">₹500 (Pay at Clinic)</span>
+                            </div>
+                        </div>
+
+                        <div class="qr-placeholder">
+                            <div class="qr-icon">QR</div>
+                            <div class="qr-text">
+                                <strong>Fast-Track Check-In Active</strong><br>
+                                Scannable at Clinic Reception. Reduces waiting room friction by 80%.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clinic Value Proposition for Doctors -->
+                    <div class="card" style="margin-top:24px; background:#F8FAFC;">
+                        <h4 style="font-size:0.95rem; color:var(--med-primary); margin-bottom:8px;">💡 Why Doctors Choose Vitoniya MedOS</h4>
+                        <ul style="font-size:0.82rem; color:var(--med-muted); padding-left:18px; line-height:1.6;">
+                            <li>Zero commission fees (Stop losing ₹200-300 per patient to aggregators).</li>
+                            <li>Instant WhatsApp token passes minimize clinic waiting room chaos.</li>
+                            <li>Receptionist + Doctor dashboards sync patient records securely.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. DOCTOR / RECEPTIONIST OPD DESK VIEW -->
+        <div id="opdDeskView" class="opd-desk-view">
+            <!-- KPI Counters -->
+            <div class="stats-kpi-grid">
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Total Appointments Today</div>
+                    <div class="kpi-val">28</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Patients Currently in Waiting Hall</div>
+                    <div class="kpi-val" style="color:#B45309;">6</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Consultations Completed</div>
+                    <div class="kpi-val" style="color:var(--med-green);">22</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-lbl">Today's Direct Collections</div>
+                    <div class="kpi-val" style="color:var(--med-primary);">₹14,200</div>
+                </div>
+            </div>
+
+            <!-- OPD Patient Queue Table -->
+            <div class="card">
+                <div class="card-header" style="justify-content: space-between;">
+                    <h3>Live OPD Patient Queue &bull; Dr. K. Radhika</h3>
+                    <button class="btn-action-sm green" onclick="alert('Walk-in patient registration form opened')">+ Quick Walk-In Registration</button>
+                </div>
+
+                <table class="patients-table">
+                    <thead>
+                        <tr>
+                            <th>TOKEN</th>
+                            <th>PATIENT NAME</th>
+                            <th>AGE/SEX</th>
+                            <th>CONTACT</th>
+                            <th>CHIEF COMPLAINT</th>
+                            <th>STATUS</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody id="opdTableBody">
+                        <tr>
+                            <td><strong>#15</strong></td>
+                            <td>Venkat Ramana</td>
+                            <td>45 / M</td>
+                            <td>98480 23412</td>
+                            <td>Chest Discomfort & BP</td>
+                            <td><span class="badge-status-done">Consulted</span></td>
+                            <td><button class="btn-action-sm">View Rx</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#16</strong></td>
+                            <td>Lakshmi Devi</td>
+                            <td>61 / F</td>
+                            <td>94401 54321</td>
+                            <td>Joint Pain & Diabetic Check</td>
+                            <td><span class="badge-status-done">Consulted</span></td>
+                            <td><button class="btn-action-sm">View Rx</button></td>
+                        </tr>
+                        <tr style="background:#FEFCE8;">
+                            <td><strong style="color:#B45309;">#17</strong></td>
+                            <td>Suresh Babu</td>
+                            <td>38 / M</td>
+                            <td>98850 99887</td>
+                            <td>Viral Fever (3 Days)</td>
+                            <td><span class="badge-status-in">In Consultation</span></td>
+                            <td><button class="btn-action-sm green" onclick="alert('Prescription saved')">Write Rx</button></td>
+                        </tr>
+                        <tr id="newlyBookedRow">
+                            <td><strong style="color:var(--med-accent);">#18</strong></td>
+                            <td><span id="deskPatientName">K. V. Subba Rao</span></td>
+                            <td><span id="deskPatientAge">52 / M</span></td>
+                            <td><span id="deskPatientPhone">98490 12345</span></td>
+                            <td>Routine Sugar & BP Checkup</td>
+                            <td><span class="badge-status-in" style="background:#E0F2FE; color:#0369A1;">Waiting in Hall</span></td>
+                            <td><button class="btn-action-sm green" onclick="alert('Calling patient to Room 1')">Call In &rarr;</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentDoc = "Dr. K. Radhika, MBBS, MD";
+        let currentSpec = "General Medicine & Diabetology";
+        let currentFee = "₹500";
+        let currentDate = "Today, 26 Sep";
+        let currentSlot = "05:30 PM";
+
+        function selectDoctor(el, name, spec, fee) {
+            document.querySelectorAll('.doctor-option').forEach(d => d.classList.remove('selected'));
+            el.classList.add('selected');
+            currentDoc = name;
+            currentSpec = spec;
+            currentFee = fee;
+            document.getElementById('displayDoctor').textContent = name;
+            document.getElementById('displayFee').textContent = fee + " (Pay at Clinic)";
+        }
+
+        function selectDate(el, dateStr) {
+            document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            currentDate = dateStr;
+            updateDateTime();
+        }
+
+        function selectSlot(el, slotStr) {
+            document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+            el.classList.add('selected');
+            currentSlot = slotStr;
+            updateDateTime();
+        }
+
+        function updateDateTime() {
+            document.getElementById('displayTime').textContent = `${currentDate} • ${currentSlot}`;
+        }
+
+        function confirmAppointment(e) {
+            e.preventDefault();
+            const name = document.getElementById('patientName').value.trim();
+            const phone = document.getElementById('patientPhone').value.trim();
+            const age = document.getElementById('patientAge').value.trim();
+            
+            document.getElementById('displayPatient').textContent = `${name} (${age})`;
+            document.getElementById('deskPatientName').textContent = name;
+            document.getElementById('deskPatientAge').textContent = age;
+            document.getElementById('deskPatientPhone').textContent = phone;
+
+            const toast = document.getElementById('waNotification');
+            toast.style.display = 'block';
+
+            // Scroll to token pass on mobile
+            document.getElementById('tokenCard').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function switchDesk(view) {
+            const btnP = document.getElementById('btnPatientView');
+            const btnO = document.getElementById('btnOpdView');
+            const pView = document.getElementById('patientBookingView');
+            const oView = document.getElementById('opdDeskView');
+
+            if (view === 'patient') {
+                btnP.classList.add('active');
+                btnO.classList.remove('active');
+                pView.style.display = 'block';
+                oView.style.display = 'none';
+            } else {
+                btnO.classList.add('active');
+                btnP.classList.remove('active');
+                pView.style.display = 'none';
+                oView.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

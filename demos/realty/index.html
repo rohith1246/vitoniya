@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealtyAI — Luxury Real Estate & Builder Showcase Suite | Vitoniya Demo</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --realty-dark: #0B132B;
+            --realty-darker: #060B18;
+            --realty-gold: #D4AF37;
+            --realty-gold-light: #F9E79F;
+            --realty-slate: #1C2541;
+            --realty-gray: #475569;
+            --realty-light-gray: #F8FAFC;
+            --realty-border: #E2E8F0;
+            --realty-green: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: #F8FAFC;
+            color: #1E293B;
+            line-height: 1.6;
+        }
+
+        /* Top Vitoniya Demo Banner */
+        .demo-bar {
+            background: #083D2E;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #D4AF37;
+        }
+
+        .demo-pill {
+            background: rgba(212, 175, 55, 0.2);
+            color: #FCD34D;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 8px;
+        }
+
+        .btn-back-vitoniya {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .btn-back-vitoniya:hover {
+            color: #FCD34D;
+        }
+
+        /* Header */
+        .realty-header {
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--realty-border);
+            padding: 16px 28px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+        }
+
+        .realty-header-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .realty-brand h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--realty-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .realty-brand span {
+            color: var(--realty-gold);
+        }
+
+        .realty-brand p {
+            font-size: 0.72rem;
+            color: var(--realty-gray);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .view-switcher-box {
+            display: flex;
+            background: #EDF2F7;
+            padding: 4px;
+            border-radius: 8px;
+            gap: 4px;
+        }
+
+        .switch-btn {
+            border: none;
+            background: transparent;
+            padding: 8px 16px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--realty-gray);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .switch-btn.active {
+            background: var(--realty-dark);
+            color: #FFFFFF;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        /* Showcase Hero */
+        .realty-hero {
+            background: linear-gradient(135deg, #0B132B 0%, #1C2541 100%);
+            color: #FFFFFF;
+            padding: 70px 24px;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .lux-tag {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--realty-gold);
+            color: #F9E79F;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .hero-title span {
+            color: var(--realty-gold);
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: #CBD5E1;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        .hero-price-badge {
+            background: rgba(255, 255, 255, 0.08);
+            border-left: 3px solid var(--realty-gold);
+            padding: 12px 18px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 28px;
+        }
+
+        .price-label {
+            font-size: 0.75rem;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .price-val {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #FFFFFF;
+        }
+
+        /* Hero Right: Lead Capture Form */
+        .lead-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 30px;
+            color: var(--realty-dark);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .lead-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--realty-dark);
+        }
+
+        .lead-card p {
+            font-size: 0.85rem;
+            color: var(--realty-gray);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 4px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--realty-border);
+            border-radius: 8px;
+            font-size: 0.88rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            border-color: var(--realty-gold);
+        }
+
+        .btn-gold-action {
+            width: 100%;
+            background: var(--realty-gold);
+            color: #0B132B;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-gold-action:hover {
+            background: #C49F27;
+            transform: translateY(-1px);
+        }
+
+        .toast-lead-sent {
+            display: none;
+            background: #10B981;
+            color: #FFFFFF;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            margin-top: 14px;
+            text-align: center;
+        }
+
+        /* Units & Floorplan Section */
+        .section-py {
+            padding: 70px 24px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--realty-dark);
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--realty-gray);
+        }
+
+        .units-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .unit-card {
+            background: #FFFFFF;
+            border: 1px solid var(--realty-border);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .unit-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--realty-gold);
+        }
+
+        .unit-header-box {
+            background: #F1F5F9;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--realty-border);
+        }
+
+        .unit-type-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: var(--realty-dark);
+            color: #FFFFFF;
+            padding: 3px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .unit-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--realty-dark);
+        }
+
+        .unit-body {
+            padding: 20px;
+        }
+
+        .unit-specs-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--realty-border);
+        }
+
+        .spec-item span:first-child {
+            color: var(--realty-gray);
+        }
+
+        .spec-item span:last-child {
+            font-weight: 600;
+        }
+
+        .unit-price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+        }
+
+        .unit-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--realty-dark);
+        }
+
+        .btn-view-floorplan {
+            background: #EDF2F7;
+            border: 1px solid var(--realty-border);
+            color: var(--realty-dark);
+            padding: 7px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-view-floorplan:hover {
+            background: var(--realty-dark);
+            color: #FFFFFF;
+        }
+
+        /* Interactive EMI Calculator */
+        .calculator-card {
+            background: #FFFFFF;
+            border: 1px solid var(--realty-border);
+            border-radius: 18px;
+            padding: 36px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            margin-top: 50px;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .slider-group {
+            margin-bottom: 24px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .slider-val {
+            font-weight: 700;
+            color: var(--realty-gold);
+            font-size: 0.95rem;
+        }
+
+        .range-slider {
+            width: 100%;
+            accent-color: var(--realty-gold);
+            cursor: pointer;
+        }
+
+        .emi-result-box {
+            background: linear-gradient(135deg, #0B132B, #1C2541);
+            color: #FFFFFF;
+            padding: 32px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .emi-label {
+            font-size: 0.82rem;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .emi-large {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--realty-gold);
+            margin-bottom: 18px;
+        }
+
+        .emi-details {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            color: #CBD5E1;
+        }
+
+        /* CRM Leads Desk View */
+        .crm-desk-view {
+            display: none;
+            padding: 40px 24px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .crm-kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .crm-kpi-card {
+            background: #FFFFFF;
+            border: 1px solid var(--realty-border);
+            padding: 22px;
+            border-radius: 12px;
+        }
+
+        .crm-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            background: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--realty-border);
+        }
+
+        .crm-table th {
+            background: #F1F5F9;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--realty-gray);
+            font-size: 0.75rem;
+        }
+
+        .crm-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--realty-border);
+        }
+
+        .lead-badge {
+            background: #E0F2FE;
+            color: #0369A1;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 900px) {
+            .hero-container, .calc-grid, .units-grid, .crm-kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Vitoniya Live Demo Banner -->
+    <div class="demo-bar">
+        <div>
+            <span class="demo-pill">Client Demo</span>
+            <strong>RealtyAI Luxury Suite</strong> &mdash; Production prototype designed for luxury builders, promoters, and real estate developers.
+        </div>
+        <div>
+            <a href="../../#interactive-demos" class="btn-back-vitoniya">&larr; Back to Vitoniya Showcase</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="realty-header">
+        <div class="realty-header-inner">
+            <div class="realty-brand">
+                <h2>THE GRAND <span>EMERALD</span></h2>
+                <p>Luxury High-Rise Residencies &bull; Amaravati ORR, Guntur</p>
+            </div>
+
+            <!-- View Switcher -->
+            <div class="view-switcher-box">
+                <button class="switch-btn active" id="btnShowcase" onclick="switchRealtyView('showcase')">
+                    Buyer Showcase View
+                </button>
+                <button class="switch-btn" id="btnCrm" onclick="switchRealtyView('crm')">
+                    Builder Sales CRM Desk 🔒
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. BUYER SHOWCASE VIEW -->
+    <div id="realtyShowcaseView">
+        <!-- Hero Section -->
+        <section class="realty-hero">
+            <div class="hero-container">
+                <div>
+                    <span class="lux-tag">✨ RERA Approved &bull; Ready by Dec 2026</span>
+                    <h1 class="hero-title">
+                        Elevated Living in the Heart of <span>Amaravati</span>.
+                    </h1>
+                    <p class="hero-sub">
+                        Exclusive 2, 3 & 4 BHK Sky Villas with panoramic river views, private clubhouse, and world-class amenities on the Amaravati Expressway.
+                    </p>
+
+                    <div class="hero-price-badge">
+                        <div class="price-label">Starting Investment</div>
+                        <div class="price-val">₹78.5 Lakhs &ndash; ₹1.85 Cr</div>
+                    </div>
+                </div>
+
+                <!-- Instant WhatsApp Lead Capture Card -->
+                <div class="lead-card">
+                    <h3>Request Price Sheet &amp; Brochure</h3>
+                    <p>Instant WhatsApp delivery with floorplans &amp; construction milestone schedule.</p>
+
+                    <form onsubmit="handleRealtyLead(event)">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" id="leadName" placeholder="e.g. Anand Chowdary" value="S. Anand Varma" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">WhatsApp Number</label>
+                            <input type="tel" class="form-input" id="leadPhone" placeholder="10-digit number" value="98480 56789" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Interested Unit Type</label>
+                            <select class="form-input" id="leadUnit">
+                                <option value="3 BHK Premium (1,850 Sq.Ft)">3 BHK Premium (1,850 Sq.Ft) &bull; ₹1.12 Cr</option>
+                                <option value="2 BHK Luxury (1,280 Sq.Ft)">2 BHK Luxury (1,280 Sq.Ft) &bull; ₹78.5 Lakhs</option>
+                                <option value="4 BHK Sky Villa (2,650 Sq.Ft)">4 BHK Sky Villa (2,650 Sq.Ft) &bull; ₹1.85 Cr</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-gold-action">
+                            📲 Send Brochure to My WhatsApp &rarr;
+                        </button>
+                    </form>
+
+                    <div class="toast-lead-sent" id="leadToast">
+                        <strong>✓ Brochure Dispatched to WhatsApp!</strong><br>
+                        Lead automatically synced to Builder CRM Desk.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Units & Floorplans -->
+        <section class="section-py">
+            <div class="section-header">
+                <h2 class="section-title">Available Luxury Configurations</h2>
+                <p class="section-desc">Designed with 100% Vaastu compliance, unhindered ventilation, and premium imported marble flooring.</p>
+            </div>
+
+            <div class="units-grid">
+                <!-- Unit 1 -->
+                <div class="unit-card">
+                    <div class="unit-header-box">
+                        <span class="unit-type-pill">2 BHK LUXURY</span>
+                        <h4 class="unit-name">Type A &bull; 1,280 Sq.Ft</h4>
+                    </div>
+                    <div class="unit-body">
+                        <ul class="unit-specs-list">
+                            <li class="spec-item"><span>Carpet Area</span><span>1,020 Sq.Ft</span></li>
+                            <li class="spec-item"><span>Facing</span><span>East Facing</span></li>
+                            <li class="spec-item"><span>Balconies</span><span>2 Luxury Balconies</span></li>
+                            <li class="spec-item"><span>Status</span><span style="color:var(--realty-green);">Available</span></li>
+                        </ul>
+                        <div class="unit-price-row">
+                            <div class="unit-price">₹78.5 L</div>
+                            <button class="btn-view-floorplan" onclick="alert('Floor plan 2BHK modal opened')">Floor Plan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit 2 -->
+                <div class="unit-card" style="border-color:var(--realty-gold);">
+                    <div class="unit-header-box" style="background:#FFFBEB;">
+                        <span class="unit-type-pill" style="background:var(--realty-gold); color:#0B132B;">MOST POPULAR</span>
+                        <h4 class="unit-name">3 BHK PREMIUM &bull; 1,850 Sq.Ft</h4>
+                    </div>
+                    <div class="unit-body">
+                        <ul class="unit-specs-list">
+                            <li class="spec-item"><span>Carpet Area</span><span>1,480 Sq.Ft</span></li>
+                            <li class="spec-item"><span>Facing</span><span>East / North</span></li>
+                            <li class="spec-item"><span>Balconies</span><span>3 Balconies + Utility</span></li>
+                            <li class="spec-item"><span>Status</span><span style="color:var(--realty-green);">Available</span></li>
+                        </ul>
+                        <div class="unit-price-row">
+                            <div class="unit-price">₹1.12 Cr</div>
+                            <button class="btn-view-floorplan" onclick="alert('Floor plan 3BHK modal opened')">Floor Plan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit 3 -->
+                <div class="unit-card">
+                    <div class="unit-header-box">
+                        <span class="unit-type-pill">4 BHK SKY VILLA</span>
+                        <h4 class="unit-name">Type C &bull; 2,650 Sq.Ft</h4>
+                    </div>
+                    <div class="unit-body">
+                        <ul class="unit-specs-list">
+                            <li class="spec-item"><span>Carpet Area</span><span>2,150 Sq.Ft</span></li>
+                            <li class="spec-item"><span>Facing</span><span>North-East Corner</span></li>
+                            <li class="spec-item"><span>Private Terrace</span><span>Included (300 Sq.Ft)</span></li>
+                            <li class="spec-item"><span>Status</span><span style="color:#D97706;">Only 2 Left</span></li>
+                        </ul>
+                        <div class="unit-price-row">
+                            <div class="unit-price">₹1.85 Cr</div>
+                            <button class="btn-view-floorplan" onclick="alert('Floor plan Sky Villa modal opened')">Floor Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic EMI Calculator -->
+            <div class="calculator-card">
+                <div class="calc-grid">
+                    <div>
+                        <h3 style="font-family:'Playfair Display', serif; font-size:1.6rem; color:var(--realty-dark); margin-bottom:6px;">
+                            Interactive Home Loan &amp; EMI Calculator
+                        </h3>
+                        <p style="font-size:0.85rem; color:var(--realty-gray); margin-bottom:24px;">
+                            Estimate your monthly installment instantly based on SBI / HDFC bank lending rates.
+                        </p>
+
+                        <!-- Price Slider -->
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <span>Property Value</span>
+                                <span class="slider-val" id="lblPrice">₹1.12 Cr</span>
+                            </div>
+                            <input type="range" class="range-slider" id="rngPrice" min="60" max="200" step="5" value="112" oninput="calculateEMI()">
+                        </div>
+
+                        <!-- Down Payment Slider -->
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <span>Down Payment (20%)</span>
+                                <span class="slider-val" id="lblDown">₹22.4 Lakhs</span>
+                            </div>
+                            <input type="range" class="range-slider" id="rngDown" min="10" max="40" step="5" value="20" oninput="calculateEMI()">
+                        </div>
+
+                        <!-- Tenure Slider -->
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <span>Loan Tenure (Years)</span>
+                                <span class="slider-val" id="lblTenure">20 Years</span>
+                            </div>
+                            <input type="range" class="range-slider" id="rngTenure" min="5" max="30" step="1" value="20" oninput="calculateEMI()">
+                        </div>
+                    </div>
+
+                    <!-- Output Card -->
+                    <div class="emi-result-box">
+                        <div class="emi-label">Estimated Monthly EMI</div>
+                        <div class="emi-large" id="lblEMI">₹77,650</div>
+                        <div class="emi-details">
+                            <div>
+                                <span style="display:block; font-size:0.7rem; color:#94A3B8;">LOAN PRINCIPAL</span>
+                                <strong id="lblPrincipal">₹89.6 Lakhs</strong>
+                            </div>
+                            <div>
+                                <span style="display:block; font-size:0.7rem; color:#94A3B8;">INTEREST RATE</span>
+                                <strong>8.50% p.a.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2. BUILDER SALES CRM DESK VIEW -->
+    <div id="realtyCrmView" class="crm-desk-view">
+        <div class="crm-kpi-grid">
+            <div class="crm-kpi-card">
+                <span style="font-size:0.75rem; color:var(--realty-gray); font-weight:700; text-transform:uppercase;">Total Inquiries (30 Days)</span>
+                <div style="font-size:1.8rem; font-weight:800; color:var(--realty-dark); margin-top:4px;">48 Leads</div>
+            </div>
+            <div class="crm-kpi-card">
+                <span style="font-size:0.75rem; color:var(--realty-gray); font-weight:700; text-transform:uppercase;">Site Visits Booked</span>
+                <div style="font-size:1.8rem; font-weight:800; color:var(--realty-green); margin-top:4px;">16 Visits</div>
+            </div>
+            <div class="crm-kpi-card">
+                <span style="font-size:0.75rem; color:var(--realty-gray); font-weight:700; text-transform:uppercase;">NRI Leads (USA / Gulf)</span>
+                <div style="font-size:1.8rem; font-weight:800; color:var(--realty-gold); margin-top:4px;">11 Hot Leads</div>
+            </div>
+            <div class="crm-kpi-card">
+                <span style="font-size:0.75rem; color:var(--realty-gray); font-weight:700; text-transform:uppercase;">Projected Deal Pipeline</span>
+                <div style="font-size:1.8rem; font-weight:800; color:var(--realty-dark); margin-top:4px;">₹5.40 Cr</div>
+            </div>
+        </div>
+
+        <div style="background:#FFFFFF; border:1px solid var(--realty-border); border-radius:14px; padding:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                <h3 style="font-family:'Playfair Display', serif; font-size:1.25rem;">Live Real Estate Lead Pipeline &bull; Amaravati Project</h3>
+                <span style="font-size:0.78rem; color:#10B981; font-weight:700;">● Real-Time WhatsApp Sync Active</span>
+            </div>
+
+            <table class="crm-table">
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>PHONE</th>
+                        <th>LOCATION</th>
+                        <th>INTERESTED CONFIG</th>
+                        <th>BUDGET</th>
+                        <th>STATUS</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody id="crmLeadRows">
+                    <tr id="newlyCapturedLeadRow">
+                        <td><strong>S. Anand Varma</strong></td>
+                        <td><span id="crmPhone">98480 56789</span></td>
+                        <td>Hyderabad / Amaravati</td>
+                        <td><span id="crmUnit">3 BHK Premium (1,850 Sq.Ft)</span></td>
+                        <td>₹1.12 Cr</td>
+                        <td><span class="lead-badge" style="background:#DCFCE7; color:#15803D;">WhatsApp Brochure Sent</span></td>
+                        <td><button style="padding:4px 8px; font-size:0.72rem; cursor:pointer;" onclick="alert('Calling lead...')">Call Lead</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dr. Venkat Rao (NRI)</strong></td>
+                        <td>+1 (408) 555-0192</td>
+                        <td>California, USA</td>
+                        <td>4 BHK Sky Villa</td>
+                        <td>₹1.85 Cr</td>
+                        <td><span class="lead-badge">Virtual Visit Scheduled</span></td>
+                        <td><button style="padding:4px 8px; font-size:0.72rem; cursor:pointer;" onclick="alert('Google Meet link sent')">Zoom Meet</button></td>
+                    </tr>
+                    <tr>
+                        <td><strong>K. Rajesh Chowdary</strong></td>
+                        <td>94401 88776</td>
+                        <td>Guntur / Vijayawada</td>
+                        <td>2 BHK Luxury</td>
+                        <td>₹78.5 L</td>
+                        <td><span class="lead-badge" style="background:#FEF3C7; color:#B45309;">Site Visit Tomorrow</span></td>
+                        <td><button style="padding:4px 8px; font-size:0.72rem; cursor:pointer;" onclick="alert('Site executive assigned')">Assign Exec</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function calculateEMI() {
+            const priceLakhs = parseFloat(document.getElementById('rngPrice').value);
+            const downPct = parseFloat(document.getElementById('rngDown').value);
+            const tenureYears = parseFloat(document.getElementById('rngTenure').value);
+
+            // Labels
+            document.getElementById('lblPrice').textContent = priceLakhs >= 100 ? `₹${(priceLakhs/100).toFixed(2)} Cr` : `₹${priceLakhs} Lakhs`;
+            const downLakhs = (priceLakhs * downPct / 100);
+            document.getElementById('lblDown').textContent = `₹${downLakhs.toFixed(1)} Lakhs (${downPct}%)`;
+            document.getElementById('lblTenure').textContent = `${tenureYears} Years`;
+
+            // Loan
+            const principal = (priceLakhs - downLakhs) * 100000;
+            document.getElementById('lblPrincipal').textContent = (principal >= 10000000) ? `₹${(principal/10000000).toFixed(2)} Cr` : `₹${(principal/100000).toFixed(1)} Lakhs`;
+
+            const monthlyRate = (8.5 / 12) / 100;
+            const months = tenureYears * 12;
+            const emi = Math.round((principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1));
+
+            document.getElementById('lblEMI').textContent = `₹${emi.toLocaleString('en-IN')}`;
+        }
+
+        function handleRealtyLead(e) {
+            e.preventDefault();
+            const name = document.getElementById('leadName').value.trim();
+            const phone = document.getElementById('leadPhone').value.trim();
+            const unit = document.getElementById('leadUnit').value;
+
+            document.getElementById('crmPhone').textContent = phone;
+            document.getElementById('crmUnit').textContent = unit;
+
+            const toast = document.getElementById('leadToast');
+            toast.style.display = 'block';
+        }
+
+        function switchRealtyView(v) {
+            const sBtn = document.getElementById('btnShowcase');
+            const cBtn = document.getElementById('btnCrm');
+            const sView = document.getElementById('realtyShowcaseView');
+            const cView = document.getElementById('realtyCrmView');
+
+            if (v === 'showcase') {
+                sBtn.classList.add('active');
+                cBtn.classList.remove('active');
+                sView.style.display = 'block';
+                cView.style.display = 'none';
+            } else {
+                cBtn.classList.add('active');
+                sBtn.classList.remove('active');
+                sView.style.display = 'none';
+                cView.style.display = 'block';
+            }
+        }
+
+        // Initialize on load
+        calculateEMI();
+    </script>
+</body>
+</html>
