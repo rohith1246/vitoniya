@@ -94,22 +94,57 @@ def sitemap():
 def manifest():
     return send_from_directory(app.static_folder, 'manifest.json')
 
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+SMTP_HOST = os.environ.get('SMTP_HOST', 'smtp.hostinger.com')
+SMTP_PORT = int(os.environ.get('SMTP_PORT', 465))
+SMTP_USER = os.environ.get('SMTP_USER', 'info@vitoniya.com')
+SMTP_PASS = os.environ.get('SMTP_PASS', 'Tinku0587@')
+
+def send_lead_email_alert(name, email, company, project_type, budget_range, message):
+    try:
+        subject = f"🔥 New Client Inquiry: {name} ({project_type or 'General'})"
+        body = f"""New prospective client inquiry received on vitoniya.com:
+
+Name: {name}
+Email: {email}
+Company / Clinic: {company or 'Not specified'}
+Project Area: {project_type or 'Not specified'}
+Budget: {budget_range or 'Not specified'}
+
+Client Message:
+----------------------------------------
+{message}
+----------------------------------------
+"""
+        msg = MIMEMultipart()
+        msg['From'] = f"VITONIYA Inquiries <{SMTP_USER}>"
+        msg['To'] = SMTP_USER
+        msg['Reply-To'] = email
+        msg['Subject'] = subject
+        msg.attach(MIMEText(body, 'plain'))
+
+        with smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, timeout=10) as server:
+            server.login(SMTP_USER, SMTP_PASS)
+            server.send_message(msg)
+        logger.info(f"Instant lead alert dispatched to {SMTP_USER}")
+    except Exception as e:
+        logger.error(f"Failed to dispatch email alert: {e}")
+
 @app.route('/api/contact', methods=['POST'])
 def contact():
-    pool_inst = get_db_pool()
-    if not pool_inst:
-        return jsonify({"success": False, "message": "Service unavailable (database not configured)"}), 503
-
     data = request.get_json()
     if not data:
         return jsonify({"success": False, "message": "Invalid JSON"}), 400
 
-    name = data.get('name')
-    email = data.get('email')
-    company = data.get('company')
-    project_type = data.get('project_type')
-    budget_range = data.get('budget_range')
-    message = data.get('message')
+    name = data.get('name', '').strip()
+    email = data.get('email', '').strip()
+    company = data.get('company', '').strip()
+    project_type = data.get('project_type', '').strip()
+    budget_range = data.get('budget_range', '').strip()
+    message = data.get('message', '').strip()
 
     if not name or not email or not message:
         return jsonify({"success": False, "message": "Name, email, and message are required"}), 400
@@ -117,27 +152,39 @@ def contact():
     if '@' not in email:
         return jsonify({"success": False, "message": "Invalid email format"}), 400
 
-    conn = None
-    try:
-        conn = pool_inst.getconn()
-        with conn.cursor() as cur:
-            cur.execute(
-                """
-                INSERT INTO contact_submissions (name, email, company, project_type, budget_range, message)
-                VALUES (%s, %s, %s, %s, %s, %s)
-                """,
-                (name, email, company, project_type, budget_range, message)
-            )
-        conn.commit()
-        return jsonify({"success": True, "message": "Thank you! Your message has been received."})
-    except Exception as e:
-        logger.error(f"Database error during insert: {e}")
-        if conn:
-            conn.rollback()
-        return jsonify({"success": False, "message": "An error occurred while saving your message"}), 500
-    finally:
-        if conn:
-            pool_inst.putconn(conn)
+    # 1. Dispatch real-time SMTP alert to info@vitoniya.com
+    send_lead_email_alert(name, email, company, project_type, budget_range, message)
+
+    # 2. Persist to PostgreSQL if available
+    pool_inst = get_db_pool()
+    if pool_inst:
+        conn = None
+        try:
+            conn = pool_inst.getconn()
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    INSERT INTO contact_submissions (name, email, company, project_type, budget_range, message)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                    """,
+                    (name, email, company, project_type, budget_range, message)
+                )
+            conn.commit()
+            logger.info("Inquiry persisted to contact_submissions database table.")
+        except Exception as e:
+            logger.error(f"Database error during insert: {e}")
+            if conn:
+                conn.rollback()
+        finally:
+            if conn:
+                pool_inst.putconn(conn)
+    else:
+        logger.info("Database pool not active; inquiry received and dispatched via SMTP.")
+
+    return jsonify({
+        "success": True, 
+        "message": "Thank you! Your message has been received. Our team will contact you within 24 hours."
+    })
 
 @app.errorhandler(404)
 def not_found(e):

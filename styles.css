@@ -2056,3 +2056,216 @@ input:focus, select:focus, textarea:focus {
   color: #94A3B8;
 }
 
+/* =====================================================================
+   TRANSPARENT INVESTMENT PACKAGES
+   ===================================================================== */
+.packages-section {
+  background: #FAF8F3;
+  padding: clamp(4rem, 7vw, 6.5rem) 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 992px) {
+  .packages-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.package-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 3.5vw, 2.75rem);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.package-card:hover {
+  transform: translateY(-5px);
+  border-color: #0E5C46;
+  box-shadow: 0 16px 40px rgba(8, 61, 46, 0.12);
+}
+
+.package-card.featured {
+  border: 2px solid var(--color-gold-bright);
+  background: #FCFBF7;
+}
+
+.package-badge-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #0E5C46;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.package-badge-tag.gold {
+  color: #B45309;
+}
+
+.package-title {
+  font-family: var(--font-main);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0F3D2E;
+  margin-bottom: 0.6rem;
+}
+
+.package-desc {
+  font-size: 0.9rem;
+  color: #4A5568;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.package-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.package-price-box .currency {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0F3D2E;
+}
+
+.package-price-box .amount {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #0F3D2E;
+  line-height: 1;
+}
+
+.package-price-box .term {
+  font-size: 0.85rem;
+  color: #718096;
+  font-weight: 600;
+}
+
+.package-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  font-size: 0.88rem;
+  color: #2D3748;
+  flex-grow: 1;
+}
+
+.package-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  line-height: 1.45;
+}
+
+.package-features span {
+  color: #10B981;
+  font-weight: 800;
+}
+
+.btn-package-primary {
+  display: block;
+  text-align: center;
+  background: #0F3D2E;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(15, 61, 46, 0.25);
+  text-decoration: none;
+}
+
+.btn-package-primary:hover {
+  background: #145A43;
+  transform: translateY(-2px);
+}
+
+.btn-package-gold {
+  display: block;
+  text-align: center;
+  background: var(--color-gold-bright);
+  color: #04241B;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-pill);
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(229, 184, 105, 0.35);
+  text-decoration: none;
+}
+
+.btn-package-gold:hover {
+  background: #FFF0C2;
+  transform: translateY(-2px);
+}
+
+/* =====================================================================
+   FLOATING WHATSAPP BUTTON (+91 8328186045)
+   ===================================================================== */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  background: #25D366;
+  color: #FFFFFF;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.55);
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: 68px;
+  white-space: nowrap;
+  background: #04241B;
+  color: #FFFFFF;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(229, 184, 105, 0.3);
+}
+
+.floating-whatsapp-btn:hover .whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
