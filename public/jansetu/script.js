@@ -300,52 +300,37 @@ async function processCitizenGrievance(text, langContext, presetData = null) {
     const auditCard = document.getElementById('aiAuditCard');
     auditCard.style.opacity = '0.5';
 
-    const apiKey = localStorage.getItem('gemini_api_key');
-
     let translation = presetData ? presetData.english_translation : `Translated: "${text}"`;
     let category = presetData ? presetData.category : "Urban Drainage & Road Structural Integrity";
     let severity = presetData ? presetData.severity : 4;
     let confidence = presetData ? "96.4%" : "92.8%";
     let damageType = presetData ? presetData.damage_type : "Structural Subsidance / Public Utility Failure";
+    let backendUsed = false;
 
-    // If real Gemini API key is provided, call Google's live endpoint
-    if (apiKey && apiKey.trim() !== '') {
-        try {
-            const prompt = `You are JanSetu AI, a national digital public good for India. Analyze this citizen infrastructure grievance in any Indian language:
-"${text}"
-
-Return a strict JSON object with these keys:
-{
-  "english_translation": "Concise English translation",
-  "category": "One of: Road & Transport, Water & Sanitation, Power Grid, Healthcare Infrastructure, Rural Connectivity",
-  "damage_type": "Specific technical hazard (e.g., Asphalt Cratering, Pipeline Rupture, Culvert Collapse)",
-  "severity": number between 1 and 5 (5 being life-threatening),
-  "confidence": "e.g. 97.2%"
-}`;
-
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: { responseMimeType: "application/json" }
-                })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                const aiResult = JSON.parse(data.candidates[0].content.parts[0].text);
-                translation = aiResult.english_translation || translation;
-                category = aiResult.category || category;
-                damageType = aiResult.damage_type || damageType;
-                severity = aiResult.severity || severity;
-                confidence = aiResult.confidence || "98.1%";
-                showToast('⚡ Live Gemini 1.5 Flash Inference Completed');
+    // 1. Try Backend Live Gemini Endpoint
+    try {
+        const resp = await fetch('/api/jansetu/analyze', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: text })
+        });
+        if (resp.ok) {
+            const result = await resp.json();
+            if (result.success && result.data) {
+                translation = result.data.english_translation || translation;
+                category = result.data.category || category;
+                damageType = result.data.damage_type || damageType;
+                severity = result.data.severity || severity;
+                confidence = result.data.confidence || "98.2%";
+                backendUsed = true;
+                showToast(`⚡ Live ${result.engine} Inference Completed`);
             }
-        } catch (err) {
-            console.warn('Gemini live API error, using intelligent fallback:', err);
         }
-    } else {
+    } catch (e) {
+        // Backend not reachable, fall back to client
+    }
+
+    if (!backendUsed) {
         // Fallback simulation latency
         await new Promise(r => setTimeout(r, 600));
         showToast('Gemini Multimodal Simulation Complete');
@@ -401,39 +386,33 @@ async function generateDPRDocument() {
     btn.innerHTML = '<span>⚡ Synthesizing with Gemini 1.5 Pro...</span>';
     btn.disabled = true;
 
-    const apiKey = localStorage.getItem('gemini_api_key');
-
-    if (apiKey && apiKey.trim() !== '') {
-        try {
-            const prompt = `You are the National Infrastructure Planning Commission AI Copilot for India. 
-Generate a comprehensive, formal policy rationale for this district:
-District: ${selectedDistrict.name}, ${selectedDistrict.state}
-SDG Vulnerability Index: ${selectedDistrict.sdg_index}
-Top Infrastructure Failure: ${selectedDistrict.top_issue}
-Estimated Budget: ${selectedDistrict.estimated_budget}
-Active Citizen Grievances: ${selectedDistrict.active_complaints}
-
-Write a professional 3-sentence policy justification aligned with PM Gati Shakti National Master Plan and Jal Jeevan/MoRTH guidelines.`;
-
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }]
-                })
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                const aiText = data.candidates[0].content.parts[0].text;
-                document.getElementById('dprRationale').innerText = aiText;
-                showToast('⚡ Official DPR Rationale Synthesized Live by Gemini Pro!');
+    // 1. Try Backend Live Gemini Endpoint
+    let backendUsed = false;
+    try {
+        const resp = await fetch('/api/jansetu/generate-dpr', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                district: `${selectedDistrict.name}, ${selectedDistrict.state}`,
+                sdg_index: selectedDistrict.sdg_index,
+                top_issue: selectedDistrict.top_issue,
+                estimated_budget: selectedDistrict.estimated_budget
+            })
+        });
+        if (resp.ok) {
+            const result = await resp.json();
+            if (result.success && result.rationale) {
+                document.getElementById('dprRationale').innerText = result.rationale;
+                showToast(`⚡ Official DPR Synthesized via ${result.engine}!`);
+                backendUsed = true;
             }
-        } catch (err) {
-            console.warn('Gemini DPR generation fallback:', err);
         }
-    } else {
-        await new Promise(r => setTimeout(r, 900));
+    } catch (e) {
+        // Backend offline
+    }
+
+    if (!backendUsed) {
+        await new Promise(r => setTimeout(r, 700));
         showToast('Official Infrastructure Sanction Note Generated!');
     }
 
