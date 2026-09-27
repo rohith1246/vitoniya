@@ -1,8 +1,12 @@
 import os
+import json
 import logging
 import psycopg2
 from psycopg2 import pool
 from flask import Flask, send_from_directory, jsonify, request
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
