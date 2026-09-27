@@ -74,6 +74,17 @@ def demo_realty():
     realty_dir = os.path.join(app.static_folder, 'demos', 'realty')
     return send_from_directory(realty_dir, 'index.html')
 
+@app.route('/jansetu')
+@app.route('/jansetu/')
+def jansetu():
+    jansetu_dir = os.path.join(app.static_folder, 'jansetu')
+    return send_from_directory(jansetu_dir, 'index.html')
+
+@app.route('/jansetu/<path:filename>')
+def jansetu_assets(filename):
+    jansetu_dir = os.path.join(app.static_folder, 'jansetu')
+    return send_from_directory(jansetu_dir, filename)
+
 @app.route('/health')
 def health():
     return jsonify({"status": "ok"})

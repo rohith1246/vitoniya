@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JanSetu AI (जन सेतु) | Multilingual Digital Public Good for Infrastructure Governance</title>
+    <meta name="description" content="JanSetu AI aggregates citizen development requests via voice, text, and messaging across diverse linguistic regions of India, surfacing demand hotspots and generating infrastructure DPRs for national policymakers using Google Gemini.">
+    <meta name="theme-color" content="#0A192F">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Leaflet.js CSS for National Geospatial Heatmap -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- National Tri-Color Strip -->
+    <div class="gov-strip"></div>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        <span>🇮🇳 Digital Public Good • Built for India &amp; BRICS Multilateral Infrastructure Alignment</span>
+        <span>Google Cloud &bull; Build with AI: Code for Communities 2026</span>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="brand-wrapper">
+                <div class="emblem-icon">सेतु</div>
+                <div class="brand-title">
+                    <h1>
+                        JanSetu AI <span class="tag">Digital Public Good</span>
+                    </h1>
+                    <p>National Citizen Voice Aggregation &amp; Infrastructure Planning Grid</p>
+                </div>
+            </div>
+
+            <div class="header-controls">
+                <span class="badge-pill green live" id="nationalBadge">🇮🇳 Digital Public Infrastructure (DPI) • India Stack</span>
+                <button class="badge-pill" id="bricsToggleBtn" onclick="toggleBricsMode()" style="cursor:pointer;">
+                    🌐 Switch to BRICS / Global South Mode
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs-wrapper">
+        <div class="nav-tabs-container">
+            <button class="tab-btn active" data-tab="tab-citizen">
+                <span>🎙️ 1. Citizen Voice &amp; Photo Portal</span>
+            </button>
+            <button class="tab-btn" data-tab="tab-heatmap">
+                <span>🗺️ 2. National Policymaker Heatmap</span>
+            </button>
+            <button class="tab-btn" data-tab="tab-copilot">
+                <span>📋 3. Gemini Policy Copilot &amp; DPR Generator</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="app-content">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: CITIZEN VOICE & GRIEVANCE PORTAL    -->
+        <!-- ========================================== -->
+        <section id="tab-citizen" class="tab-panel active">
+            <div class="citizen-grid">
+                
+                <!-- Left: Citizen Input Form -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>🎙️ Voice-First Multilingual Grievance Intake</h2>
+                            <p>Speak in your mother tongue or upload photos of civil infrastructure hazards</p>
+                        </div>
+                        <span class="badge-pill green">Multilingual AI Active</span>
+                    </div>
+
+                    <!-- Voice Recorder Interactive Box -->
+                    <div class="voice-intake-box" id="voiceBox">
+                        <button type="button" class="mic-circle-btn" id="micBtn" onclick="toggleVoiceRecord()" aria-label="Record voice grievance">
+                            🎙️
+                        </button>
+                        <div class="voice-status-text" id="voiceStatusText">Tap to Speak in Any Indian Language</div>
+                        <p class="voice-subtext">Supports Telugu, Hindi, Marathi, Tamil, Bengali, Kannada &amp; English</p>
+                    </div>
+
+                    <!-- Quick Language & Audio Samples -->
+                    <div class="quick-samples-bar">
+                        <span class="label">⚡ Or Click a Regional Voice Sample:</span>
+                        <div class="sample-chip-group" id="sampleChipsContainer">
+                            <!-- Populated dynamically via JS -->
+                        </div>
+                    </div>
+
+                    <form id="grievanceForm" onsubmit="handleGrievanceSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="voiceLangSelect">Citizen Primary Language</label>
+                                <select id="voiceLangSelect" class="form-select">
+                                    <option value="te-IN">Telugu (తెలుగు)</option>
+                                    <option value="hi-IN">Hindi (हिन्दी)</option>
+                                    <option value="mr-IN">Marathi (मराठी)</option>
+                                    <option value="ta-IN">Tamil (தமிழ்)</option>
+                                    <option value="kn-IN">Kannada (ಕನ್ನಡ)</option>
+                                    <option value="en-IN">English (India)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="citizenPincode">Pincode / Location</label>
+                                <input type="text" id="citizenPincode" class="form-input" placeholder="e.g. 506001 (Warangal)" value="506001">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="grievanceText">Transcribed Citizen Voice Input / Detailed Complaint</label>
+                            <textarea id="grievanceText" class="form-textarea" placeholder="Speak into the microphone above or type your infrastructure issue here..."></textarea>
+                        </div>
+
+                        <!-- Photo Verification Dropzone -->
+                        <div class="form-group">
+                            <label>Civil Damage Photo Evidence (Analyzed by Gemini Multimodal Vision)</label>
+                            <div class="dropzone-box" id="photoDropzone">
+                                <input type="file" id="filePhoto" accept="image/*" style="display:none;">
+                                <div class="dropzone-content">
+                                    <span style="font-size:1.5rem;">📸</span>
+                                    <div>
+                                        <strong id="dropzoneLabel" style="font-size:0.85rem; color:#1E293B;">Click to Attach Infrastructure Photo</strong>
+                                        <p style="font-size:0.75rem; color:#64748B; margin:0;">AI verifies structural hazard, depth, and safety risk automatically</p>
+                                    </div>
+                                </div>
+                                <img id="previewImg" class="preview-thumb-img" alt="Uploaded Hazard Preview">
+                            </div>
+                        </div>
+
+                        <button type="submit" id="btnSubmitGrievance" class="btn-primary-national">
+                            <span>Submit Grievance to National Infrastructure Grid &rarr;</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right: Real-Time Gemini Multimodal Audit Card -->
+                <div class="ai-audit-card" id="aiAuditCard">
+                    <div class="ai-audit-header">
+                        <div>
+                            <span style="font-size:0.75rem; color:#94A3B8; text-transform:uppercase; font-weight:800;">Real-Time AI Processing</span>
+                            <h3 style="font-size:1.1rem; font-weight:800; color:#FFFFFF;">Gemini 1.5 Multimodal Audit</h3>
+                        </div>
+                        <span class="gemini-badge">✨ Google Gemini Powered</span>
+                    </div>
+
+                    <div class="audit-metric-grid">
+                        <div class="metric-pill-box">
+                            <div class="m-label">Verified Damage Severity</div>
+                            <div class="m-val red" id="aiSeverityVal">5 / 5 (CRITICAL)</div>
+                        </div>
+                        <div class="metric-pill-box">
+                            <div class="m-label">Vision Confidence</div>
+                            <div class="m-val green" id="aiConfidenceVal">96.4%</div>
+                        </div>
+                    </div>
+
+                    <div class="ai-output-box">
+                        <h4>Classified Infrastructure Domain</h4>
+                        <p id="aiCategoryVal">Water &amp; Sanitation / Road Subsidence</p>
+                    </div>
+
+                    <div class="ai-output-box">
+                        <h4>Identified Civil Hazard</h4>
+                        <p id="aiDamageVal">Pipeline Burst &amp; Structural Road Cavity</p>
+                    </div>
+
+                    <div class="ai-output-box" style="border-left-color: #34D399;">
+                        <h4>English Policy Normalization (From Regional Dialect)</h4>
+                        <p id="aiTranslationText">"In Warangal Hanumakonda Nakkalagutta road, a major drainage pipe has burst, contaminating drinking water for 15 days. The entire road is at risk of cave-in. Please repair urgently."</p>
+                    </div>
+
+                    <div style="background:rgba(255,255,255,0.05); padding:12px; border-radius:8px; font-size:0.75rem; color:#94A3B8;">
+                        🔒 <strong>Digital Public Good Privacy:</strong> Citizen biometric and personal phone records are anonymized at edge before indexing into the public policy grid.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: NATIONAL POLICYMAKER HEATMAP        -->
+        <!-- ========================================== -->
+        <section id="tab-heatmap" class="tab-panel">
+            <div class="dashboard-layout">
+                
+                <!-- Left: Interactive Leaflet Map -->
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <div>
+                            <h2 style="font-size:1.2rem; font-weight:800; color:#0A192F;">National Infrastructure Grievance Heatmap</h2>
+                            <p style="font-size:0.8rem; color:#64748B;">Surfacing high-frequency citizen distress hotspots across Indian economic corridors</p>
+                        </div>
+                        <span class="badge-pill green">Live Geospatial Feed</span>
+                    </div>
+
+                    <div id="indiaMap"></div>
+                </div>
+
+                <!-- Right: Clustered Demand Hotspots Feed -->
+                <div class="hotspot-list-card">
+                    <div style="border-bottom:1px solid #E2E8F0; padding-bottom:10px;">
+                        <h3 style="font-size:1rem; font-weight:800; color:#0F172A;">Clustered Demand Hotspots</h3>
+                        <p style="font-size:0.78rem; color:#64748B;">Aggregated citizen requests ranked by NITI Aayog SDG urgency</p>
+                    </div>
+
+                    <div class="hotspot-scroll" id="hotspotListContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: GEMINI POLICY COPILOT & DPR         -->
+        <!-- ========================================== -->
+        <section id="tab-copilot" class="tab-panel">
+            <div class="copilot-grid">
+                
+                <!-- Left: DPR Controls -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>📋 Policy Copilot Controls</h2>
+                            <p>Synthesizes citizen voice clusters with PM Gati Shakti Master Plan</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dprDistrictSelect">Select Target District Hotspot</label>
+                        <select id="dprDistrictSelect" class="form-select">
+                            <!-- Populated dynamically via JS -->
+                        </select>
+                    </div>
+
+                    <div style="background:#F1F5F9; border-radius:8px; padding:16px; margin-bottom:16px;">
+                        <div style="font-size:0.78rem; font-weight:800; color:#475569; text-transform:uppercase; margin-bottom:8px;">
+                            🏛️ Alignment Frameworks
+                        </div>
+                        <ul style="font-size:0.8rem; color:#334155; padding-left:18px; line-height:1.6;">
+                            <li>PM Gati Shakti National Master Plan</li>
+                            <li>NITI Aayog Aspirational Districts Programme</li>
+                            <li>Jal Jeevan Mission &amp; Smart Cities Mission</li>
+                        </ul>
+                    </div>
+
+                    <button type="button" id="btnGenerateDPR" class="btn-primary-national" onclick="generateDPRDocument()">
+                        <span>⚡ Re-synthesize DPR with Gemini 1.5 Pro</span>
+                    </button>
+                    
+                    <button type="button" class="btn-primary-national" onclick="window.print()" style="margin-top:10px; background:#475569;">
+                        <span>🖨️ Export / Print Official Sanction Note</span>
+                    </button>
+                </div>
+
+                <!-- Right: Official DPR Sanction Note Paper -->
+                <div class="dpr-paper-card">
+                    <div class="dpr-gov-header">
+                        <h3>National Infrastructure Planning Commission</h3>
+                        <p>Detailed Project Report (DPR) &amp; Public Budget Allocation Recommendation</p>
+                        <p style="font-size:0.7rem; color:#94A3B8; margin-top:4px;">Generated autonomously via JanSetu AI &bull; Ref ID: DPI-JS-2026-X89</p>
+                    </div>
+
+                    <div class="dpr-section-title">1. Project Identification</div>
+                    <p class="dpr-text" id="dprTitle">Detailed Project Report: Warangal Municipal Infrastructure Rehabilitation</p>
+
+                    <div class="dpr-section-title">2. Target Region &amp; Vulnerability Profile</div>
+                    <p class="dpr-text" id="dprDistrictName">Warangal, Telangana (SDG Index: 68)</p>
+
+                    <div class="dpr-section-title">3. Citizen Distress Rationale &amp; Gati Shakti Correlation</div>
+                    <p class="dpr-text" id="dprRationale">
+                        Correlating 47 geo-tagged citizen grievances over 30 days indicates severe structural stress on the drinking water pipeline network and arterial road bed. Left unaddressed, failure threatens municipal water safety and causes severe transit gridlock on feeder corridors. Aligns with PM Gati Shakti critical connectivity index.
+                    </p>
+
+                    <div class="dpr-section-title">4. Budget Allocation &amp; Scope Breakdown</div>
+                    <table class="budget-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Responsible Ministry</th>
+                                <th>Estimated Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Civil Remediation &amp; Structural Repair</td>
+                                <td id="dprMinistry">Ministry of Jal Shakti / MoRTH</td>
+                                <td id="dprEstimatedCost">₹42.5 Lakhs</td>
+                            </tr>
+                            <tr>
+                                <td>Direct Beneficiary Citizens</td>
+                                <td>Municipal Council</td>
+                                <td id="dprBeneficiaries">18,400 Citizens</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="dpr-section-title">5. Digital Public Good Verification Stamp</div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; border-top:1px dashed #CBD5E1; padding-top:12px;">
+                        <span style="font-size:0.75rem; color:#64748B;">Authenticated via Google Gemini GenAI Multimodal Engine</span>
+                        <span style="font-size:0.75rem; color:#10B981; font-weight:800;">✓ VALIDATED POLICY SANCTION</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="national-footer">
+        <div class="footer-inner">
+            <div>
+                <strong>JanSetu AI (जन सेतु)</strong> &bull; Open-source Digital Public Good
+                <p style="font-size:0.72rem; color:#64748B; margin-top:2px;">Built for Google Cloud Build with AI: Code for Communities 2026 &bull; Architected by Vitoniya Global Technologies</p>
+            </div>
+            <div>
+                <a href="https://vitoniya.com" target="_blank">vitoniya.com</a> &bull;
+                <a href="https://github.com/rohith1246" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet.js Library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="script.js"></script>
+</body>
+</html>

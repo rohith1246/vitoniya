@@ -1,0 +1,768 @@
+/* JanSetu AI - Digital Public Good for Citizen Infrastructure Governance */
+:root {
+    --primary-navy: #0A192F;
+    --navy-surface: #112240;
+    --accent-blue: #0284C7;
+    --saffron: #FF9933;
+    --india-green: #138808;
+    --chakra-blue: #000080;
+    --card-bg: #FFFFFF;
+    --bg-page: #F8FAFC;
+    --text-main: #0F172A;
+    --text-muted: #64748B;
+    --border-color: #E2E8F0;
+    --danger: #EF4444;
+    --warning: #F59E0B;
+    --success: #10B981;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top National Banner */
+.gov-strip {
+    background: linear-gradient(90deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+    height: 4px;
+    width: 100%;
+}
+
+.top-bar {
+    background: #0F172A;
+    color: #94A3B8;
+    font-size: 0.76rem;
+    padding: 6px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-bar a {
+    color: #38BDF8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* Header */
+.main-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-color);
+    padding: 14px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.brand-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.emblem-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #0A192F 0%, #0284C7 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-weight: 900;
+    font-size: 1.35rem;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.25);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.brand-title h1 {
+    font-size: 1.28rem;
+    font-weight: 800;
+    color: #0A192F;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.02em;
+}
+
+.brand-title span.tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: #E0F2FE;
+    color: #0284C7;
+    padding: 2px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.brand-title p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge-pill {
+    background: #F1F5F9;
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #334155;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-pill.green {
+    background: #ECFDF5;
+    border-color: #A7F3D0;
+    color: #065F46;
+}
+
+.badge-pill.live::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.9; }
+    50% { transform: scale(1.4); opacity: 0.3; }
+    100% { transform: scale(0.9); opacity: 0.9; }
+}
+
+/* Nav Tabs */
+.nav-tabs-wrapper {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 24px;
+}
+
+.nav-tabs-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    border: none;
+    background: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    color: var(--primary-navy);
+}
+
+.tab-btn.active {
+    color: #0284C7;
+    border-bottom-color: #0284C7;
+}
+
+/* Main Container */
+.app-content {
+    max-width: 1400px;
+    margin: 24px auto;
+    padding: 0 20px;
+    flex: 1;
+    width: 100%;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- TAB 1: CITIZEN INTAKE PORTAL --- */
+.citizen-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 24px;
+}
+
+@media (max-width: 960px) {
+    .citizen-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.card-header {
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--primary-navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-header p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+/* Voice Recorder Box */
+.voice-intake-box {
+    background: #F8FAFC;
+    border: 2px dashed #CBD5E1;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+}
+
+.voice-intake-box.recording {
+    border-color: var(--danger);
+    background: #FEF2F2;
+}
+
+.mic-circle-btn {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    margin-bottom: 12px;
+}
+
+.mic-circle-btn:hover {
+    transform: scale(1.06);
+}
+
+.mic-circle-btn.active {
+    background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+    animation: pulseMic 1.2s infinite;
+}
+
+@keyframes pulseMic {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.voice-status-text {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+.voice-subtext {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+/* Quick Voice Pre-sets */
+.quick-samples-bar {
+    margin-bottom: 20px;
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+}
+
+.quick-samples-bar span.label {
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: #1E40AF;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.sample-chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sample-chip {
+    background: #FFFFFF;
+    border: 1px solid #93C5FD;
+    color: #1D4ED8;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.sample-chip:hover {
+    background: #1D4ED8;
+    color: #FFFFFF;
+}
+
+/* Form Groups */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #334155;
+}
+
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    background: #FFFFFF;
+    color: var(--text-main);
+    transition: border-color 0.2s;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #0284C7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 85px;
+}
+
+/* Image Upload Dropzone */
+.dropzone-box {
+    border: 1px dashed #94A3B8;
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+    background: #F8FAFC;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.dropzone-box:hover {
+    border-color: #0284C7;
+    background: #F0F9FF;
+}
+
+.dropzone-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.preview-thumb-img {
+    max-height: 120px;
+    border-radius: 8px;
+    margin-top: 10px;
+    display: none;
+    border: 1px solid #CBD5E1;
+}
+
+/* Submit Button */
+.btn-primary-national {
+    width: 100%;
+    background: linear-gradient(135deg, #0A192F 0%, #0284C7 100%);
+    color: #FFFFFF;
+    padding: 14px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(10, 25, 47, 0.2);
+    transition: all 0.2s;
+}
+
+.btn-primary-national:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+/* AI Analysis Live Output Card */
+.ai-audit-card {
+    background: #0F172A;
+    color: #FFFFFF;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.ai-audit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+}
+
+.gemini-badge {
+    background: linear-gradient(135deg, #4285F4 0%, #9B72CB 50%, #D96570 100%);
+    color: #FFFFFF;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    letter-spacing: 0.03em;
+}
+
+.audit-metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.metric-pill-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.metric-pill-box .m-label {
+    font-size: 0.7rem;
+    color: #94A3B8;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.metric-pill-box .m-val {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #F8FAFC;
+    margin-top: 2px;
+}
+
+.metric-pill-box .m-val.red { color: #F87171; }
+.metric-pill-box .m-val.gold { color: #FBBF24; }
+.metric-pill-box .m-val.green { color: #34D399; }
+
+.ai-output-box {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+    border-left: 3px solid #38BDF8;
+}
+
+.ai-output-box h4 {
+    font-size: 0.8rem;
+    color: #38BDF8;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.ai-output-box p {
+    font-size: 0.84rem;
+    color: #E2E8F0;
+    line-height: 1.45;
+}
+
+/* --- TAB 2: POLICYMAKER & COLLECTOR HEATMAP DASHBOARD --- */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+#indiaMap {
+    height: 520px;
+    width: 100%;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    z-index: 10;
+}
+
+.hotspot-list-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    max-height: 520px;
+}
+
+.hotspot-scroll {
+    overflow-y: auto;
+    flex: 1;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-right: 6px;
+}
+
+.hotspot-item {
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #F8FAFC;
+    border-left: 4px solid #0284C7;
+}
+
+.hotspot-item:hover, .hotspot-item.selected {
+    background: #F0F9FF;
+    border-color: #0284C7;
+    transform: translateX(3px);
+}
+
+.hotspot-item.urgent {
+    border-left-color: #EF4444;
+}
+
+.hotspot-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.hotspot-district {
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: #0F172A;
+}
+
+.priority-chip {
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #FEE2E2;
+    color: #B91C1C;
+}
+
+.hotspot-issue {
+    font-size: 0.78rem;
+    color: #475569;
+    margin-bottom: 6px;
+}
+
+.hotspot-meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.72rem;
+    color: #64748B;
+    font-weight: 600;
+}
+
+/* --- TAB 3: GEMINI POLICY COPILOT & DPR GENERATOR --- */
+.copilot-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 24px;
+}
+
+@media (max-width: 960px) {
+    .copilot-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dpr-paper-card {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    border-radius: var(--radius-md);
+    padding: 32px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.dpr-gov-header {
+    text-align: center;
+    border-bottom: 2px solid #0A192F;
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+}
+
+.dpr-gov-header h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #0A192F;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.dpr-gov-header p {
+    font-size: 0.78rem;
+    color: #64748B;
+}
+
+.dpr-section-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #0A192F;
+    text-transform: uppercase;
+    margin: 18px 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-left: 3px solid #0284C7;
+    padding-left: 8px;
+}
+
+.dpr-text {
+    font-size: 0.85rem;
+    color: #334155;
+    line-height: 1.6;
+}
+
+.budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.82rem;
+}
+
+.budget-table th, .budget-table td {
+    border: 1px solid #E2E8F0;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.budget-table th {
+    background: #F1F5F9;
+    font-weight: 700;
+    color: #1E293B;
+}
+
+/* Footer */
+.national-footer {
+    background: #0A192F;
+    color: #94A3B8;
+    padding: 24px;
+    margin-top: auto;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.footer-inner a {
+    color: #38BDF8;
+    text-decoration: none;
+}
