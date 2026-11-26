@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}{{ lesson.title }} | {{ course.title }}{% endblock %}
+{% block meta_robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="lesson-workspace">
+        <aside class="lesson-sidebar">
+            <div style="margin-bottom:0.85rem;">
+                <a href="/courses/{{ course.slug }}" style="font-size:0.84rem; color:var(--ink-subtle);">&larr; {{ course.title }}</a>
+                <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin:0.6rem 0 0.35rem;">
+                    <span>Course progress</span>
+                    <strong>{{ progress_pct }}%</strong>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: {{ progress_pct }}%;"></div>
+                </div>
+            </div>
+
+            {% for mod in course.modules %}
+                <div class="sidebar-mod-title">{{ mod.title }}</div>
+                {% for item in mod.lessons %}
+                <a href="/learn/{{ course.slug }}/{{ item.id }}"
+                   class="sidebar-lesson-link {% if item.id == lesson.id %}active{% endif %}">
+                    <span>{{ item.title }}</span>
+                    {% if item.id in completed_ids %}
+                        <span style="color:var(--accent); font-weight:700;">&#10003;</span>
+                    {% endif %}
+                </a>
+                {% endfor %}
+            {% endfor %}
+        </aside>
+
+        <article class="lesson-content-card">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; border-bottom:1px solid var(--border); padding-bottom:1rem;">
+                <div>
+                    <span class="tag">{{ lesson.duration_mins }} min</span>
+                    <h1 style="font-size:1.75rem; margin:0.5rem 0 0;">{{ lesson.title }}</h1>
+                </div>
+
+                <form action="/learn/{{ course.slug }}/{{ lesson.id }}/toggle" method="post" style="margin:0;">
+                    <button type="submit" class="btn {% if is_completed %}btn-secondary{% else %}btn-primary{% endif %} btn-sm">
+                        {% if is_completed %}Completed &#10003;{% else %}Mark as complete{% endif %}
+                    </button>
+                </form>
+            </div>
+
+            {% if lesson.video_url %}
+            <div style="margin-top:1.5rem; aspect-ratio:16/9; background:#18181B; border-radius:var(--radius); overflow:hidden;">
+                <iframe src="{{ lesson.video_url }}" title="{{ lesson.title }}" style="width:100%; height:100%; border:0;" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+
+            <div class="lesson-body">{{ lesson.content_md }}</div>
+
+            <div style="display:flex; justify-content:space-between; padding-top:1.25rem; border-top:1px solid var(--border);">
+                {% if prev_lesson %}
+                    <a href="/learn/{{ course.slug }}/{{ prev_lesson.id }}" class="btn btn-secondary btn-sm">&larr; Previous lesson</a>
+                {% else %}
+                    <span></span>
+                {% endif %}
+
+                {% if next_lesson %}
+                    <a href="/learn/{{ course.slug }}/{{ next_lesson.id }}" class="btn btn-primary btn-sm">Next lesson &rarr;</a>
+                {% endif %}
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}

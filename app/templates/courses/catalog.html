@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Courses | Vitoniya Edu{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h1>Course Catalog</h1>
+                <p class="muted" style="margin:0;">Structured learning tracks built by Vitoniya Labs.</p>
+            </div>
+            <form method="get" action="/courses" style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                <select name="category" style="width:auto;" onchange="this.form.submit()">
+                    <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All Categories</option>
+                    {% for cat in categories %}
+                        <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+                    {% endfor %}
+                </select>
+                <select name="level" style="width:auto;" onchange="this.form.submit()">
+                    <option value="All" {% if selected_level == 'All' %}selected{% endif %}>All Levels</option>
+                    <option value="Beginner" {% if selected_level == 'Beginner' %}selected{% endif %}>Beginner</option>
+                    <option value="Intermediate" {% if selected_level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+                    <option value="Advanced" {% if selected_level == 'Advanced' %}selected{% endif %}>Advanced</option>
+                </select>
+            </form>
+        </div>
+
+        <div class="card-grid">
+            {% for course in courses %}
+            <article class="card">
+                <div>
+                    <div class="card-meta">
+                        <span class="tag tag-green">{{ course.category }}</span>
+                        <span class="tag">{{ course.level }}</span>
+                    </div>
+                    <h3>{{ course.title }}</h3>
+                    <p class="muted" style="font-size:0.93rem; margin:0;">{{ course.subtitle }}</p>
+                </div>
+                <div class="card-footer">
+                    <span>{{ course.modules|length }} modules &middot; {{ course.total_lessons }} lessons</span>
+                    <a href="/courses/{{ course.slug }}" class="btn btn-primary btn-sm">Open course</a>
+                </div>
+            </article>
+            {% else %}
+            <p class="muted">No courses match your selected filters.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

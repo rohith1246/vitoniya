@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Console | Vitoniya Edu{% endblock %}
+{% block meta_robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h1>Admin Console</h1>
+                <p class="muted" style="margin:0;">Manage courses, curriculum, and student accounts.</p>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-box">
+                <div class="stat-num">{{ courses|length }}</div>
+                <div class="stat-label">Total Courses</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">{{ users|length }}</div>
+                <div class="stat-label">Registered Users</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">{{ total_enrollments }}</div>
+                <div class="stat-label">Course Enrollments</div>
+            </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr; gap: 2rem;">
+            <div class="card">
+                <h3>Create New Course</h3>
+                <form action="/admin/courses/create" method="post" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+                    <div class="form-group" style="margin:0;">
+                        <label for="title">Course Title</label>
+                        <input type="text" id="title" name="title" required placeholder="e.g., System Design Basics">
+                    </div>
+                    <div class="form-group" style="margin:0;">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" name="category" required value="Backend & AI">
+                    </div>
+                    <div class="form-group" style="margin:0;">
+                        <label for="level">Level</label>
+                        <select id="level" name="level">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin:0; grid-column: 1 / -1;">
+                        <label for="subtitle">Short Subtitle</label>
+                        <input type="text" id="subtitle" name="subtitle" required placeholder="One-line summary shown on course cards">
+                    </div>
+                    <div class="form-group" style="margin:0; grid-column: 1 / -1;">
+                        <label for="description">Full Description</label>
+                        <textarea id="description" name="description" rows="2" required placeholder="Detailed overview of what students will learn"></textarea>
+                    </div>
+                    <div style="grid-column: 1 / -1;">
+                        <button type="submit" class="btn btn-primary btn-sm">Create Course &amp; Add Lessons</button>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                <h2 style="margin-bottom:0.85rem;">Courses</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Level</th>
+                                <th>Lessons</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for c in courses %}
+                            <tr>
+                                <td><strong>{{ c.title }}</strong></td>
+                                <td>{{ c.category }}</td>
+                                <td>{{ c.level }}</td>
+                                <td>{{ c.total_lessons }}</td>
+                                <td>
+                                    {% if c.is_published %}
+                                        <span class="tag tag-green">Published</span>
+                                    {% else %}
+                                        <span class="tag">Draft</span>
+                                    {% endif %}
+                                </td>
+                                <td style="display:flex; gap:0.5rem;">
+                                    <a href="/admin/courses/{{ c.id }}" class="btn btn-secondary btn-sm">Edit Curriculum</a>
+                                    <form action="/admin/courses/{{ c.id }}/toggle-publish" method="post" style="margin:0;">
+                                        <button type="submit" class="btn btn-ghost btn-sm">
+                                            {% if c.is_published %}Unpublish{% else %}Publish{% endif %}
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <h2 style="margin-bottom:0.85rem;">Users</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for u in users %}
+                            <tr>
+                                <td>{{ u.full_name }}</td>
+                                <td>{{ u.email }}</td>
+                                <td><span class="role-pill {% if u.role == 'admin' %}admin{% endif %}">{{ u.role }}</span></td>
+                                <td>{% if u.is_active %}Active{% else %}Disabled{% endif %}</td>
+                                <td>
+                                    {% if u.id != user.id %}
+                                    <form action="/admin/users/{{ u.id }}/toggle-active" method="post" style="margin:0;">
+                                        <button type="submit" class="btn btn-secondary btn-sm">
+                                            {% if u.is_active %}Disable{% else %}Activate{% endif %}
+                                        </button>
+                                    </form>
+                                    {% else %}
+                                        <span class="muted">You</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

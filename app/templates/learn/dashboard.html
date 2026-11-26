@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}My Learning | Vitoniya Edu{% endblock %}
+{% block meta_robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h1>Welcome, {{ user.full_name }}</h1>
+                <p class="muted" style="margin:0;">Your enrolled courses and lesson progress.</p>
+            </div>
+            <a href="/courses" class="btn btn-secondary btn-sm">Explore more courses</a>
+        </div>
+
+        {% if enrolled_cards %}
+        <div class="card-grid">
+            {% for item in enrolled_cards %}
+            <article class="card">
+                <div>
+                    <div class="card-meta">
+                        <span class="tag tag-green">{{ item.course.category }}</span>
+                        <span class="tag">{{ item.progress_pct }}% complete</span>
+                    </div>
+                    <h3>{{ item.course.title }}</h3>
+                    <p class="muted" style="font-size:0.9rem; margin:0 0 1rem;">
+                        {{ item.completed_lessons }} of {{ item.total_lessons }} lessons completed
+                    </p>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: {{ item.progress_pct }}%;"></div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    {% if item.next_lesson %}
+                        <a href="/learn/{{ item.course.slug }}/{{ item.next_lesson.id }}" class="btn btn-primary btn-sm">
+                            {% if item.progress_pct > 0 %}Resume learning{% else %}Start course{% endif %}
+                        </a>
+                    {% else %}
+                        <span class="muted">No lessons yet</span>
+                    {% endif %}
+                    <a href="/courses/{{ item.course.slug }}" class="btn btn-ghost btn-sm">Syllabus</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="card" style="max-width:560px;">
+            <h3>You haven't enrolled in any courses yet</h3>
+            <p class="muted" style="margin:0;">
+                Browse our catalog and enroll in a track to start tracking your progress.
+            </p>
+            <div>
+                <a href="/courses" class="btn btn-primary btn-sm">Browse courses</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

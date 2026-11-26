@@ -8,3 +8,7 @@ venv/
 ENV/
 .pytest_cache/
 .DS_Store
+_archive_agency/
+*.db
+*.sqlite3
+resume_rohith_vuppula.tex

@@ -1,0 +1,1 @@
+"""Vitoniya Edu application package."""

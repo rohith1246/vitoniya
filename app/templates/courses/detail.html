@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.title }} | Vitoniya Edu{% endblock %}
+{% block meta_description %}{{ course.subtitle }}{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: 880px;">
+        <div class="card-meta" style="margin-bottom:0.9rem;">
+            <span class="tag tag-green">{{ course.category }}</span>
+            <span class="tag">{{ course.level }}</span>
+            <span class="tag">{{ course.total_lessons }} lessons</span>
+        </div>
+
+        <h1 style="margin-bottom:0.75rem;">{{ course.title }}</h1>
+        <p class="lead" style="margin-bottom:1.5rem;">{{ course.description }}</p>
+
+        <div style="margin-bottom: 2.5rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+            {% if is_enrolled and first_lesson %}
+                <a href="/learn/{{ course.slug }}/{{ first_lesson.id }}" class="btn btn-primary">Continue learning</a>
+            {% elif user %}
+                <form action="/courses/{{ course.slug }}/enroll" method="post" style="margin:0;">
+                    <button type="submit" class="btn btn-primary">Enroll in this course</button>
+                </form>
+            {% else %}
+                <a href="/signup" class="btn btn-primary">Sign up free to enroll</a>
+                <a href="/login" class="btn btn-secondary">Log in</a>
+            {% endif %}
+        </div>
+
+        <h2 style="margin-bottom:1rem;">Course Syllabus</h2>
+        {% for mod in course.modules %}
+        <div class="syllabus-module">
+            <div class="syllabus-module-head">{{ mod.title }}</div>
+            {% for lesson in mod.lessons %}
+            <div class="lesson-row">
+                <span>
+                    {% if is_enrolled or (user and user.role == 'admin') %}
+                        <a href="/learn/{{ course.slug }}/{{ lesson.id }}" style="font-weight:500;">{{ lesson.title }}</a>
+                    {% else %}
+                        {{ lesson.title }}
+                    {% endif %}
+                </span>
+                <span class="muted" style="font-size:0.84rem;">{{ lesson.duration_mins }} min</span>
+            </div>
+            {% else %}
+            <div class="lesson-row muted">No lessons added yet.</div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="muted">Syllabus is being prepared.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <span class="eyebrow">Vitoniya Labs &middot; Education Platform</span>
+            <h1>Learn software engineering with structure, not noise.</h1>
+            <p class="lead">
+                Vitoniya Edu brings together focused tracks in Java, Data Structures, FastAPI, and PostgreSQL.
+                Follow clear modules, track every completed lesson, and build real engineering habits.
+            </p>
+            <div class="hero-actions">
+                <a href="/courses" class="btn btn-primary">Browse courses</a>
+                {% if user %}
+                    <a href="/dashboard" class="btn btn-secondary">Go to My Learning</a>
+                {% else %}
+                    <a href="/signup" class="btn btn-secondary">Create free student account</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <aside class="hero-note-card">
+            <h3>How Vitoniya Edu works</h3>
+            <ul class="check-list">
+                <li>
+                    <span class="check-dot">1</span>
+                    <span><strong>Structured modules:</strong> Every track is broken into clear, bite-sized lessons.</span>
+                </li>
+                <li>
+                    <span class="check-dot">2</span>
+                    <span><strong>Real progress tracking:</strong> Mark lessons complete and pick up right where you stopped.</span>
+                </li>
+                <li>
+                    <span class="check-dot">3</span>
+                    <span><strong>Practical curriculum:</strong> Built around skills companies actually test in interviews.</span>
+                </li>
+            </ul>
+        </aside>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <h2>Available Courses</h2>
+                <p class="muted" style="margin:0;">Start with a track and learn at your own pace.</p>
+            </div>
+            <a href="/courses" class="btn btn-secondary btn-sm">View full catalog</a>
+        </div>
+
+        <div class="card-grid">
+            {% for course in courses %}
+            <article class="card">
+                <div>
+                    <div class="card-meta">
+                        <span class="tag tag-green">{{ course.category }}</span>
+                        <span class="tag">{{ course.level }}</span>
+                    </div>
+                    <h3>{{ course.title }}</h3>
+                    <p class="muted" style="font-size:0.93rem; margin:0;">{{ course.subtitle }}</p>
+                </div>
+                <div class="card-footer">
+                    <span>{{ course.modules|length }} modules &middot; {{ course.total_lessons }} lessons</span>
+                    <a href="/courses/{{ course.slug }}" class="btn btn-secondary btn-sm">View syllabus</a>
+                </div>
+            </article>
+            {% else %}
+            <p class="muted">No published courses yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

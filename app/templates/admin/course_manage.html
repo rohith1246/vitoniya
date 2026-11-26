@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Manage {{ course.title }} | Admin{% endblock %}
+{% block meta_robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: 900px;">
+        <div style="margin-bottom:1.25rem;">
+            <a href="/admin" class="muted" style="font-size:0.88rem;">&larr; Back to Admin Console</a>
+            <h1 style="margin:0.4rem 0 0.25rem;">{{ course.title }}</h1>
+            <p class="muted" style="margin:0;">{{ course.category }} &middot; {{ course.level }}</p>
+        </div>
+
+        <div class="card" style="margin-bottom:2rem;">
+            <h3>Add New Module</h3>
+            <form action="/admin/courses/{{ course.id }}/modules" method="post" style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                <input type="text" name="title" required placeholder="e.g., Module 3: Binary Search & Sorting" style="flex:1; min-width:240px;">
+                <button type="submit" class="btn btn-primary btn-sm">Add Module</button>
+            </form>
+        </div>
+
+        {% for mod in course.modules %}
+        <div class="syllabus-module" style="margin-bottom:1.5rem;">
+            <div class="syllabus-module-head">{{ mod.title }}</div>
+            {% for lesson in mod.lessons %}
+            <div class="lesson-row">
+                <span><strong>{{ loop.index }}.</strong> {{ lesson.title }}</span>
+                <span class="muted">{{ lesson.duration_mins }} min</span>
+            </div>
+            {% else %}
+            <div class="lesson-row muted">No lessons in this module yet.</div>
+            {% endfor %}
+
+            <div style="padding:1rem 1.2rem; background:var(--bg); border-top:1px solid var(--border);">
+                <strong style="font-size:0.85rem; display:block; margin-bottom:0.75rem;">Add Lesson to {{ mod.title }}</strong>
+                <form action="/admin/modules/{{ mod.id }}/lessons" method="post" style="display:grid; gap:0.75rem;">
+                    <div style="display:grid; grid-template-columns: 1fr 130px; gap:0.75rem;">
+                        <input type="text" name="title" required placeholder="Lesson title">
+                        <input type="number" name="duration_mins" value="15" min="1" required placeholder="Minutes">
+                    </div>
+                    <input type="url" name="video_url" placeholder="Optional embed video URL (e.g., https://www.youtube.com/embed/...)">
+                    <textarea name="content_md" rows="3" placeholder="Lesson notes or code examples..."></textarea>
+                    <div>
+                        <button type="submit" class="btn btn-secondary btn-sm">Add Lesson</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <p class="muted">No modules yet. Add your first module above.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
