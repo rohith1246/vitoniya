@@ -109,6 +109,37 @@
     <div class="container">
         <div class="section-header">
             <div>
+                <span class="section-num">02 / INTERVIEW PREPARATION</span>
+                <h2>Popular Interview Question Sets</h2>
+            </div>
+            <a href="/interview-questions" class="link-reveal" style="font-size:0.9rem; color:var(--forest);">All interview guides &rarr;</a>
+        </div>
+
+        <div class="card-grid">
+            {% for guide in interview_guides %}
+            <article class="card card-interactive">
+                <div>
+                    <div class="card-meta">
+                        <span class="tag tag-indigo">{{ guide.category }}</span>
+                        <span class="tag">{{ guide.qa|length }} Q&amp;As</span>
+                    </div>
+                    <h3>{{ guide.title }}</h3>
+                    <p class="muted" style="font-size:0.92rem; margin:0;">{{ guide.summary }}</p>
+                </div>
+                <div class="card-footer">
+                    <span>{{ guide.level }}</span>
+                    <a href="/interview-questions/{{ guide.slug }}" class="btn btn-secondary btn-sm">Read Q&amp;A &rarr;</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-bordered" style="padding-top:0;">
+    <div class="container">
+        <div class="section-header">
+            <div>
                 <span class="section-num">02 / OVERVIEW</span>
                 <h2>What is VitoniyaEdu?</h2>
             </div>

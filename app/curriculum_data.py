@@ -707,4 +707,138 @@ CURRICULUM_DATA = [
             },
         ],
     },
+    {
+        "title": "AI Agents, RAG & LLM Engineering with Python",
+        "slug": "ai-agents-rag-engineering",
+        "subtitle": "Build production RAG pipelines, vector search, and tool-calling AI agents with Gemini & FastAPI.",
+        "description": (
+            "Go past basic prompt wrappers. Learn how modern AI engineering teams build grounded "
+            "Retrieval-Augmented Generation systems, index embeddings in PostgreSQL, and orchestrate reliable tool-calling agents."
+        ),
+        "category": "AI & Agents",
+        "level": "Intermediate",
+        "modules": [
+            {
+                "title": "Module 1: Embeddings, RAG & Agent Workflows",
+                "lessons": [
+                    {
+                        "title": "Embeddings, Vector Search & PostgreSQL pgvector",
+                        "duration_mins": 24,
+                        "content_md": (
+                            "## Why Keyword Search Falls Short for AI Apps\n\n"
+                            "Traditional `LIKE '%query%'` SQL search only matches exact words. If a user asks about *'database speed'*, keyword search misses a note titled *'B-Tree Indexing Guide'*. "
+                            "**Embeddings** solve this by mapping sentences into dense numeric vectors where semantically similar ideas sit close together.\n\n"
+                            "### How Vector Similarity Works\n\n"
+                            "- **Chunking:** Split long documents into 300–500 token chunks with small overlap so context isn't cut in half.\n"
+                            "- **Embedding Generation:** Pass each chunk through an embedding model (such as `text-embedding-004`).\n"
+                            "- **Cosine Similarity Search:** Compare the user's question vector against stored chunk vectors in PostgreSQL (`pgvector`) using the `<=>` cosine distance operator.\n\n"
+                            "```sql\n"
+                            "SELECT title, content\n"
+                            "FROM document_chunks\n"
+                            "ORDER BY embedding <=> :query_vector\n"
+                            "LIMIT 5;\n"
+                            "```\n\n"
+                            "### Actionable Practice Task\n\n"
+                            "- Take a 1,500-word study guide and write a Python helper that splits it into overlapping 400-character chunks cleanly on paragraph boundaries."
+                        ),
+                    },
+                    {
+                        "title": "Building a Retrieval-Augmented Generation (RAG) Pipeline",
+                        "duration_mins": 26,
+                        "content_md": (
+                            "## Architecture of a Reliable RAG System\n\n"
+                            "RAG grounds an LLM in your own private or up-to-date data without paying to fine-tune model weights:\n\n"
+                            "1. **Retrieve:** Convert the user's question to a vector and fetch the top-k matching chunks from your database.\n"
+                            "2. **Augment:** Inject those verified chunks into a strict system prompt.\n"
+                            "3. **Generate:** Ask the LLM to answer *only* using the supplied context and cite sources.\n\n"
+                            "### Grounding Prompt Pattern\n\n"
+                            "```python\n"
+                            "prompt = f'''Answer using ONLY the verified context below.\n"
+                            "If the answer is not in the context, reply: \"Not covered in provided notes.\"\n\n"
+                            "Context:\n{retrieved_chunks}\n\nQuestion: {user_question}'''\n"
+                            "```\n\n"
+                            "### Actionable Practice Task\n\n"
+                            "- Build a FastAPI `/api/ask` endpoint accepting a question, injecting 3 hard-coded study snippets, and enforcing `temperature=0.1`."
+                        ),
+                    },
+                    {
+                        "title": "Tool-Calling AI Agents & Structured Outputs",
+                        "duration_mins": 28,
+                        "content_md": (
+                            "## Moving From Chatbots to Autonomous AI Agents\n\n"
+                            "An **AI Agent** does more than generate text—it chooses external Python functions (tools), inspects real results, and validates outputs against strict schemas.\n\n"
+                            "### 3 Guardrails for Production Agents\n\n"
+                            "- **Structured JSON Schemas (Pydantic):** Force the model to return typed JSON so your backend never crashes on markdown prose.\n"
+                            "- **Bounded Iteration Loops:** Cap agent tool loops (for example `max_steps = 5`) to prevent infinite API billing loops.\n"
+                            "- **Human Approval for Side Effects:** Never let an autonomous agent delete rows or send external emails without explicit confirmation.\n\n"
+                            "### Actionable Practice Task\n\n"
+                            "- Define a Pydantic model `StudySummary(topic: str, key_points: list[str], difficulty: str)` and validate an LLM JSON response against it."
+                        ),
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        "title": "System Design (HLD & LLD) Foundations",
+        "slug": "system-design-foundations",
+        "subtitle": "Learn caching, rate limiting, load balancing, database scaling, and clean LLD patterns.",
+        "description": (
+            "Essential High-Level and Low-Level Design concepts tested by product companies and backend teams. "
+            "Understand how real web systems handle traffic spikes, protect APIs, and stay maintainable."
+        ),
+        "category": "System Design",
+        "level": "Intermediate",
+        "modules": [
+            {
+                "title": "Module 1: Scalability & Clean Architecture",
+                "lessons": [
+                    {
+                        "title": "Caching Strategies (Redis), CDNs & Rate Limiting",
+                        "duration_mins": 25,
+                        "content_md": (
+                            "## Why Caching Is Your Highest-ROI Optimization\n\n"
+                            "Reading a course catalog from PostgreSQL takes milliseconds; reading from in-memory **Redis** takes sub-millisecond time and removes repeated load from your primary database.\n\n"
+                            "### Cache-Aside Pattern (Most Common)\n\n"
+                            "1. Check Redis for `course:{slug}`.\n"
+                            "2. On **Cache Hit**, return immediately.\n"
+                            "3. On **Cache Miss**, query PostgreSQL, store in Redis with a TTL (e.g., `EX 300`), and return.\n"
+                            "4. Invalidate or update the key whenever an admin edits the course.\n\n"
+                            "### Protecting APIs with Rate Limiting\n\n"
+                            "Use a **Token Bucket** or **Sliding Window** counter per IP/user ID so scrapers or brute-force login attempts receive HTTP `429 Too Many Requests`.\n\n"
+                            "### Actionable Practice Task\n\n"
+                            "- Design a Redis key structure and TTL strategy for rate-limiting `/login` to 5 attempts per minute per IP."
+                        ),
+                    },
+                    {
+                        "title": "Load Balancing, Database Indexing & Read Replicas",
+                        "duration_mins": 25,
+                        "content_md": (
+                            "## Scaling Both Compute and Data Tiers\n\n"
+                            "Adding a second FastAPI server behind a **Load Balancer** (Round Robin or Least Connections) works smoothly only if your app tier is **stateless**—meaning session state lives in signed JWT cookies or Redis rather than server RAM.\n\n"
+                            "### Read Replicas for Read-Heavy Platforms\n\n"
+                            "Educational platforms often see 95% reads (students reading lessons) and 5% writes (progress updates, enrollments). "
+                            "Direct writes to the **Primary PostgreSQL** node and distribute read queries across **Read Replicas**, accepting tiny replication lag for catalog pages.\n\n"
+                            "### Actionable Practice Task\n\n"
+                            "- Draw an architecture diagram showing Browser &rarr; CDN &rarr; Load Balancer &rarr; 2 FastAPI Workers &rarr; Primary + Read Replica PostgreSQL."
+                        ),
+                    },
+                    {
+                        "title": "Low-Level Design (LLD) & Clean Design Patterns",
+                        "duration_mins": 24,
+                        "content_md": (
+                            "## What Interviewers Look for in LLD Rounds\n\n"
+                            "LLD tests whether you can turn messy requirements (like designing a Parking Lot, URL Shortener, or Learning Portal) into clean, extensible classes.\n\n"
+                            "### Patterns You Will Actually Use\n\n"
+                            "- **Strategy Pattern:** Swap payment or notification providers (`RazorpayStrategy`, `StripeStrategy`) behind one clean interface without giant `if/elif` chains.\n"
+                            "- **Factory Pattern:** Instantiate the right database or AI connector based on environment configuration.\n"
+                            "- **Repository / Dependency Separation:** Keep HTTP routing separate from business rules and ORM models.\n\n"
+                            "### Actionable Practice Task\n\n"
+                            "- Design classes and interfaces in Java or Python for a `NotificationService` supporting Email and In-App alerts cleanly."
+                        ),
+                    },
+                ],
+            },
+        ],
+    },
 ]

@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session, selectinload
 from app.config import get_settings
 from app.database import get_db
 from app.dependencies import get_optional_user
+from app.interview_data import INTERVIEW_GUIDES
 from app.models.course import Course, Module
 from app.models.progress import Enrollment, LessonProgress
 from app.models.user import User
@@ -69,7 +70,12 @@ def home(
     return templates.TemplateResponse(
         request,
         "index.html",
-        {"user": user, "courses": courses, "course_meta": course_meta},
+        {
+            "user": user,
+            "courses": courses,
+            "course_meta": course_meta,
+            "interview_guides": INTERVIEW_GUIDES[:3],
+        },
     )
 
 
@@ -243,6 +249,80 @@ def public_lesson_reader(
     )
 
 
+@router.get("/interview-questions")
+def interview_questions_index(
+    request: Request,
+    q: Optional[str] = None,
+    category: Optional[str] = None,
+    user: Optional[User] = Depends(get_optional_user),
+):
+    categories = sorted({g["category"] for g in INTERVIEW_GUIDES})
+    guides = INTERVIEW_GUIDES
+    if category and category != "All":
+        guides = [g for g in guides if g["category"] == category]
+    if q and q.strip():
+        term = q.strip().lower()
+        guides = [
+            g
+            for g in guides
+            if term in g["title"].lower()
+            or term in g["summary"].lower()
+            or any(term in item["q"].lower() or term in item["a"].lower() for item in g["qa"])
+        ]
+
+    return templates.TemplateResponse(
+        request,
+        "interview/index.html",
+        {
+            "user": user,
+            "guides": guides,
+            "categories": categories,
+            "search_query": q or "",
+            "selected_category": category or "All",
+        },
+    )
+
+
+@router.get("/interview-questions/{slug}")
+def interview_question_detail(
+    slug: str,
+    request: Request,
+    user: Optional[User] = Depends(get_optional_user),
+):
+    idx = next((i for i, g in enumerate(INTERVIEW_GUIDES) if g["slug"] == slug), None)
+    if idx is None:
+        raise HTTPException(status_code=404, detail="Interview question guide not found.")
+
+    guide = INTERVIEW_GUIDES[idx]
+    prev_guide = INTERVIEW_GUIDES[idx - 1] if idx > 0 else None
+    next_guide = INTERVIEW_GUIDES[idx + 1] if idx + 1 < len(INTERVIEW_GUIDES) else None
+
+    return templates.TemplateResponse(
+        request,
+        "interview/detail.html",
+        {
+            "user": user,
+            "guide": guide,
+            "prev_guide": prev_guide,
+            "next_guide": next_guide,
+        },
+    )
+
+
+@router.get("/ads.txt", include_in_schema=False)
+def ads_txt():
+    if settings.ADSENSE_CLIENT_ID:
+        pub_id = settings.ADSENSE_CLIENT_ID.replace("ca-", "")
+        return Response(
+            content=f"google.com, {pub_id}, DIRECT, f08c47fec0942fa0\n",
+            media_type="text/plain",
+        )
+    return Response(
+        content="# AdSense Publisher ID will be configured via ADSENSE_CLIENT_ID\n",
+        media_type="text/plain",
+    )
+
+
 @router.get("/about")
 def about_page(request: Request, user: Optional[User] = Depends(get_optional_user)):
     return templates.TemplateResponse(request, "about.html", {"user": user})
@@ -296,10 +376,15 @@ def sitemap_xml(db: Session = Depends(get_db)):
     urls = [
         f"  <url><loc>{settings.SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>",
         f"  <url><loc>{settings.SITE_URL}/courses</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>",
+        f"  <url><loc>{settings.SITE_URL}/interview-questions</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>",
         f"  <url><loc>{settings.SITE_URL}/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>",
         f"  <url><loc>{settings.SITE_URL}/faq</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>",
         f"  <url><loc>{settings.SITE_URL}/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>",
     ]
+    for g in INTERVIEW_GUIDES:
+        urls.append(
+            f"  <url><loc>{settings.SITE_URL}/interview-questions/{g['slug']}</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>"
+        )
     for c in courses:
         urls.append(
             f"  <url><loc>{settings.SITE_URL}/courses/{c.slug}</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>"

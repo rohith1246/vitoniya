@@ -2,6 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0TM3P2MPPE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0TM3P2MPPE');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}VitoniyaEdu | Digital Learning Journal by Vitoniya Labs{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}VitoniyaEdu by Vitoniya Labs is an editorial learning platform for structured software engineering courses in Java, Data Structures, FastAPI, and PostgreSQL.{% endblock %}">
@@ -50,7 +58,8 @@
 
             <nav id="primary-nav" class="nav-links" aria-label="Primary navigation">
                 <a href="/" class="nav-link {% if request.url.path == '/' %}active{% endif %}">Home</a>
-                <a href="/courses" class="nav-link {% if request.url.path.startswith('/courses') %}active{% endif %}">Explore Courses</a>
+                <a href="/courses" class="nav-link {% if request.url.path.startswith('/courses') %}active{% endif %}">Courses</a>
+                <a href="/interview-questions" class="nav-link {% if request.url.path.startswith('/interview-questions') %}active{% endif %}">Interview Questions</a>
                 <a href="/about" class="nav-link {% if request.url.path == '/about' %}active{% endif %}">About</a>
                 {% if user %}
                     <a href="/dashboard" class="nav-link {% if request.url.path.startswith('/dashboard') %}active{% endif %}">Journal</a>
@@ -94,6 +103,7 @@
                     <ul class="footer-links">
                         <li><a href="/" class="link-reveal">Home</a></li>
                         <li><a href="/courses" class="link-reveal">Explore Courses</a></li>
+                        <li><a href="/interview-questions" class="link-reveal">Interview Questions</a></li>
                         <li><a href="/faq" class="link-reveal">FAQ</a></li>
                     </ul>
                 </div>

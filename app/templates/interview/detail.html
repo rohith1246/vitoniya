@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}{{ guide.title }} | VitoniyaEdu{% endblock %}
+{% block meta_description %}{{ guide.summary }}{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in guide.qa %}
+    {
+      "@type": "Question",
+      "name": {{ item.q | tojson }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ item.a | tojson }}
+      }
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: 860px;">
+        <div style="margin-bottom:1.25rem; font-size:0.85rem;">
+            <a href="/interview-questions" class="link-reveal muted">&larr; Back to All Interview Questions</a>
+        </div>
+
+        <div class="card-meta" style="margin-bottom:0.85rem;">
+            <span class="tag tag-green">{{ guide.category }}</span>
+            <span class="tag tag-amber">{{ guide.level }}</span>
+            <span class="tag">{{ guide.qa|length }} Q&amp;As</span>
+        </div>
+
+        <h1>{{ guide.title }}</h1>
+        <p class="lead" style="margin-bottom:2.25rem;">{{ guide.summary }}</p>
+
+        <div style="display:grid; gap:1.25rem; margin-bottom:2.5rem;">
+            {% for item in guide.qa %}
+            <article class="card">
+                <h2 style="font-size:1.25rem; margin:0; color:var(--forest);">{{ item.q }}</h2>
+                <div class="prose" style="margin:0.75rem 0 0;">
+                    {{ item.a | lesson_html }}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div class="journal-note" style="margin-bottom:2rem;">
+            <div class="journal-note-body" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+                <div>
+                    <strong style="display:block;">Want full structured practice?</strong>
+                    <span class="muted" style="font-size:0.88rem;">Explore step-by-step coding tracks and track your progress in your Learning Journal.</span>
+                </div>
+                <a href="/courses" class="btn btn-primary btn-sm">Explore Courses</a>
+            </div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+            {% if prev_guide %}
+                <a href="/interview-questions/{{ prev_guide.slug }}" class="btn btn-secondary btn-sm">&larr; {{ prev_guide.category }} Questions</a>
+            {% else %}
+                <span></span>
+            {% endif %}
+
+            {% if next_guide %}
+                <a href="/interview-questions/{{ next_guide.slug }}" class="btn btn-primary btn-sm">{{ next_guide.category }} Questions &rarr;</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
