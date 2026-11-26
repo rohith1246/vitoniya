@@ -4,7 +4,7 @@
 <section class="hero">
     <div class="container editorial-grid">
         <div class="hero-main">
-            <span class="issue-label">Vitoniya Labs &middot; Independent Learning Publication</span>
+            <span class="issue-label">Vitoniya Labs &middot; Digital Learning Journal</span>
             <h1>Learn with purpose. Build with confidence.</h1>
             <p class="lead">
                 VitoniyaEdu is a structured learning platform for software engineering.
@@ -19,21 +19,26 @@
 
         <aside class="hero-aside">
             <div class="journal-note">
-                <div class="journal-note-label">Inside Each Track</div>
-                <ul class="journal-list">
-                    <li>
-                        <span class="journal-num">01</span>
-                        <span><strong>Focused modules:</strong> Concepts broken down into readable, sequential chapters.</span>
-                    </li>
-                    <li>
-                        <span class="journal-num">02</span>
-                        <span><strong>Code &amp; notes:</strong> Clean technical examples formatted like a reference book.</span>
-                    </li>
-                    <li>
-                        <span class="journal-num">03</span>
-                        <span><strong>Saved progress:</strong> Mark lessons complete and pick up from your current chapter.</span>
-                    </li>
-                </ul>
+                <div class="journal-note-header">
+                    <span>Inside Each Track</span>
+                    <span>Self-Paced</span>
+                </div>
+                <div class="journal-note-body">
+                    <ul class="journal-list">
+                        <li>
+                            <span class="journal-num">01</span>
+                            <span><strong>Focused modules:</strong> Concepts broken down into readable, sequential chapters.</span>
+                        </li>
+                        <li>
+                            <span class="journal-num">02</span>
+                            <span><strong>Code &amp; notes:</strong> Clean technical examples formatted like a reference book.</span>
+                        </li>
+                        <li>
+                            <span class="journal-num">03</span>
+                            <span><strong>Saved progress:</strong> Mark lessons complete and pick up from your current chapter.</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </aside>
     </div>
@@ -61,36 +66,41 @@
                 </p>
             </div>
             <div class="journal-note">
-                <div class="journal-note-label">What You Can Do Here</div>
-                <ul class="journal-list">
-                    <li><span class="journal-num">&rarr;</span><span>Browse published tracks by category, difficulty, or keyword.</span></li>
-                    <li><span class="journal-num">&rarr;</span><span>Enroll in courses with a free student account.</span></li>
-                    <li><span class="journal-num">&rarr;</span><span>Study at your own pace and mark each lesson complete.</span></li>
-                </ul>
+                <div class="journal-note-body">
+                    <div class="journal-note-label">What You Can Do Here</div>
+                    <ul class="journal-list">
+                        <li><span class="journal-num">&rarr;</span><span>Browse published tracks by category, difficulty, or keyword.</span></li>
+                        <li><span class="journal-num">&rarr;</span><span>Enroll in courses with a free student account.</span></li>
+                        <li><span class="journal-num">&rarr;</span><span>Study at your own pace and mark each lesson complete.</span></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="section section-bordered">
+<section class="section">
     <div class="container">
         <div class="section-header">
             <div>
                 <span class="section-num">02 / CURRICULUM</span>
                 <h2>Featured Courses</h2>
             </div>
-            <a href="/courses" class="link-reveal" style="font-size:0.9rem; color:var(--accent);">Explore all courses &rarr;</a>
+            <a href="/courses" class="link-reveal" style="font-size:0.9rem; color:var(--forest);">Explore all courses &rarr;</a>
         </div>
 
         <div class="card-grid">
             {% for course in courses %}
             {% set meta = course_meta[course.id] %}
-            <article class="card card-interactive {% if loop.index is odd %}card-accent-green{% else %}card-accent-terracotta{% endif %}">
-                <div>
-                    <div class="card-index">{{ "%02d" % loop.index }}</div>
+            <article class="card card-course card-interactive">
+                <div class="card-cover {% if loop.index % 3 == 1 %}card-cover-forest{% elif loop.index % 3 == 2 %}card-cover-indigo{% else %}card-cover-terracotta{% endif %}">
+                    <span class="card-cover-num">{{ "%02d" % loop.index }}</span>
+                    <span class="card-cover-cat">{{ course.category }}</span>
+                </div>
+
+                <div class="card-body">
                     <div class="card-meta">
-                        <span class="tag tag-green">{{ course.category }}</span>
-                        <span class="tag">{{ course.level }}</span>
+                        <span class="tag tag-amber">{{ course.level }}</span>
                         {% if meta.total_mins > 0 %}
                             <span class="tag">{{ meta.total_mins }} min</span>
                         {% endif %}
@@ -99,7 +109,7 @@
                     <p class="muted" style="font-size:0.93rem; margin:0 0 1rem;">{{ course.subtitle }}</p>
 
                     {% if user and meta.is_enrolled %}
-                        <div style="font-size:0.8rem; color:var(--accent); font-weight:600; margin-bottom:0.35rem;">
+                        <div style="font-size:0.8rem; color:var(--forest); font-weight:600; margin-bottom:0.35rem;">
                             Enrolled &middot; {{ meta.progress_pct }}% complete
                         </div>
                         <div class="progress-track">
@@ -113,7 +123,7 @@
                     {% if user and meta.is_enrolled and meta.first_lesson_id %}
                         <a href="/learn/{{ course.slug }}/{{ meta.first_lesson_id }}" class="btn btn-primary btn-sm">Continue</a>
                     {% else %}
-                        <a href="/courses/{{ course.slug }}" class="link-reveal" style="color:var(--accent);">Explore &rarr;</a>
+                        <a href="/courses/{{ course.slug }}" class="btn btn-secondary btn-sm">Explore &rarr;</a>
                     {% endif %}
                 </div>
             </article>
@@ -124,7 +134,7 @@
     </div>
 </section>
 
-<section id="how-learning-works" class="section section-surface">
+<section id="how-learning-works" class="section section-tint">
     <div class="container">
         <div class="section-header">
             <div>
@@ -163,17 +173,17 @@
     </div>
 </section>
 
-<section class="section section-bordered">
+<section class="section section-forest">
     <div class="container split-2">
         <div>
             <span class="section-num">04 / ADVANTAGES</span>
             <h2>Why Learn Here?</h2>
             <p class="muted">Designed to respect your attention and make steady progress visible.</p>
             <ul class="journal-list" style="margin-top:1.5rem;">
-                <li><span class="journal-num">01</span><span><strong>Structured lessons:</strong> Clear module hierarchy instead of scattered playlists.</span></li>
-                <li><span class="journal-num">02</span><span><strong>Self-paced learning:</strong> Study on your own schedule with zero expiring access.</span></li>
-                <li><span class="journal-num">03</span><span><strong>Practical focus:</strong> Grounded in real backend and interview fundamentals.</span></li>
-                <li><span class="journal-num">04</span><span><strong>Accessible reading UI:</strong> Clean contrast, keyboard navigation, and comfortable line width.</span></li>
+                <li><span class="journal-num" style="color:#F6C391;">01</span><span><strong>Structured lessons:</strong> Clear module hierarchy instead of scattered playlists.</span></li>
+                <li><span class="journal-num" style="color:#F6C391;">02</span><span><strong>Self-paced learning:</strong> Study on your own schedule with zero expiring access.</span></li>
+                <li><span class="journal-num" style="color:#F6C391;">03</span><span><strong>Practical focus:</strong> Grounded in real backend and interview fundamentals.</span></li>
+                <li><span class="journal-num" style="color:#F6C391;">04</span><span><strong>Accessible reading UI:</strong> Clean contrast, keyboard navigation, and comfortable line width.</span></li>
             </ul>
         </div>
 
@@ -183,7 +193,7 @@
                 &ldquo;Real skill comes from understanding why something works, writing it yourself, and showing up consistently — not from passively binge-watching tutorials.&rdquo;
             </p>
             <p class="muted" style="margin:0;">
-                VitoniyaEdu is deliberately quiet. Every layout choice prioritizes comprehension, readable code,
+                VitoniyaEdu is deliberately calm. Every layout choice prioritizes comprehension, readable code,
                 and steady daily momentum over flashy distractions.
             </p>
         </div>
@@ -197,7 +207,7 @@
                 <span class="section-num">06 / FAQ</span>
                 <h2>Frequently Asked Questions</h2>
             </div>
-            <a href="/faq" class="link-reveal" style="font-size:0.9rem; color:var(--accent);">Full FAQ page &rarr;</a>
+            <a href="/faq" class="link-reveal" style="font-size:0.9rem; color:var(--forest);">Full FAQ page &rarr;</a>
         </div>
 
         <div class="faq-list">
@@ -207,7 +217,7 @@
             </details>
             <details class="faq-item">
                 <summary>How do I start learning?</summary>
-                <div class="faq-answer">Browse the <a href="/courses" class="link-reveal" style="color:var(--accent);">Explore Courses</a> page, create a free student account, and click Enroll on any published course.</div>
+                <div class="faq-answer">Browse the <a href="/courses" class="link-reveal" style="color:var(--forest);">Explore Courses</a> page, create a free student account, and click Enroll on any published course.</div>
             </details>
             <details class="faq-item">
                 <summary>Do I need an account?</summary>
@@ -215,7 +225,7 @@
             </details>
             <details class="faq-item">
                 <summary>Are courses free or paid?</summary>
-                <div class="faq-answer">All currently published courses on VitoniyaEdu are free to enroll and study. *(Configurable placeholder: pricing policy can be updated here if paid tracks are introduced later.)*</div>
+                <div class="faq-answer">All currently published courses on VitoniyaEdu are free to enroll and study. <em>[Configurable placeholder: pricing policy can be updated here if paid tracks are introduced later.]</em></div>
             </details>
             <details class="faq-item">
                 <summary>Can I learn at my own pace?</summary>
@@ -223,11 +233,11 @@
             </details>
             <details class="faq-item">
                 <summary>How is progress tracked?</summary>
-                <div class="faq-answer">Inside each lesson, click <strong>Mark as complete</strong>. Your completion percentage and current chapter update automatically in your Learning Journal.</div>
+                <div class="faq-answer">Inside each lesson, click <strong>Mark as completed</strong>. Your completion percentage and current chapter update automatically in your Learning Journal.</div>
             </details>
             <details class="faq-item">
                 <summary>How do I contact support?</summary>
-                <div class="faq-answer">Visit our <a href="/contact" class="link-reveal" style="color:var(--accent);">Contact &amp; Support</a> page or email <code>info@vitoniya.com</code>.</div>
+                <div class="faq-answer">Visit our <a href="/contact" class="link-reveal" style="color:var(--forest);">Contact &amp; Support</a> page or email <code>info@vitoniya.com</code>.</div>
             </details>
         </div>
     </div>

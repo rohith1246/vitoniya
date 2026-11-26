@@ -39,7 +39,7 @@
                     <option value="lessons" {% if selected_sort == 'lessons' %}selected{% endif %}>Most Lessons</option>
                 </select>
 
-                <button type="submit" class="btn btn-secondary btn-sm">Filter</button>
+                <button type="submit" class="btn btn-primary btn-sm">Filter</button>
             </form>
         </div>
 
@@ -47,12 +47,15 @@
         <div class="card-grid">
             {% for course in courses %}
             {% set meta = course_meta[course.id] %}
-            <article class="card card-interactive {% if loop.index is odd %}card-accent-green{% else %}card-accent-terracotta{% endif %}">
-                <div>
-                    <div class="card-index">{{ "%02d" % loop.index }}</div>
+            <article class="card card-course card-interactive">
+                <div class="card-cover {% if loop.index % 3 == 1 %}card-cover-forest{% elif loop.index % 3 == 2 %}card-cover-indigo{% else %}card-cover-terracotta{% endif %}">
+                    <span class="card-cover-num">{{ "%02d" % loop.index }}</span>
+                    <span class="card-cover-cat">{{ course.category }}</span>
+                </div>
+
+                <div class="card-body">
                     <div class="card-meta">
-                        <span class="tag tag-green">{{ course.category }}</span>
-                        <span class="tag">{{ course.level }}</span>
+                        <span class="tag tag-amber">{{ course.level }}</span>
                         {% if meta.total_mins > 0 %}
                             <span class="tag">{{ meta.total_mins }} min</span>
                         {% endif %}
@@ -61,7 +64,7 @@
                     <p class="muted" style="font-size:0.93rem; margin:0 0 1rem;">{{ course.subtitle }}</p>
 
                     {% if user and meta.is_enrolled %}
-                        <div style="font-size:0.8rem; color:var(--accent); font-weight:600; margin-bottom:0.35rem;">
+                        <div style="font-size:0.8rem; color:var(--forest); font-weight:600; margin-bottom:0.35rem;">
                             Enrolled &middot; {{ meta.progress_pct }}% complete
                         </div>
                         <div class="progress-track">
