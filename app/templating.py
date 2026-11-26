@@ -46,7 +46,11 @@ def _format_text_blocks(text: str) -> str:
     rendered = []
     for block in blocks:
         lines = [line.rstrip() for line in block.splitlines() if line.strip()]
-        if all(line.lstrip().startswith("- ") for line in lines):
+        if len(lines) == 1 and lines[0].lstrip().startswith("### "):
+            rendered.append(f"<h3>{_format_inline(lines[0].lstrip()[4:])}</h3>")
+        elif len(lines) == 1 and lines[0].lstrip().startswith("## "):
+            rendered.append(f"<h2>{_format_inline(lines[0].lstrip()[3:])}</h2>")
+        elif all(line.lstrip().startswith("- ") for line in lines):
             items = "".join(
                 f"<li>{_format_inline(line.lstrip()[2:])}</li>" for line in lines
             )

@@ -1047,6 +1047,19 @@ input:focus, select:focus, textarea:focus {
     margin: 0 0 1.2rem;
 }
 
+.prose h2 {
+    font-size: 1.45rem;
+    margin: 2rem 0 0.7rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.prose h3 {
+    font-size: 1.15rem;
+    margin: 1.45rem 0 0.5rem;
+    color: var(--forest);
+}
+
 .prose ul, .prose ol {
     margin: 0 0 1.25rem;
     padding-left: 1.4rem;
