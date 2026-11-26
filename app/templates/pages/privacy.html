@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy | VitoniyaEdu{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: var(--reading-width);">
+        <span class="issue-label">Legal &middot; Placeholder Draft</span>
+        <h1>Privacy Policy</h1>
+        <p class="muted" style="font-size:0.88rem;">
+            <em>Note: Review and update the bracketed details below before publishing formal legal terms.</em>
+        </p>
+
+        <div class="prose">
+            <p><strong>1. Information We Store</strong><br>
+            When you create a student account on VitoniyaEdu, we store your full name, email address, securely hashed password (via bcrypt), course enrollments, and lesson completion records in our PostgreSQL database.</p>
+
+            <p><strong>2. Session Cookies</strong><br>
+            VitoniyaEdu uses a single <code>HttpOnly</code> session cookie (<code>vitoniya_session</code>) strictly to keep you signed in securely. We do not sell your personal data.</p>
+
+            <p><strong>3. Data Removal &amp; Contact</strong><br>
+            To request account deletion or ask questions about your data, contact <code>info@vitoniya.com</code>. <em>[Owner to verify: add registered entity address and retention period if required.]</em></p>
+        </div>
+    </div>
+</section>
+{% endblock %}

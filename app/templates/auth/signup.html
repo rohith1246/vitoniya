@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Create Account | Vitoniya Edu{% endblock %}
+{% block title %}Signup | VitoniyaEdu{% endblock %}
 {% block meta_robots %}noindex, nofollow{% endblock %}
 
 {% block content %}
@@ -8,7 +8,7 @@
     <div class="auth-split">
         <div class="auth-editorial">
             <div>
-                <span class="issue-label">Vitoniya Edu &middot; Membership</span>
+                <span class="issue-label">VitoniyaEdu &middot; Membership</span>
                 <h2 style="font-size:2rem; margin-bottom:1rem;">Start your learning journal.</h2>
                 <p class="muted" style="margin:0;">
                     Enroll in structured engineering tracks, track chapter completion, and build real fundamentals at your own pace.
@@ -26,13 +26,13 @@
             </p>
 
             {% if error %}
-                <div class="alert-error">{{ error }}</div>
+                <div class="alert-error" role="alert">{{ error }}</div>
             {% endif %}
 
-            <form action="/signup" method="post">
+            <form action="/signup" method="post" data-loading-text="Creating account...">
                 <div class="form-group">
                     <label for="full_name">Full name</label>
-                    <input type="text" id="full_name" name="full_name" required autocomplete="name" placeholder="Your full name">
+                    <input type="text" id="full_name" name="full_name" required minlength="2" autocomplete="name" placeholder="Your full name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email address</label>
@@ -40,7 +40,10 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password" placeholder="Minimum 6 characters">
+                    <div class="password-field">
+                        <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password" placeholder="Minimum 6 characters">
+                        <button type="button" class="password-toggle" data-password-toggle="password" aria-label="Toggle password visibility">Show</button>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%;">Create student account</button>
             </form>

@@ -1,4 +1,4 @@
-"""Student learning workspace: dashboard, enrollment, lesson player, progress."""
+"""Student learning workspace: journal dashboard, enrollment, lesson player, progress."""
 
 from datetime import datetime, timezone
 
@@ -29,18 +29,21 @@ def student_dashboard(
         .all()
     )
 
-    completed_ids = {
-        row[0]
-        for row in db.query(LessonProgress.lesson_id)
+    completed_records = (
+        db.query(LessonProgress)
         .filter(
             LessonProgress.user_id == current_user.id,
             LessonProgress.is_completed.is_(True),
         )
+        .order_by(LessonProgress.completed_at.desc())
         .all()
-    }
+    )
+    completed_ids = {rec.lesson_id for rec in completed_records}
 
     enrolled_cards = []
+    enrolled_course_ids = set()
     for enr in enrollments:
+        enrolled_course_ids.add(enr.course_id)
         course = (
             db.query(Course)
             .options(selectinload(Course.modules).selectinload(Module.lessons))
@@ -69,12 +72,42 @@ def student_dashboard(
             }
         )
 
+    # Recent learning activity from real completed lessons
+    recent_activity = []
+    for rec in completed_records[:5]:
+        lesson = db.query(Lesson).filter(Lesson.id == rec.lesson_id).first()
+        if lesson and lesson.module and lesson.module.course:
+            recent_activity.append(
+                {
+                    "lesson_title": lesson.title,
+                    "course_title": lesson.module.course.title,
+                    "course_slug": lesson.module.course.slug,
+                    "lesson_id": lesson.id,
+                    "completed_at": rec.completed_at,
+                }
+            )
+
+    # Recommended courses not yet enrolled
+    recommended_courses = (
+        db.query(Course)
+        .options(selectinload(Course.modules).selectinload(Module.lessons))
+        .filter(
+            Course.is_published.is_(True),
+            ~Course.id.in_(enrolled_course_ids) if enrolled_course_ids else True,
+        )
+        .order_by(Course.created_at.asc())
+        .limit(3)
+        .all()
+    )
+
     return templates.TemplateResponse(
         request,
         "learn/dashboard.html",
         {
             "user": current_user,
             "enrolled_cards": enrolled_cards,
+            "recent_activity": recent_activity,
+            "recommended_courses": recommended_courses,
         },
     )
 
@@ -168,6 +201,8 @@ def lesson_player(
             "user": current_user,
             "course": course,
             "lesson": current_lesson,
+            "chapter_number": current_idx + 1,
+            "total_lessons": total_lessons,
             "prev_lesson": prev_lesson,
             "next_lesson": next_lesson,
             "completed_ids": completed_ids,

@@ -1,9 +1,11 @@
 """Admin-only console for courses, modules, lessons, and user management."""
 
 import re
+from typing import Optional
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import RedirectResponse
+from sqlalchemy import or_
 from sqlalchemy.orm import Session, selectinload
 
 from app.database import get_db
@@ -24,16 +26,24 @@ def _slugify(text: str) -> str:
 @router.get("")
 def admin_dashboard(
     request: Request,
+    q: Optional[str] = None,
     db: Session = Depends(get_db),
     current_user: User = Depends(require_roles("admin")),
 ):
-    users = db.query(User).order_by(User.created_at.desc()).all()
-    courses = (
-        db.query(Course)
-        .options(selectinload(Course.modules).selectinload(Module.lessons))
-        .order_by(Course.created_at.desc())
-        .all()
-    )
+    user_query = db.query(User)
+    course_query = db.query(Course).options(selectinload(Course.modules).selectinload(Module.lessons))
+
+    if q and q.strip():
+        term = f"%{q.strip()}%"
+        user_query = user_query.filter(or_(User.full_name.ilike(term), User.email.ilike(term)))
+        course_query = course_query.filter(or_(Course.title.ilike(term), Course.category.ilike(term)))
+
+    users = user_query.order_by(User.created_at.desc()).all()
+    courses = course_query.order_by(Course.created_at.desc()).all()
+
+    total_courses = db.query(Course).count()
+    total_lessons = db.query(Lesson).count()
+    total_users = db.query(User).count()
     total_enrollments = db.query(Enrollment).count()
 
     return templates.TemplateResponse(
@@ -43,6 +53,10 @@ def admin_dashboard(
             "user": current_user,
             "users": users,
             "courses": courses,
+            "search_query": q or "",
+            "total_courses": total_courses,
+            "total_lessons": total_lessons,
+            "total_users": total_users,
             "total_enrollments": total_enrollments,
         },
     )

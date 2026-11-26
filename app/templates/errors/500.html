@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Something Went Wrong | VitoniyaEdu{% endblock %}
+{% block meta_robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: 640px;">
+        <span class="issue-label">Error {{ status_code or 500 }}</span>
+        <h1>We couldn't complete that request.</h1>
+        <p class="lead">
+            {{ detail or "An unexpected error occurred. Please try again or return to the homepage." }}
+        </p>
+        <div class="hero-actions">
+            <a href="/" class="btn btn-primary">Return Home</a>
+            <a href="/contact" class="btn btn-secondary">Contact Support</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

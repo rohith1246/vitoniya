@@ -1,53 +1,96 @@
 {% extends "base.html" %}
 
-{% block title %}Curriculum | Vitoniya Edu{% endblock %}
+{% block title %}Explore Courses | VitoniyaEdu{% endblock %}
 
 {% block content %}
 <section class="section">
     <div class="container">
         <div class="section-header">
             <div>
-                <span class="section-num">INDEX / ALL TRACKS</span>
-                <h1>Curriculum</h1>
+                <span class="section-num">INDEX / CURRICULUM</span>
+                <h1>Explore Courses</h1>
                 <p class="muted" style="margin:0;">Structured engineering tracks published by Vitoniya Labs.</p>
             </div>
-            <form method="get" action="/courses" style="display:flex; gap:0.65rem; flex-wrap:wrap;">
-                <select name="category" style="width:auto;" onchange="this.form.submit()">
+
+            <form method="get" action="/courses" class="filter-bar">
+                <label for="q" class="sr-only">Search courses</label>
+                <input type="text" id="q" name="q" value="{{ search_query }}" placeholder="Search courses...">
+
+                <label for="category" class="sr-only">Category</label>
+                <select id="category" name="category" onchange="this.form.submit()">
                     <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All Categories</option>
                     {% for cat in categories %}
                         <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
                     {% endfor %}
                 </select>
-                <select name="level" style="width:auto;" onchange="this.form.submit()">
+
+                <label for="level" class="sr-only">Level</label>
+                <select id="level" name="level" onchange="this.form.submit()">
                     <option value="All" {% if selected_level == 'All' %}selected{% endif %}>All Levels</option>
                     <option value="Beginner" {% if selected_level == 'Beginner' %}selected{% endif %}>Beginner</option>
                     <option value="Intermediate" {% if selected_level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
                     <option value="Advanced" {% if selected_level == 'Advanced' %}selected{% endif %}>Advanced</option>
                 </select>
+
+                <label for="sort" class="sr-only">Sort by</label>
+                <select id="sort" name="sort" onchange="this.form.submit()">
+                    <option value="newest" {% if selected_sort == 'newest' %}selected{% endif %}>Default Order</option>
+                    <option value="title" {% if selected_sort == 'title' %}selected{% endif %}>Title (A–Z)</option>
+                    <option value="lessons" {% if selected_sort == 'lessons' %}selected{% endif %}>Most Lessons</option>
+                </select>
+
+                <button type="submit" class="btn btn-secondary btn-sm">Filter</button>
             </form>
         </div>
 
+        {% if courses %}
         <div class="card-grid">
             {% for course in courses %}
-            <article class="card card-interactive">
+            {% set meta = course_meta[course.id] %}
+            <article class="card card-interactive {% if loop.index is odd %}card-accent-green{% else %}card-accent-terracotta{% endif %}">
                 <div>
                     <div class="card-index">{{ "%02d" % loop.index }}</div>
                     <div class="card-meta">
                         <span class="tag tag-green">{{ course.category }}</span>
                         <span class="tag">{{ course.level }}</span>
+                        {% if meta.total_mins > 0 %}
+                            <span class="tag">{{ meta.total_mins }} min</span>
+                        {% endif %}
                     </div>
                     <h3>{{ course.title }}</h3>
-                    <p class="muted" style="font-size:0.93rem; margin:0;">{{ course.subtitle }}</p>
+                    <p class="muted" style="font-size:0.93rem; margin:0 0 1rem;">{{ course.subtitle }}</p>
+
+                    {% if user and meta.is_enrolled %}
+                        <div style="font-size:0.8rem; color:var(--accent); font-weight:600; margin-bottom:0.35rem;">
+                            Enrolled &middot; {{ meta.progress_pct }}% complete
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: {{ meta.progress_pct }}%;"></div>
+                        </div>
+                    {% endif %}
                 </div>
+
                 <div class="card-footer">
                     <span>{{ course.modules|length }} modules &middot; {{ course.total_lessons }} lessons</span>
-                    <a href="/courses/{{ course.slug }}" class="btn btn-primary btn-sm">Open track</a>
+                    <a href="/courses/{{ course.slug }}" class="btn btn-primary btn-sm">
+                        {% if user and meta.is_enrolled %}Continue{% else %}Open track{% endif %}
+                    </a>
                 </div>
             </article>
-            {% else %}
-            <p class="muted">No courses match your selected filters.</p>
             {% endfor %}
         </div>
+        {% else %}
+        <div class="card" style="max-width:560px;">
+            <div class="card-index">00</div>
+            <h3>No courses found</h3>
+            <p class="muted" style="margin:0;">
+                No published courses match your current search or filter selection.
+            </p>
+            <div>
+                <a href="/courses" class="btn btn-secondary btn-sm">Reset filters</a>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}

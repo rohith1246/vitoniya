@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}FAQ | VitoniyaEdu{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: 820px;">
+        <span class="issue-label">Support &middot; FAQ</span>
+        <h1>Frequently Asked Questions</h1>
+        <p class="lead">Answers based on how VitoniyaEdu currently works.</p>
+
+        <div class="faq-list">
+            <details class="faq-item" open>
+                <summary>What is VitoniyaEdu?</summary>
+                <div class="faq-answer">VitoniyaEdu is an independent educational platform developed by Vitoniya Labs, focused on structured software engineering and computer science tracks.</div>
+            </details>
+            <details class="faq-item">
+                <summary>How do I start learning?</summary>
+                <div class="faq-answer">Create a free student account on the <a href="/signup" class="link-reveal" style="color:var(--accent);">Signup</a> page, open any course in <a href="/courses" class="link-reveal" style="color:var(--accent);">Explore Courses</a>, and click <strong>Enroll in this course</strong>.</div>
+            </details>
+            <details class="faq-item">
+                <summary>Do I need an account?</summary>
+                <div class="faq-answer">Browsing the catalog and viewing course syllabi is open to everyone. A student account is required to enroll, read lessons, and save progress.</div>
+            </details>
+            <details class="faq-item">
+                <summary>Are courses free or paid?</summary>
+                <div class="faq-answer">All currently published courses are free to enroll and study. <em>[Configurable placeholder: update this policy if paid courses or subscriptions are added.]</em></div>
+            </details>
+            <details class="faq-item">
+                <summary>Can I learn at my own pace?</summary>
+                <div class="faq-answer">Yes. All tracks are self-paced with no fixed deadlines.</div>
+            </details>
+            <details class="faq-item">
+                <summary>How is progress tracked?</summary>
+                <div class="faq-answer">Each lesson includes a <strong>Mark as completed</strong> button. Your completion count and percentage are saved to your account and shown in your Learning Journal.</div>
+            </details>
+            <details class="faq-item">
+                <summary>How do I contact support?</summary>
+                <div class="faq-answer">Reach us anytime via the <a href="/contact" class="link-reveal" style="color:var(--accent);">Contact &amp; Support</a> page.</div>
+            </details>
+        </div>
+    </div>
+</section>
+{% endblock %}

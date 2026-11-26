@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Sign in | Vitoniya Edu{% endblock %}
+{% block title %}Login | VitoniyaEdu{% endblock %}
 {% block meta_robots %}noindex, nofollow{% endblock %}
 
 {% block content %}
@@ -8,10 +8,10 @@
     <div class="auth-split">
         <div class="auth-editorial">
             <div>
-                <span class="issue-label">Vitoniya Edu &middot; Journal</span>
+                <span class="issue-label">VitoniyaEdu &middot; Journal</span>
                 <h2 style="font-size:2rem; margin-bottom:1rem;">Pick up right where you left off.</h2>
                 <p class="muted" style="margin:0;">
-                    Your enrolled tracks, completed chapters, and reading notes stay synced to your account.
+                    Your enrolled tracks, completed chapters, and learning progress stay synced to your account.
                 </p>
             </div>
             <div class="muted" style="font-size:0.84rem;">
@@ -26,17 +26,20 @@
             </p>
 
             {% if error %}
-                <div class="alert-error">{{ error }}</div>
+                <div class="alert-error" role="alert">{{ error }}</div>
             {% endif %}
 
-            <form action="/login" method="post">
+            <form action="/login" method="post" data-loading-text="Signing in...">
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required autocomplete="current-password">
+                    <div class="password-field">
+                        <input type="password" id="password" name="password" required autocomplete="current-password">
+                        <button type="button" class="password-toggle" data-password-toggle="password" aria-label="Toggle password visibility">Show</button>
+                    </div>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width:100%;">Sign in</button>
             </form>

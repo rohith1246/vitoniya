@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Access Denied (403) | VitoniyaEdu{% endblock %}
+{% block meta_robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: 640px;">
+        <span class="issue-label">Error 403 &middot; Restricted</span>
+        <h1>Access denied.</h1>
+        <p class="lead">
+            {{ detail or "Your current account role does not have permission to view this page." }}
+        </p>
+        <div class="hero-actions">
+            <a href="/dashboard" class="btn btn-primary">Go to My Journal</a>
+            <a href="/" class="btn btn-secondary">Return Home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -4,37 +4,34 @@
 <section class="hero">
     <div class="container editorial-grid">
         <div class="hero-main">
-            <span class="issue-label">Vol. 01 &middot; Vitoniya Labs Education</span>
-            <h1>A calm, deliberate way to master software engineering.</h1>
+            <span class="issue-label">Vitoniya Labs &middot; Independent Learning Publication</span>
+            <h1>Learn with purpose. Build with confidence.</h1>
             <p class="lead">
-                Vitoniya Edu is a structured learning journal built for engineers who prefer clarity over noise.
-                Study Java, Data Structures, FastAPI, and PostgreSQL chapter by chapter, with real progress tracking.
+                VitoniyaEdu is a structured learning platform for software engineering.
+                Study Java, Data Structures, FastAPI, and PostgreSQL through distraction-free lessons,
+                clear technical notes, and real chapter-by-chapter progress tracking.
             </p>
             <div class="hero-actions">
-                <a href="/courses" class="btn btn-primary">Explore Curriculum</a>
-                {% if user %}
-                    <a href="/dashboard" class="btn btn-secondary">Open My Journal</a>
-                {% else %}
-                    <a href="/signup" class="btn btn-secondary">Create Student Account</a>
-                {% endif %}
+                <a href="/courses" class="btn btn-primary">Explore Courses</a>
+                <a href="#how-learning-works" class="btn btn-secondary">How Learning Works</a>
             </div>
         </div>
 
         <aside class="hero-aside">
             <div class="journal-note">
-                <div class="journal-note-label">Editorial Principles</div>
+                <div class="journal-note-label">Inside Each Track</div>
                 <ul class="journal-list">
                     <li>
                         <span class="journal-num">01</span>
-                        <span><strong>Structured chapters:</strong> Every subject is broken into focused, readable lessons.</span>
+                        <span><strong>Focused modules:</strong> Concepts broken down into readable, sequential chapters.</span>
                     </li>
                     <li>
                         <span class="journal-num">02</span>
-                        <span><strong>Measured progress:</strong> Track completed chapters and resume exactly where you left off.</span>
+                        <span><strong>Code &amp; notes:</strong> Clean technical examples formatted like a reference book.</span>
                     </li>
                     <li>
                         <span class="journal-num">03</span>
-                        <span><strong>Interview-ready depth:</strong> Built around Java, DSA, FastAPI, and PostgreSQL fundamentals.</span>
+                        <span><strong>Saved progress:</strong> Mark lessons complete and pick up from your current chapter.</span>
                     </li>
                 </ul>
             </div>
@@ -42,36 +39,196 @@
     </div>
 </section>
 
-<section class="section">
+<section class="section section-bordered">
     <div class="container">
         <div class="section-header">
             <div>
-                <span class="section-num">01 / CURRICULUM</span>
-                <h2>Published Tracks</h2>
+                <span class="section-num">01 / OVERVIEW</span>
+                <h2>What is VitoniyaEdu?</h2>
             </div>
-            <a href="/courses" class="link-reveal" style="font-size:0.9rem; color:var(--accent);">View all courses &rarr;</a>
+        </div>
+
+        <div class="split-2">
+            <div>
+                <p style="margin-top:0;">
+                    VitoniyaEdu is built by <strong>Vitoniya Labs</strong> for learners who want structured,
+                    practical technical education without algorithmic clutter or noisy dashboards.
+                </p>
+                <p class="muted" style="margin-bottom:0;">
+                    Each course is organized into modules and individual lessons combining reading notes,
+                    code examples, and optional video walkthroughs. Once enrolled, your completion state is saved
+                    to your personal learning journal.
+                </p>
+            </div>
+            <div class="journal-note">
+                <div class="journal-note-label">What You Can Do Here</div>
+                <ul class="journal-list">
+                    <li><span class="journal-num">&rarr;</span><span>Browse published tracks by category, difficulty, or keyword.</span></li>
+                    <li><span class="journal-num">&rarr;</span><span>Enroll in courses with a free student account.</span></li>
+                    <li><span class="journal-num">&rarr;</span><span>Study at your own pace and mark each lesson complete.</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-bordered">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <span class="section-num">02 / CURRICULUM</span>
+                <h2>Featured Courses</h2>
+            </div>
+            <a href="/courses" class="link-reveal" style="font-size:0.9rem; color:var(--accent);">Explore all courses &rarr;</a>
         </div>
 
         <div class="card-grid">
             {% for course in courses %}
-            <article class="card card-interactive">
+            {% set meta = course_meta[course.id] %}
+            <article class="card card-interactive {% if loop.index is odd %}card-accent-green{% else %}card-accent-terracotta{% endif %}">
                 <div>
                     <div class="card-index">{{ "%02d" % loop.index }}</div>
                     <div class="card-meta">
                         <span class="tag tag-green">{{ course.category }}</span>
                         <span class="tag">{{ course.level }}</span>
+                        {% if meta.total_mins > 0 %}
+                            <span class="tag">{{ meta.total_mins }} min</span>
+                        {% endif %}
                     </div>
                     <h3>{{ course.title }}</h3>
-                    <p class="muted" style="font-size:0.93rem; margin:0;">{{ course.subtitle }}</p>
+                    <p class="muted" style="font-size:0.93rem; margin:0 0 1rem;">{{ course.subtitle }}</p>
+
+                    {% if user and meta.is_enrolled %}
+                        <div style="font-size:0.8rem; color:var(--accent); font-weight:600; margin-bottom:0.35rem;">
+                            Enrolled &middot; {{ meta.progress_pct }}% complete
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" style="width: {{ meta.progress_pct }}%;"></div>
+                        </div>
+                    {% endif %}
                 </div>
+
                 <div class="card-footer">
                     <span>{{ course.modules|length }} modules &middot; {{ course.total_lessons }} lessons</span>
-                    <a href="/courses/{{ course.slug }}" class="link-reveal" style="color:var(--accent);">Read syllabus &rarr;</a>
+                    {% if user and meta.is_enrolled and meta.first_lesson_id %}
+                        <a href="/learn/{{ course.slug }}/{{ meta.first_lesson_id }}" class="btn btn-primary btn-sm">Continue</a>
+                    {% else %}
+                        <a href="/courses/{{ course.slug }}" class="link-reveal" style="color:var(--accent);">Explore &rarr;</a>
+                    {% endif %}
                 </div>
             </article>
             {% else %}
-            <p class="muted">No published tracks yet.</p>
+            <p class="muted">No published courses are available yet.</p>
             {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="how-learning-works" class="section section-surface">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <span class="section-num">03 / LEARNING PROCESS</span>
+                <h2>How Learning Works</h2>
+            </div>
+        </div>
+
+        <div class="process-grid">
+            <div class="process-item">
+                <div class="process-step">01</div>
+                <h3>Discover a course</h3>
+                <p class="muted" style="font-size:0.9rem; margin:0;">Review the full syllabus, module list, and lesson durations before enrolling.</p>
+            </div>
+            <div class="process-item">
+                <div class="process-step">02</div>
+                <h3>Learn through lessons</h3>
+                <p class="muted" style="font-size:0.9rem; margin:0;">Read focused explanations, inspect code blocks, and follow along chapter by chapter.</p>
+            </div>
+            <div class="process-item">
+                <div class="process-step">03</div>
+                <h3>Practice consistently</h3>
+                <p class="muted" style="font-size:0.9rem; margin:0;">Apply the concepts and patterns directly in your own editor as you go.</p>
+            </div>
+            <div class="process-item">
+                <div class="process-step">04</div>
+                <h3>Track your progress</h3>
+                <p class="muted" style="font-size:0.9rem; margin:0;">Mark completed lessons to keep an accurate record in your Learning Journal.</p>
+            </div>
+            <div class="process-item">
+                <div class="process-step">05</div>
+                <h3>Complete the track</h3>
+                <p class="muted" style="font-size:0.9rem; margin:0;">Finish every module in sequence and move on to the next engineering subject.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-bordered">
+    <div class="container split-2">
+        <div>
+            <span class="section-num">04 / ADVANTAGES</span>
+            <h2>Why Learn Here?</h2>
+            <p class="muted">Designed to respect your attention and make steady progress visible.</p>
+            <ul class="journal-list" style="margin-top:1.5rem;">
+                <li><span class="journal-num">01</span><span><strong>Structured lessons:</strong> Clear module hierarchy instead of scattered playlists.</span></li>
+                <li><span class="journal-num">02</span><span><strong>Self-paced learning:</strong> Study on your own schedule with zero expiring access.</span></li>
+                <li><span class="journal-num">03</span><span><strong>Practical focus:</strong> Grounded in real backend and interview fundamentals.</span></li>
+                <li><span class="journal-num">04</span><span><strong>Accessible reading UI:</strong> Clean contrast, keyboard navigation, and comfortable line width.</span></li>
+            </ul>
+        </div>
+
+        <div class="philosophy-box">
+            <span class="section-num">05 / PHILOSOPHY</span>
+            <p class="philosophy-quote">
+                &ldquo;Real skill comes from understanding why something works, writing it yourself, and showing up consistently — not from passively binge-watching tutorials.&rdquo;
+            </p>
+            <p class="muted" style="margin:0;">
+                VitoniyaEdu is deliberately quiet. Every layout choice prioritizes comprehension, readable code,
+                and steady daily momentum over flashy distractions.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <div>
+                <span class="section-num">06 / FAQ</span>
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <a href="/faq" class="link-reveal" style="font-size:0.9rem; color:var(--accent);">Full FAQ page &rarr;</a>
+        </div>
+
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>What is VitoniyaEdu?</summary>
+                <div class="faq-answer">VitoniyaEdu is an independent educational platform developed by Vitoniya Labs, offering structured courses in software engineering and backend development.</div>
+            </details>
+            <details class="faq-item">
+                <summary>How do I start learning?</summary>
+                <div class="faq-answer">Browse the <a href="/courses" class="link-reveal" style="color:var(--accent);">Explore Courses</a> page, create a free student account, and click Enroll on any published course.</div>
+            </details>
+            <details class="faq-item">
+                <summary>Do I need an account?</summary>
+                <div class="faq-answer">You can view the course catalog and syllabi without an account, but you need a student account to enroll, open lessons, and save your progress.</div>
+            </details>
+            <details class="faq-item">
+                <summary>Are courses free or paid?</summary>
+                <div class="faq-answer">All currently published courses on VitoniyaEdu are free to enroll and study. *(Configurable placeholder: pricing policy can be updated here if paid tracks are introduced later.)*</div>
+            </details>
+            <details class="faq-item">
+                <summary>Can I learn at my own pace?</summary>
+                <div class="faq-answer">Yes. All lessons are self-paced with no cohort deadlines.</div>
+            </details>
+            <details class="faq-item">
+                <summary>How is progress tracked?</summary>
+                <div class="faq-answer">Inside each lesson, click <strong>Mark as complete</strong>. Your completion percentage and current chapter update automatically in your Learning Journal.</div>
+            </details>
+            <details class="faq-item">
+                <summary>How do I contact support?</summary>
+                <div class="faq-answer">Visit our <a href="/contact" class="link-reveal" style="color:var(--accent);">Contact &amp; Support</a> page or email <code>info@vitoniya.com</code>.</div>
+            </details>
         </div>
     </div>
 </section>

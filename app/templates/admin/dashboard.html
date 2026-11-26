@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Admin Console | Vitoniya Edu{% endblock %}
+{% block title %}Admin Console | VitoniyaEdu{% endblock %}
 {% block meta_robots %}noindex, nofollow{% endblock %}
 
 {% block content %}
@@ -8,30 +8,43 @@
     <div class="container">
         <div class="section-header">
             <div>
+                <span class="section-num">ADMINISTRATION</span>
                 <h1>Admin Console</h1>
-                <p class="muted" style="margin:0;">Manage courses, curriculum, and student accounts.</p>
+                <p class="muted" style="margin:0;">Manage courses, curriculum lessons, and registered user accounts.</p>
             </div>
+            <form method="get" action="/admin" class="filter-bar">
+                <label for="admin-q" class="sr-only">Search courses or users</label>
+                <input type="text" id="admin-q" name="q" value="{{ search_query }}" placeholder="Search courses or users...">
+                <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+                {% if search_query %}
+                    <a href="/admin" class="btn btn-ghost btn-sm">Clear</a>
+                {% endif %}
+            </form>
         </div>
 
         <div class="stats-row">
             <div class="stat-box">
-                <div class="stat-num">{{ courses|length }}</div>
-                <div class="stat-label">Total Courses</div>
+                <div class="stat-num">{{ total_courses }}</div>
+                <div class="stat-label">Courses</div>
             </div>
             <div class="stat-box">
-                <div class="stat-num">{{ users|length }}</div>
-                <div class="stat-label">Registered Users</div>
+                <div class="stat-num">{{ total_lessons }}</div>
+                <div class="stat-label">Lessons</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">{{ total_users }}</div>
+                <div class="stat-label">Users</div>
             </div>
             <div class="stat-box">
                 <div class="stat-num">{{ total_enrollments }}</div>
-                <div class="stat-label">Course Enrollments</div>
+                <div class="stat-label">Enrollments</div>
             </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr; gap: 2rem;">
+        <div style="display:grid; grid-template-columns: 1fr; gap: 2.5rem;">
             <div class="card">
                 <h3>Create New Course</h3>
-                <form action="/admin/courses/create" method="post" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+                <form action="/admin/courses/create" method="post" data-loading-text="Creating..." style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
                     <div class="form-group" style="margin:0;">
                         <label for="title">Course Title</label>
                         <input type="text" id="title" name="title" required placeholder="e.g., System Design Basics">
@@ -63,7 +76,7 @@
             </div>
 
             <div>
-                <h2 style="margin-bottom:0.85rem;">Courses</h2>
+                <h2 style="margin-bottom:0.85rem;">Courses ({{ courses|length }})</h2>
                 <div class="table-wrap">
                     <table>
                         <thead>
@@ -99,6 +112,10 @@
                                     </form>
                                 </td>
                             </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="6" class="muted">No courses match your search.</td>
+                            </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -106,7 +123,7 @@
             </div>
 
             <div>
-                <h2 style="margin-bottom:0.85rem;">Users</h2>
+                <h2 style="margin-bottom:0.85rem;">Users ({{ users|length }})</h2>
                 <div class="table-wrap">
                     <table>
                         <thead>
@@ -127,15 +144,20 @@
                                 <td>{% if u.is_active %}Active{% else %}Disabled{% endif %}</td>
                                 <td>
                                     {% if u.id != user.id %}
-                                    <form action="/admin/users/{{ u.id }}/toggle-active" method="post" style="margin:0;">
+                                    <form action="/admin/users/{{ u.id }}/toggle-active" method="post" style="margin:0;"
+                                          {% if u.is_active %}data-confirm="Disable account for {{ u.email }}?"{% endif %}>
                                         <button type="submit" class="btn btn-secondary btn-sm">
                                             {% if u.is_active %}Disable{% else %}Activate{% endif %}
                                         </button>
                                     </form>
                                     {% else %}
-                                        <span class="muted">You</span>
+                                        <span class="muted">Current Admin</span>
                                     {% endif %}
                                 </td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="5" class="muted">No users match your search.</td>
                             </tr>
                             {% endfor %}
                         </tbody>

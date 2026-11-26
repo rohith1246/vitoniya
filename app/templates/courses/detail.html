@@ -1,34 +1,70 @@
 {% extends "base.html" %}
 
-{% block title %}{{ course.title }} | Vitoniya Edu{% endblock %}
+{% block title %}{{ course.title }} | VitoniyaEdu{% endblock %}
 {% block meta_description %}{{ course.subtitle }}{% endblock %}
 
 {% block content %}
 <section class="section">
-    <div class="container" style="max-width: 880px;">
+    <div class="container" style="max-width: 900px;">
+        <div style="margin-bottom:1.25rem; font-size:0.85rem;">
+            <a href="/courses" class="link-reveal muted">&larr; Back to Explore Courses</a>
+        </div>
+
         <div class="card-meta" style="margin-bottom:0.9rem;">
             <span class="tag tag-green">{{ course.category }}</span>
             <span class="tag">{{ course.level }}</span>
             <span class="tag">{{ course.total_lessons }} lessons</span>
+            {% if total_mins > 0 %}
+                <span class="tag">{{ total_mins }} min total</span>
+            {% endif %}
         </div>
 
         <h1 style="margin-bottom:0.75rem;">{{ course.title }}</h1>
         <p class="lead" style="margin-bottom:1.5rem;">{{ course.description }}</p>
 
-        <div style="margin-bottom: 2.5rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
+        {% if user and is_enrolled %}
+        <div class="card" style="margin-bottom:1.75rem; padding:1.1rem 1.35rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:0.45rem;">
+                <span>Your course progress</span>
+                <strong>{{ progress_pct }}%</strong>
+            </div>
+            <div class="progress-track">
+                <div class="progress-fill" style="width: {{ progress_pct }}%;"></div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div style="margin-bottom: 2.75rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
             {% if is_enrolled and first_lesson %}
-                <a href="/learn/{{ course.slug }}/{{ first_lesson.id }}" class="btn btn-primary">Continue learning</a>
+                <a href="/learn/{{ course.slug }}/{{ first_lesson.id }}" class="btn btn-primary">Continue Learning</a>
             {% elif user %}
-                <form action="/courses/{{ course.slug }}/enroll" method="post" style="margin:0;">
+                <form action="/courses/{{ course.slug }}/enroll" method="post" style="margin:0;" data-loading-text="Enrolling...">
                     <button type="submit" class="btn btn-primary">Enroll in this course</button>
                 </form>
             {% else %}
                 <a href="/signup" class="btn btn-primary">Sign up free to enroll</a>
-                <a href="/login" class="btn btn-secondary">Log in</a>
+                <a href="/login" class="btn btn-secondary">Login</a>
             {% endif %}
         </div>
 
-        <h2 style="margin-bottom:1rem;">Course Syllabus</h2>
+        <div class="split-2" style="margin-bottom:2.75rem;">
+            <div class="journal-note">
+                <div class="journal-note-label">Course Structure</div>
+                <p style="margin:0; font-size:0.93rem;">
+                    This track contains <strong>{{ course.modules|length }} modules</strong> and
+                    <strong>{{ course.total_lessons }} lessons</strong>{% if total_mins > 0 %} (~{{ total_mins }} minutes of study){% endif %}.
+                    Lessons are self-paced and can be revisited anytime.
+                </p>
+            </div>
+            <div class="journal-note">
+                <div class="journal-note-label">Completion Requirement</div>
+                <p style="margin:0; font-size:0.93rem;">
+                    Read through each chapter in sequence and mark all {{ course.total_lessons }} lessons as completed to reach 100% in your Learning Journal.
+                </p>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom:1rem;">Course Curriculum</h2>
         {% for mod in course.modules %}
         <div class="syllabus-module">
             <div class="syllabus-module-head">{{ mod.title }}</div>
@@ -36,19 +72,19 @@
             <div class="lesson-row">
                 <span>
                     {% if is_enrolled or (user and user.role == 'admin') %}
-                        <a href="/learn/{{ course.slug }}/{{ lesson.id }}" style="font-weight:500;">{{ lesson.title }}</a>
+                        <a href="/learn/{{ course.slug }}/{{ lesson.id }}" class="link-reveal" style="font-weight:500;">{{ lesson.title }}</a>
                     {% else %}
                         {{ lesson.title }}
                     {% endif %}
                 </span>
-                <span class="muted" style="font-size:0.84rem;">{{ lesson.duration_mins }} min</span>
+                <span class="muted" style="font-size:0.84rem; font-family:var(--font-mono);">{{ lesson.duration_mins }} min</span>
             </div>
             {% else %}
-            <div class="lesson-row muted">No lessons added yet.</div>
+            <div class="lesson-row muted">No lessons added to this module yet.</div>
             {% endfor %}
         </div>
         {% else %}
-        <p class="muted">Syllabus is being prepared.</p>
+        <p class="muted">Curriculum modules are being prepared.</p>
         {% endfor %}
     </div>
 </section>

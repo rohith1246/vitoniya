@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Learning Journal | Vitoniya Edu{% endblock %}
+{% block title %}Learning Journal | VitoniyaEdu{% endblock %}
 {% block meta_robots %}noindex, nofollow{% endblock %}
 
 {% block content %}
@@ -8,17 +8,17 @@
     <div class="container">
         <div class="section-header">
             <div>
-                <span class="section-num">LEARNING JOURNAL</span>
+                <span class="section-num">PERSONAL LEARNING JOURNAL</span>
                 <h1>Welcome back, {{ user.full_name }}</h1>
-                <p class="muted" style="margin:0;">Your active tracks, current chapters, and completion log.</p>
+                <p class="muted" style="margin:0;">Continue your enrolled tracks, review completed chapters, and pick your next step.</p>
             </div>
-            <a href="/courses" class="btn btn-secondary btn-sm">Browse Curriculum</a>
+            <a href="/courses" class="btn btn-secondary btn-sm">Explore Courses</a>
         </div>
 
         {% if enrolled_cards %}
-        <div class="card-grid">
+        <div class="card-grid" style="margin-bottom:3.5rem;">
             {% for item in enrolled_cards %}
-            <article class="card card-interactive">
+            <article class="card card-interactive {% if loop.index is odd %}card-accent-green{% else %}card-accent-terracotta{% endif %}">
                 <div>
                     <div class="card-index">{{ "%02d" % loop.index }}</div>
                     <div class="card-meta">
@@ -30,8 +30,8 @@
                         {{ item.completed_lessons }} of {{ item.total_lessons }} lessons completed
                     </p>
                     {% if item.next_lesson %}
-                    <p style="font-size:0.84rem; margin:0 0 1rem; color:var(--ink);">
-                        <span class="muted">Current chapter:</span> <strong>{{ item.next_lesson.title }}</strong>
+                    <p style="font-size:0.85rem; margin:0 0 1rem; color:var(--ink);">
+                        <span class="muted">Next step:</span> <strong>{{ item.next_lesson.title }}</strong>
                     </p>
                     {% endif %}
                     <div class="progress-track">
@@ -42,25 +42,77 @@
                 <div class="card-footer">
                     {% if item.next_lesson %}
                         <a href="/learn/{{ item.course.slug }}/{{ item.next_lesson.id }}" class="btn btn-primary btn-sm">
-                            {% if item.progress_pct > 0 %}Resume chapter{% else %}Start reading{% endif %}
+                            {% if item.progress_pct > 0 %}Continue learning{% else %}Start reading{% endif %}
                         </a>
                     {% else %}
                         <span class="muted">No chapters yet</span>
                     {% endif %}
-                    <a href="/courses/{{ item.course.slug }}" class="link-reveal" style="color:var(--ink-muted);">Syllabus</a>
+                    <a href="/courses/{{ item.course.slug }}" class="link-reveal muted">Syllabus</a>
                 </div>
             </article>
             {% endfor %}
         </div>
         {% else %}
-        <div class="card" style="max-width:560px;">
+        <div class="card" style="max-width:580px; margin-bottom:3.5rem;">
             <div class="card-index">00</div>
-            <h3>Your journal is empty</h3>
+            <h3>Your learning journal is ready</h3>
             <p class="muted" style="margin:0;">
-                Choose a track from the curriculum to begin recording your progress.
+                You haven't enrolled in any courses yet. Browse our catalog and choose your first track to begin.
             </p>
             <div>
-                <a href="/courses" class="btn btn-primary btn-sm">Explore Curriculum</a>
+                <a href="/courses" class="btn btn-primary btn-sm">Explore Courses</a>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if recent_activity %}
+        <div style="margin-bottom:3.5rem;">
+            <span class="section-num">RECENT ACTIVITY</span>
+            <h2 style="margin-bottom:1rem;">Recently Completed Lessons</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Lesson</th>
+                            <th>Course</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for act in recent_activity %}
+                        <tr>
+                            <td><strong>{{ act.lesson_title }}</strong></td>
+                            <td class="muted">{{ act.course_title }}</td>
+                            <td><a href="/learn/{{ act.course_slug }}/{{ act.lesson_id }}" class="link-reveal" style="color:var(--accent);">Revisit</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if recommended_courses %}
+        <div>
+            <span class="section-num">RECOMMENDED NEXT</span>
+            <h2 style="margin-bottom:1rem;">More Courses to Explore</h2>
+            <div class="card-grid">
+                {% for rec in recommended_courses %}
+                <article class="card card-interactive">
+                    <div>
+                        <div class="card-meta">
+                            <span class="tag tag-green">{{ rec.category }}</span>
+                            <span class="tag">{{ rec.level }}</span>
+                        </div>
+                        <h3>{{ rec.title }}</h3>
+                        <p class="muted" style="font-size:0.9rem; margin:0;">{{ rec.subtitle }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <span>{{ rec.total_lessons }} lessons</span>
+                        <a href="/courses/{{ rec.slug }}" class="link-reveal" style="color:var(--accent);">View syllabus &rarr;</a>
+                    </div>
+                </article>
+                {% endfor %}
             </div>
         </div>
         {% endif %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found (404) | VitoniyaEdu{% endblock %}
+{% block meta_robots %}noindex, nofollow{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container" style="max-width: 640px;">
+        <span class="issue-label">Error 404</span>
+        <h1>Page not found.</h1>
+        <p class="lead">
+            {{ detail or "The page or course you requested could not be found or is no longer available." }}
+        </p>
+        <div class="hero-actions">
+            <a href="/" class="btn btn-primary">Return Home</a>
+            <a href="/courses" class="btn btn-secondary">Explore Courses</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
