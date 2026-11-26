@@ -8,6 +8,10 @@
     <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
     <link rel="canonical" href="{{ settings.SITE_URL }}{{ request.url.path }}">
     <meta name="google-site-verification" content="googlebfdaeb45b812b897">
+    {% if settings.ADSENSE_CLIENT_ID %}
+    <meta name="google-adsense-account" content="{{ settings.ADSENSE_CLIENT_ID }}">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ settings.ADSENSE_CLIENT_ID }}" crossorigin="anonymous"></script>
+    {% endif %}
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="VitoniyaEdu">

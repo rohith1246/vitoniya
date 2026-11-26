@@ -1,4 +1,4 @@
-"""Public pages, legal/support pages, and SEO endpoints."""
+"""Public pages, SEO-indexable lesson reader, legal/support pages, and XML sitemap."""
 
 from typing import Optional
 
@@ -47,6 +47,7 @@ def _course_stats(courses: list[Course], user: Optional[User], db: Session) -> d
             "is_enrolled": c.id in enrolled_ids,
             "progress_pct": pct,
             "first_lesson_id": lessons[0].id if lessons else None,
+            "first_lesson_slug": lessons[0].slug if lessons else None,
         }
     return stats
 
@@ -172,6 +173,76 @@ def course_detail(
     )
 
 
+@router.get("/courses/{course_slug}/{lesson_slug}")
+def public_lesson_reader(
+    course_slug: str,
+    lesson_slug: str,
+    request: Request,
+    db: Session = Depends(get_db),
+    user: Optional[User] = Depends(get_optional_user),
+):
+    """Public SEO-indexable lesson page; logged-in students also get progress tracking."""
+    course = (
+        db.query(Course)
+        .options(selectinload(Course.modules).selectinload(Module.lessons))
+        .filter(Course.slug == course_slug)
+        .first()
+    )
+    if not course or (not course.is_published and (not user or user.role != "admin")):
+        raise HTTPException(status_code=404, detail="Course not found.")
+
+    ordered_lessons = [lesson for mod in course.modules for lesson in mod.lessons]
+    current_idx = next(
+        (i for i, l in enumerate(ordered_lessons) if l.slug == lesson_slug or str(l.id) == lesson_slug),
+        None,
+    )
+    if current_idx is None:
+        raise HTTPException(status_code=404, detail="Lesson not found.")
+
+    current_lesson = ordered_lessons[current_idx]
+    prev_lesson = ordered_lessons[current_idx - 1] if current_idx > 0 else None
+    next_lesson = ordered_lessons[current_idx + 1] if current_idx + 1 < len(ordered_lessons) else None
+
+    completed_ids: set[int] = set()
+    is_enrolled = False
+    if user:
+        is_enrolled = (
+            db.query(Enrollment)
+            .filter(Enrollment.user_id == user.id, Enrollment.course_id == course.id)
+            .first()
+            is not None
+        )
+        completed_ids = {
+            row[0]
+            for row in db.query(LessonProgress.lesson_id)
+            .filter(LessonProgress.user_id == user.id, LessonProgress.is_completed.is_(True))
+            .all()
+        }
+
+    total_lessons = len(ordered_lessons)
+    completed_count = sum(1 for l in ordered_lessons if l.id in completed_ids) if user else 0
+    progress_pct = int((completed_count / total_lessons) * 100) if total_lessons > 0 else 0
+
+    return templates.TemplateResponse(
+        request,
+        "learn/lesson.html",
+        {
+            "user": user,
+            "course": course,
+            "lesson": current_lesson,
+            "is_enrolled": is_enrolled,
+            "chapter_number": current_idx + 1,
+            "total_lessons": total_lessons,
+            "prev_lesson": prev_lesson,
+            "next_lesson": next_lesson,
+            "completed_ids": completed_ids,
+            "is_completed": current_lesson.id in completed_ids,
+            "progress_pct": progress_pct,
+            "is_public_seo": True,
+        },
+    )
+
+
 @router.get("/about")
 def about_page(request: Request, user: Optional[User] = Depends(get_optional_user)):
     return templates.TemplateResponse(request, "about.html", {"user": user})
@@ -202,6 +273,7 @@ def robots_txt():
     content = (
         "User-agent: *\n"
         "Allow: /\n"
+        "Allow: /courses/\n"
         "Disallow: /admin\n"
         "Disallow: /dashboard\n"
         "Disallow: /learn\n"
@@ -215,7 +287,12 @@ def robots_txt():
 
 @router.get("/sitemap.xml", include_in_schema=False)
 def sitemap_xml(db: Session = Depends(get_db)):
-    courses = db.query(Course).filter(Course.is_published.is_(True)).all()
+    courses = (
+        db.query(Course)
+        .options(selectinload(Course.modules).selectinload(Module.lessons))
+        .filter(Course.is_published.is_(True))
+        .all()
+    )
     urls = [
         f"  <url><loc>{settings.SITE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>",
         f"  <url><loc>{settings.SITE_URL}/courses</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>",
@@ -227,6 +304,12 @@ def sitemap_xml(db: Session = Depends(get_db)):
         urls.append(
             f"  <url><loc>{settings.SITE_URL}/courses/{c.slug}</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>"
         )
+        for mod in c.modules:
+            for lesson in mod.lessons:
+                if lesson.slug:
+                    urls.append(
+                        f"  <url><loc>{settings.SITE_URL}/courses/{c.slug}/{lesson.slug}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>"
+                    )
     xml = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'

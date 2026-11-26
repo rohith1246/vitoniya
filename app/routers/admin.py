@@ -13,6 +13,7 @@ from app.dependencies import require_roles
 from app.models.course import Course, Lesson, Module
 from app.models.progress import Enrollment
 from app.models.user import User
+from app.seed import slugify_text
 from app.templating import templates
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
@@ -164,10 +165,16 @@ def add_lesson(
         raise HTTPException(status_code=404, detail="Module not found")
 
     next_order = db.query(Lesson).filter(Lesson.module_id == module_id).count() + 1
+    base_slug = slugify_text(title)
+    lesson_slug = base_slug
+    if db.query(Lesson).filter(Lesson.slug == lesson_slug).first():
+        lesson_slug = f"{base_slug}-{module_id}-{next_order}"
+
     db.add(
         Lesson(
             module_id=module_id,
             title=title.strip(),
+            slug=lesson_slug,
             duration_mins=max(1, duration_mins),
             video_url=video_url.strip() or None,
             content_md=content_md.strip(),

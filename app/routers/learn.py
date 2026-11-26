@@ -82,6 +82,7 @@ def student_dashboard(
                     "lesson_title": lesson.title,
                     "course_title": lesson.module.course.title,
                     "course_slug": lesson.module.course.slug,
+                    "lesson_slug": lesson.slug or str(lesson.id),
                     "lesson_id": lesson.id,
                     "completed_at": rec.completed_at,
                 }
@@ -139,8 +140,9 @@ def enroll_course(
         .first()
     )
     if first_lesson:
+        target_slug = first_lesson.slug or str(first_lesson.id)
         return RedirectResponse(
-            url=f"/learn/{course.slug}/{first_lesson.id}",
+            url=f"/courses/{course.slug}/{target_slug}",
             status_code=status.HTTP_303_SEE_OTHER,
         )
     return RedirectResponse(url="/dashboard", status_code=status.HTTP_303_SEE_OTHER)
@@ -246,6 +248,6 @@ def toggle_lesson_complete(
     db.commit()
 
     return RedirectResponse(
-        url=f"/learn/{slug}/{lesson_id}",
+        url=f"/courses/{slug}/{lesson.slug or lesson_id}",
         status_code=status.HTTP_303_SEE_OTHER,
     )

@@ -6,6 +6,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.responses import JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import inspect, text
 
 from app.database import Base, SessionLocal, engine
 from app.dependencies import AuthRedirectException, get_optional_user
@@ -16,10 +17,21 @@ from app.templating import templates
 BASE_APP_DIR = Path(__file__).resolve().parent
 
 
+def _ensure_schema_columns() -> None:
+    """Safely add new columns to existing PostgreSQL/SQLite tables on startup."""
+    inspector = inspect(engine)
+    if "lessons" in inspector.get_table_names():
+        cols = {col["name"] for col in inspector.get_columns("lessons")}
+        if "slug" not in cols:
+            with engine.begin() as conn:
+                conn.execute(text("ALTER TABLE lessons ADD COLUMN slug VARCHAR(220)"))
+
+
 @asynccontextmanager
 async def lifespan(_: FastAPI):
-    """Create tables and seed initial data on startup."""
+    """Create tables, apply safe column upgrades, and seed data on startup."""
     Base.metadata.create_all(bind=engine)
+    _ensure_schema_columns()
     db = SessionLocal()
     try:
         seed_initial_data(db)

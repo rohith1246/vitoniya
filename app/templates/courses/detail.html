@@ -36,14 +36,19 @@
 
         <div style="margin-bottom: 2.75rem; display:flex; gap:0.75rem; flex-wrap:wrap;">
             {% if is_enrolled and first_lesson %}
-                <a href="/learn/{{ course.slug }}/{{ first_lesson.id }}" class="btn btn-primary">Continue Learning</a>
+                <a href="/courses/{{ course.slug }}/{{ first_lesson.slug or first_lesson.id }}" class="btn btn-primary">Continue Learning</a>
             {% elif user %}
                 <form action="/courses/{{ course.slug }}/enroll" method="post" style="margin:0;" data-loading-text="Enrolling...">
-                    <button type="submit" class="btn btn-primary">Enroll in this course</button>
+                    <button type="submit" class="btn btn-primary">Enroll to Track Progress</button>
                 </form>
+                {% if first_lesson %}
+                    <a href="/courses/{{ course.slug }}/{{ first_lesson.slug or first_lesson.id }}" class="btn btn-secondary">Read Chapter 01</a>
+                {% endif %}
             {% else %}
-                <a href="/signup" class="btn btn-primary">Sign up free to enroll</a>
-                <a href="/login" class="btn btn-secondary">Login</a>
+                {% if first_lesson %}
+                    <a href="/courses/{{ course.slug }}/{{ first_lesson.slug or first_lesson.id }}" class="btn btn-primary">Start Reading Free</a>
+                {% endif %}
+                <a href="/signup" class="btn btn-secondary">Sign up to Track Progress</a>
             {% endif %}
         </div>
 
@@ -71,11 +76,7 @@
             {% for lesson in mod.lessons %}
             <div class="lesson-row">
                 <span>
-                    {% if is_enrolled or (user and user.role == 'admin') %}
-                        <a href="/learn/{{ course.slug }}/{{ lesson.id }}" class="link-reveal" style="font-weight:500;">{{ lesson.title }}</a>
-                    {% else %}
-                        {{ lesson.title }}
-                    {% endif %}
+                    <a href="/courses/{{ course.slug }}/{{ lesson.slug or lesson.id }}" class="link-reveal" style="font-weight:500;">{{ lesson.title }}</a>
                 </span>
                 <span class="muted" style="font-size:0.84rem; font-family:var(--font-mono);">{{ lesson.duration_mins }} min</span>
             </div>

@@ -92,7 +92,7 @@
                 <div class="card-footer">
                     <span>{{ course.modules|length }} modules &middot; {{ course.total_lessons }} lessons</span>
                     {% if user and meta.is_enrolled and meta.first_lesson_id %}
-                        <a href="/learn/{{ course.slug }}/{{ meta.first_lesson_id }}" class="btn btn-primary btn-sm">Continue</a>
+                        <a href="/courses/{{ course.slug }}/{{ meta.first_lesson_slug or meta.first_lesson_id }}" class="btn btn-primary btn-sm">Continue</a>
                     {% else %}
                         <a href="/courses/{{ course.slug }}" class="btn btn-secondary btn-sm">Explore &rarr;</a>
                     {% endif %}

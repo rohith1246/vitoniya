@@ -31,6 +31,7 @@ class Settings:
     ADMIN_EMAIL: str = os.getenv("ADMIN_EMAIL", "rohith@vitoniya.com")
     ADMIN_PASSWORD: str = os.getenv("ADMIN_PASSWORD", "VitoniyaAdmin@2026")
     ADMIN_NAME: str = os.getenv("ADMIN_NAME", "Rohith Vuppula")
+    ADSENSE_CLIENT_ID: str = os.getenv("ADSENSE_CLIENT_ID", "").strip()
 
 
 @lru_cache

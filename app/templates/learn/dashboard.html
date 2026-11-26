@@ -41,7 +41,7 @@
 
                 <div class="card-footer">
                     {% if item.next_lesson %}
-                        <a href="/learn/{{ item.course.slug }}/{{ item.next_lesson.id }}" class="btn btn-primary btn-sm">
+                        <a href="/courses/{{ item.course.slug }}/{{ item.next_lesson.slug or item.next_lesson.id }}" class="btn btn-primary btn-sm">
                             {% if item.progress_pct > 0 %}Continue learning{% else %}Start reading{% endif %}
                         </a>
                     {% else %}
@@ -83,7 +83,7 @@
                         <tr>
                             <td><strong>{{ act.lesson_title }}</strong></td>
                             <td class="muted">{{ act.course_title }}</td>
-                            <td><a href="/learn/{{ act.course_slug }}/{{ act.lesson_id }}" class="link-reveal" style="color:var(--accent);">Revisit</a></td>
+                            <td><a href="/courses/{{ act.course_slug }}/{{ act.lesson_slug }}" class="link-reveal" style="color:var(--accent);">Revisit</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>

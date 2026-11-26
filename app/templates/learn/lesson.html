@@ -1,7 +1,29 @@
 {% extends "base.html" %}
 
-{% block title %}{{ lesson.title }} | {{ course.title }}{% endblock %}
-{% block meta_robots %}noindex, nofollow{% endblock %}
+{% block title %}{{ lesson.title }} | {{ course.title }} | VitoniyaEdu{% endblock %}
+{% block meta_description %}Learn {{ lesson.title }} in {{ course.title }}. Free practical engineering notes, code examples, and practice tasks on VitoniyaEdu.{% endblock %}
+{% block meta_robots %}index, follow{% endblock %}
+
+{% block extra_head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "{{ lesson.title }}",
+  "educationalLevel": "{{ course.level }}",
+  "isPartOf": {
+    "@type": "Course",
+    "name": "{{ course.title }}",
+    "url": "{{ settings.SITE_URL }}/courses/{{ course.slug }}"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Vitoniya Labs",
+    "url": "{{ settings.SITE_URL }}"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <div class="container">
@@ -15,6 +37,7 @@
         <aside id="lesson-sidebar" class="lesson-sidebar" aria-label="Course syllabus">
             <div style="margin-bottom:0.85rem;">
                 <a href="/courses/{{ course.slug }}" class="link-reveal muted" style="font-size:0.84rem;">&larr; {{ course.title }}</a>
+                {% if user %}
                 <div style="display:flex; justify-content:space-between; font-size:0.8rem; margin:0.75rem 0 0.35rem;">
                     <span>Course progress</span>
                     <strong>{{ progress_pct }}%</strong>
@@ -22,16 +45,17 @@
                 <div class="progress-track">
                     <div class="progress-fill" style="width: {{ progress_pct }}%;"></div>
                 </div>
+                {% endif %}
             </div>
 
             {% for mod in course.modules %}
                 <div class="sidebar-mod-title">{{ mod.title }}</div>
                 {% for item in mod.lessons %}
-                <a href="/learn/{{ course.slug }}/{{ item.id }}"
+                <a href="/courses/{{ course.slug }}/{{ item.slug or item.id }}"
                    class="sidebar-lesson-link {% if item.id == lesson.id %}active{% endif %}">
                     <span>{{ item.title }}</span>
-                    {% if item.id in completed_ids %}
-                        <span style="color:var(--accent); font-weight:700;" aria-label="Completed">&#10003;</span>
+                    {% if user and item.id in completed_ids %}
+                        <span style="color:var(--forest); font-weight:700;" aria-label="Completed">&#10003;</span>
                     {% endif %}
                 </a>
                 {% endfor %}
@@ -40,41 +64,58 @@
 
         <article class="lesson-content-card">
             <div style="font-size:0.82rem; margin-bottom:0.75rem;" class="muted">
-                <a href="/dashboard" class="link-reveal">Journal</a> /
+                <a href="/courses" class="link-reveal">Courses</a> /
                 <a href="/courses/{{ course.slug }}" class="link-reveal">{{ course.title }}</a> /
                 <span>Chapter {{ "%02d" % chapter_number }} of {{ "%02d" % total_lessons }}</span>
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; border-bottom:1px solid var(--border); padding-bottom:1.25rem;">
                 <div>
+                    <span class="tag tag-green">{{ course.category }}</span>
                     <span class="tag">Chapter {{ "%02d" % chapter_number }} &middot; {{ lesson.duration_mins }} min</span>
                     <h1 style="font-size:clamp(1.65rem, 3vw, 2.2rem); margin:0.65rem 0 0;">{{ lesson.title }}</h1>
                 </div>
 
+                {% if user %}
                 <form action="/learn/{{ course.slug }}/{{ lesson.id }}/toggle" method="post" style="margin:0;" data-loading-text="Saving...">
                     <button type="submit" class="btn {% if is_completed %}btn-secondary{% else %}btn-primary{% endif %} btn-sm">
                         {% if is_completed %}Completed &#10003;{% else %}Mark as completed{% endif %}
                     </button>
                 </form>
+                {% else %}
+                <a href="/signup" class="btn btn-primary btn-sm">Sign up to save progress</a>
+                {% endif %}
             </div>
 
             {% if lesson.video_url %}
-            <div style="margin-top:1.75rem; aspect-ratio:16/9; background:#20231F; border-radius:var(--radius-sm); overflow:hidden; border:1px solid var(--border);">
+            <div style="margin-top:1.75rem; aspect-ratio:16/9; background:#1B221E; border-radius:var(--radius-sm); overflow:hidden; border:1px solid var(--border);">
                 <iframe src="{{ lesson.video_url }}" title="{{ lesson.title }}" style="width:100%; height:100%; border:0;" allowfullscreen></iframe>
             </div>
             {% endif %}
 
             <div class="prose">{{ lesson.content_md | lesson_html }}</div>
 
+            {% if not user %}
+            <div class="journal-note" style="margin:1.75rem 0;">
+                <div class="journal-note-body" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;">
+                    <div>
+                        <strong style="display:block;">Save your progress in a free Learning Journal</strong>
+                        <span class="muted" style="font-size:0.88rem;">Create a student account to track completed chapters across all courses.</span>
+                    </div>
+                    <a href="/signup" class="btn btn-primary btn-sm">Create free account</a>
+                </div>
+            </div>
+            {% endif %}
+
             <div style="display:flex; justify-content:space-between; padding-top:1.5rem; border-top:1px solid var(--border); gap:1rem; flex-wrap:wrap;">
                 {% if prev_lesson %}
-                    <a href="/learn/{{ course.slug }}/{{ prev_lesson.id }}" class="btn btn-secondary btn-sm">&larr; Previous: {{ prev_lesson.title }}</a>
+                    <a href="/courses/{{ course.slug }}/{{ prev_lesson.slug or prev_lesson.id }}" class="btn btn-secondary btn-sm">&larr; Previous: {{ prev_lesson.title }}</a>
                 {% else %}
                     <span></span>
                 {% endif %}
 
                 {% if next_lesson %}
-                    <a href="/learn/{{ course.slug }}/{{ next_lesson.id }}" class="btn btn-primary btn-sm">Next: {{ next_lesson.title }} &rarr;</a>
+                    <a href="/courses/{{ course.slug }}/{{ next_lesson.slug or next_lesson.id }}" class="btn btn-primary btn-sm">Next: {{ next_lesson.title }} &rarr;</a>
                 {% endif %}
             </div>
         </article>

@@ -68,6 +68,7 @@ class Lesson(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     module_id: Mapped[int] = mapped_column(ForeignKey("modules.id", ondelete="CASCADE"), nullable=False)
     title: Mapped[str] = mapped_column(String(200), nullable=False)
+    slug: Mapped[Optional[str]] = mapped_column(String(220), nullable=True, index=True)
     video_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     content_md: Mapped[str] = mapped_column(Text, nullable=False, default="")
     duration_mins: Mapped[int] = mapped_column(Integer, nullable=False, default=15)
