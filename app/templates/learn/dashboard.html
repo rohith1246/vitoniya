@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}My Learning | Vitoniya Edu{% endblock %}
+{% block title %}Learning Journal | Vitoniya Edu{% endblock %}
 {% block meta_robots %}noindex, nofollow{% endblock %}
 
 {% block content %}
@@ -8,25 +8,32 @@
     <div class="container">
         <div class="section-header">
             <div>
-                <h1>Welcome, {{ user.full_name }}</h1>
-                <p class="muted" style="margin:0;">Your enrolled courses and lesson progress.</p>
+                <span class="section-num">LEARNING JOURNAL</span>
+                <h1>Welcome back, {{ user.full_name }}</h1>
+                <p class="muted" style="margin:0;">Your active tracks, current chapters, and completion log.</p>
             </div>
-            <a href="/courses" class="btn btn-secondary btn-sm">Explore more courses</a>
+            <a href="/courses" class="btn btn-secondary btn-sm">Browse Curriculum</a>
         </div>
 
         {% if enrolled_cards %}
         <div class="card-grid">
             {% for item in enrolled_cards %}
-            <article class="card">
+            <article class="card card-interactive">
                 <div>
+                    <div class="card-index">{{ "%02d" % loop.index }}</div>
                     <div class="card-meta">
                         <span class="tag tag-green">{{ item.course.category }}</span>
                         <span class="tag">{{ item.progress_pct }}% complete</span>
                     </div>
                     <h3>{{ item.course.title }}</h3>
-                    <p class="muted" style="font-size:0.9rem; margin:0 0 1rem;">
+                    <p class="muted" style="font-size:0.9rem; margin:0 0 0.65rem;">
                         {{ item.completed_lessons }} of {{ item.total_lessons }} lessons completed
                     </p>
+                    {% if item.next_lesson %}
+                    <p style="font-size:0.84rem; margin:0 0 1rem; color:var(--ink);">
+                        <span class="muted">Current chapter:</span> <strong>{{ item.next_lesson.title }}</strong>
+                    </p>
+                    {% endif %}
                     <div class="progress-track">
                         <div class="progress-fill" style="width: {{ item.progress_pct }}%;"></div>
                     </div>
@@ -35,24 +42,25 @@
                 <div class="card-footer">
                     {% if item.next_lesson %}
                         <a href="/learn/{{ item.course.slug }}/{{ item.next_lesson.id }}" class="btn btn-primary btn-sm">
-                            {% if item.progress_pct > 0 %}Resume learning{% else %}Start course{% endif %}
+                            {% if item.progress_pct > 0 %}Resume chapter{% else %}Start reading{% endif %}
                         </a>
                     {% else %}
-                        <span class="muted">No lessons yet</span>
+                        <span class="muted">No chapters yet</span>
                     {% endif %}
-                    <a href="/courses/{{ item.course.slug }}" class="btn btn-ghost btn-sm">Syllabus</a>
+                    <a href="/courses/{{ item.course.slug }}" class="link-reveal" style="color:var(--ink-muted);">Syllabus</a>
                 </div>
             </article>
             {% endfor %}
         </div>
         {% else %}
         <div class="card" style="max-width:560px;">
-            <h3>You haven't enrolled in any courses yet</h3>
+            <div class="card-index">00</div>
+            <h3>Your journal is empty</h3>
             <p class="muted" style="margin:0;">
-                Browse our catalog and enroll in a track to start tracking your progress.
+                Choose a track from the curriculum to begin recording your progress.
             </p>
             <div>
-                <a href="/courses" class="btn btn-primary btn-sm">Browse courses</a>
+                <a href="/courses" class="btn btn-primary btn-sm">Explore Curriculum</a>
             </div>
         </div>
         {% endif %}

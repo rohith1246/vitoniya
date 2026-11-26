@@ -2,40 +2,42 @@
 
 {% block content %}
 <section class="hero">
-    <div class="container hero-grid">
-        <div>
-            <span class="eyebrow">Vitoniya Labs &middot; Education Platform</span>
-            <h1>Learn software engineering with structure, not noise.</h1>
+    <div class="container editorial-grid">
+        <div class="hero-main">
+            <span class="issue-label">Vol. 01 &middot; Vitoniya Labs Education</span>
+            <h1>A calm, deliberate way to master software engineering.</h1>
             <p class="lead">
-                Vitoniya Edu brings together focused tracks in Java, Data Structures, FastAPI, and PostgreSQL.
-                Follow clear modules, track every completed lesson, and build real engineering habits.
+                Vitoniya Edu is a structured learning journal built for engineers who prefer clarity over noise.
+                Study Java, Data Structures, FastAPI, and PostgreSQL chapter by chapter, with real progress tracking.
             </p>
             <div class="hero-actions">
-                <a href="/courses" class="btn btn-primary">Browse courses</a>
+                <a href="/courses" class="btn btn-primary">Explore Curriculum</a>
                 {% if user %}
-                    <a href="/dashboard" class="btn btn-secondary">Go to My Learning</a>
+                    <a href="/dashboard" class="btn btn-secondary">Open My Journal</a>
                 {% else %}
-                    <a href="/signup" class="btn btn-secondary">Create free student account</a>
+                    <a href="/signup" class="btn btn-secondary">Create Student Account</a>
                 {% endif %}
             </div>
         </div>
 
-        <aside class="hero-note-card">
-            <h3>How Vitoniya Edu works</h3>
-            <ul class="check-list">
-                <li>
-                    <span class="check-dot">1</span>
-                    <span><strong>Structured modules:</strong> Every track is broken into clear, bite-sized lessons.</span>
-                </li>
-                <li>
-                    <span class="check-dot">2</span>
-                    <span><strong>Real progress tracking:</strong> Mark lessons complete and pick up right where you stopped.</span>
-                </li>
-                <li>
-                    <span class="check-dot">3</span>
-                    <span><strong>Practical curriculum:</strong> Built around skills companies actually test in interviews.</span>
-                </li>
-            </ul>
+        <aside class="hero-aside">
+            <div class="journal-note">
+                <div class="journal-note-label">Editorial Principles</div>
+                <ul class="journal-list">
+                    <li>
+                        <span class="journal-num">01</span>
+                        <span><strong>Structured chapters:</strong> Every subject is broken into focused, readable lessons.</span>
+                    </li>
+                    <li>
+                        <span class="journal-num">02</span>
+                        <span><strong>Measured progress:</strong> Track completed chapters and resume exactly where you left off.</span>
+                    </li>
+                    <li>
+                        <span class="journal-num">03</span>
+                        <span><strong>Interview-ready depth:</strong> Built around Java, DSA, FastAPI, and PostgreSQL fundamentals.</span>
+                    </li>
+                </ul>
+            </div>
         </aside>
     </div>
 </section>
@@ -44,16 +46,17 @@
     <div class="container">
         <div class="section-header">
             <div>
-                <h2>Available Courses</h2>
-                <p class="muted" style="margin:0;">Start with a track and learn at your own pace.</p>
+                <span class="section-num">01 / CURRICULUM</span>
+                <h2>Published Tracks</h2>
             </div>
-            <a href="/courses" class="btn btn-secondary btn-sm">View full catalog</a>
+            <a href="/courses" class="link-reveal" style="font-size:0.9rem; color:var(--accent);">View all courses &rarr;</a>
         </div>
 
         <div class="card-grid">
             {% for course in courses %}
-            <article class="card">
+            <article class="card card-interactive">
                 <div>
+                    <div class="card-index">{{ "%02d" % loop.index }}</div>
                     <div class="card-meta">
                         <span class="tag tag-green">{{ course.category }}</span>
                         <span class="tag">{{ course.level }}</span>
@@ -63,11 +66,11 @@
                 </div>
                 <div class="card-footer">
                     <span>{{ course.modules|length }} modules &middot; {{ course.total_lessons }} lessons</span>
-                    <a href="/courses/{{ course.slug }}" class="btn btn-secondary btn-sm">View syllabus</a>
+                    <a href="/courses/{{ course.slug }}" class="link-reveal" style="color:var(--accent);">Read syllabus &rarr;</a>
                 </div>
             </article>
             {% else %}
-            <p class="muted">No published courses yet.</p>
+            <p class="muted">No published tracks yet.</p>
             {% endfor %}
         </div>
     </div>

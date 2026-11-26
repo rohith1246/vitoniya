@@ -1,23 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}About Vitoniya Labs | Vitoniya Edu{% endblock %}
+{% block title %}Editorial Note | Vitoniya Labs{% endblock %}
 
 {% block content %}
 <section class="section">
-    <div class="container" style="max-width: 760px;">
-        <span class="eyebrow">Vitoniya Labs</span>
-        <h1>Built for learners who want clarity.</h1>
+    <div class="container" style="max-width: var(--reading-width);">
+        <span class="issue-label">Editorial Note &middot; Vitoniya Labs</span>
+        <h1>Built for learners who value focus.</h1>
         <p class="lead">
-            Vitoniya Edu is the learning platform developed by Vitoniya Labs. Our goal is straightforward:
-            organize core computer science and backend engineering topics into calm, distraction-free courses.
+            Vitoniya Edu is the independent education publication developed by Vitoniya Labs.
+            We design distraction-free engineering tracks so students can study core computer science
+            and backend systems with the calm of a well-edited book.
         </p>
 
-        <div class="card" style="margin-top: 2rem;">
-            <h3>Platform Architecture</h3>
+        <div class="card" style="margin-top: 2.25rem;">
+            <div class="journal-note-label" style="margin-bottom:0.5rem;">Under the Hood</div>
+            <h3 style="margin-top:0;">Engineered with FastAPI &amp; PostgreSQL</h3>
             <p class="muted" style="margin:0;">
-                Vitoniya Edu is engineered with FastAPI, SQLAlchemy, and PostgreSQL, featuring role-based access control
-                for students and administrators, structured module progression, and server-rendered pages for fast,
-                reliable access on any device.
+                The platform runs on FastAPI, SQLAlchemy 2.0, PostgreSQL, and role-based access control
+                for students and administrators — keeping pages fast, accessible, and easy to maintain.
             </p>
         </div>
     </div>

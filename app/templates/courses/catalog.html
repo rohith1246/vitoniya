@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Courses | Vitoniya Edu{% endblock %}
+{% block title %}Curriculum | Vitoniya Edu{% endblock %}
 
 {% block content %}
 <section class="section">
     <div class="container">
         <div class="section-header">
             <div>
-                <h1>Course Catalog</h1>
-                <p class="muted" style="margin:0;">Structured learning tracks built by Vitoniya Labs.</p>
+                <span class="section-num">INDEX / ALL TRACKS</span>
+                <h1>Curriculum</h1>
+                <p class="muted" style="margin:0;">Structured engineering tracks published by Vitoniya Labs.</p>
             </div>
-            <form method="get" action="/courses" style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+            <form method="get" action="/courses" style="display:flex; gap:0.65rem; flex-wrap:wrap;">
                 <select name="category" style="width:auto;" onchange="this.form.submit()">
                     <option value="All" {% if selected_category == 'All' %}selected{% endif %}>All Categories</option>
                     {% for cat in categories %}
@@ -28,8 +29,9 @@
 
         <div class="card-grid">
             {% for course in courses %}
-            <article class="card">
+            <article class="card card-interactive">
                 <div>
+                    <div class="card-index">{{ "%02d" % loop.index }}</div>
                     <div class="card-meta">
                         <span class="tag tag-green">{{ course.category }}</span>
                         <span class="tag">{{ course.level }}</span>
@@ -39,7 +41,7 @@
                 </div>
                 <div class="card-footer">
                     <span>{{ course.modules|length }} modules &middot; {{ course.total_lessons }} lessons</span>
-                    <a href="/courses/{{ course.slug }}" class="btn btn-primary btn-sm">Open course</a>
+                    <a href="/courses/{{ course.slug }}" class="btn btn-primary btn-sm">Open track</a>
                 </div>
             </article>
             {% else %}

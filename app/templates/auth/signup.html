@@ -5,35 +5,50 @@
 
 {% block content %}
 <div class="container">
-    <div class="auth-wrap">
-        <h2 style="margin-bottom:0.35rem;">Create your account</h2>
-        <p class="muted" style="margin-top:0; margin-bottom:1.5rem; font-size:0.92rem;">
-            Start learning and tracking your progress for free.
-        </p>
-
-        {% if error %}
-            <div class="alert-error">{{ error }}</div>
-        {% endif %}
-
-        <form action="/signup" method="post">
-            <div class="form-group">
-                <label for="full_name">Full name</label>
-                <input type="text" id="full_name" name="full_name" required autocomplete="name" placeholder="Your full name">
+    <div class="auth-split">
+        <div class="auth-editorial">
+            <div>
+                <span class="issue-label">Vitoniya Edu &middot; Membership</span>
+                <h2 style="font-size:2rem; margin-bottom:1rem;">Start your learning journal.</h2>
+                <p class="muted" style="margin:0;">
+                    Enroll in structured engineering tracks, track chapter completion, and build real fundamentals at your own pace.
+                </p>
             </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+            <div class="muted" style="font-size:0.84rem;">
+                Free student access &middot; <strong>Vitoniya Labs</strong>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password" placeholder="Minimum 6 characters">
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;">Create student account</button>
-        </form>
+        </div>
 
-        <p class="muted" style="margin-top:1.25rem; margin-bottom:0; font-size:0.88rem; text-align:center;">
-            Already have an account? <a href="/login" style="color:var(--accent); font-weight:600;">Log in</a>
-        </p>
+        <div class="auth-form-pane">
+            <h2 style="margin-bottom:0.35rem;">Create account</h2>
+            <p class="muted" style="margin-top:0; margin-bottom:1.5rem; font-size:0.92rem;">
+                Set up your student profile in seconds.
+            </p>
+
+            {% if error %}
+                <div class="alert-error">{{ error }}</div>
+            {% endif %}
+
+            <form action="/signup" method="post">
+                <div class="form-group">
+                    <label for="full_name">Full name</label>
+                    <input type="text" id="full_name" name="full_name" required autocomplete="name" placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password" placeholder="Minimum 6 characters">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Create student account</button>
+            </form>
+
+            <p class="muted" style="margin-top:1.35rem; margin-bottom:0; font-size:0.88rem;">
+                Already enrolled? <a href="/login" class="link-reveal" style="color:var(--accent);">Sign in</a>
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}

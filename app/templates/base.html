@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Vitoniya Edu | Practical Engineering &amp; Coding Courses by Vitoniya Labs{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Vitoniya Edu by Vitoniya Labs offers structured, practical courses in Java, Data Structures, FastAPI, and PostgreSQL with real progress tracking.{% endblock %}">
+    <title>{% block title %}Vitoniya Edu | Digital Learning Journal by Vitoniya Labs{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Vitoniya Edu by Vitoniya Labs is an editorial learning platform for Java, Data Structures, FastAPI, and PostgreSQL.{% endblock %}">
     <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
     <link rel="canonical" href="{{ settings.SITE_URL }}{{ request.url.path }}">
     <meta name="google-site-verification" content="googlebfdaeb45b812b897">
@@ -18,7 +18,7 @@
     <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/styles.css">
 
     <script type="application/ld+json">
@@ -39,20 +39,17 @@
     <header class="site-header">
         <div class="container header-inner">
             <a href="/" class="brand">
-                <div class="brand-mark">V</div>
-                <div class="brand-text">
-                    <span class="brand-name">Vitoniya Edu</span>
-                    <span class="brand-sub">by Vitoniya Labs</span>
-                </div>
+                <span class="brand-name">Vitoniya Edu</span>
+                <span class="brand-sub">/ Vitoniya Labs</span>
             </a>
 
             <nav id="primary-nav" class="nav-links">
-                <a href="/courses" class="nav-link {% if request.url.path.startswith('/courses') %}active{% endif %}">Courses</a>
-                <a href="/about" class="nav-link {% if request.url.path == '/about' %}active{% endif %}">Vitoniya Labs</a>
+                <a href="/courses" class="nav-link {% if request.url.path.startswith('/courses') %}active{% endif %}">Curriculum</a>
+                <a href="/about" class="nav-link {% if request.url.path == '/about' %}active{% endif %}">Editorial Note</a>
                 {% if user %}
-                    <a href="/dashboard" class="nav-link {% if request.url.path.startswith('/dashboard') %}active{% endif %}">My Learning</a>
+                    <a href="/dashboard" class="nav-link {% if request.url.path.startswith('/dashboard') %}active{% endif %}">Journal</a>
                     {% if user.role == 'admin' %}
-                        <a href="/admin" class="nav-link {% if request.url.path.startswith('/admin') %}active{% endif %}">Admin Console</a>
+                        <a href="/admin" class="nav-link {% if request.url.path.startswith('/admin') %}active{% endif %}">Admin</a>
                     {% endif %}
                 {% endif %}
             </nav>
@@ -64,8 +61,8 @@
                         <button type="submit" class="btn btn-ghost btn-sm">Log out</button>
                     </form>
                 {% else %}
-                    <a href="/login" class="btn btn-ghost btn-sm">Log in</a>
-                    <a href="/signup" class="btn btn-primary btn-sm">Create account</a>
+                    <a href="/login" class="btn btn-ghost btn-sm">Sign in</a>
+                    <a href="/signup" class="btn btn-primary btn-sm">Join free</a>
                 {% endif %}
                 <button id="mobile-menu-toggle" class="mobile-toggle" type="button" aria-label="Toggle navigation">Menu</button>
             </div>
@@ -79,12 +76,13 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <div>
-                <strong>Vitoniya Edu</strong> — Developed by <strong>Vitoniya Labs</strong>
+                <div class="serif" style="font-size:1.15rem; color:var(--ink); margin-bottom:0.25rem;">Vitoniya Edu</div>
+                <div>An independent learning publication by <strong>Vitoniya Labs</strong>.</div>
             </div>
-            <div style="display:flex; gap:1.25rem;">
-                <a href="/courses">Courses</a>
-                <a href="/about">About</a>
-                <a href="/docs">API Docs</a>
+            <div style="display:flex; gap:1.5rem; align-items:center;">
+                <a href="/courses" class="link-reveal">Curriculum</a>
+                <a href="/about" class="link-reveal">Vitoniya Labs</a>
+                <a href="/docs" class="link-reveal">API Docs</a>
             </div>
         </div>
     </footer>
